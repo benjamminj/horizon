@@ -12,11 +12,6 @@
   background-color: #fff;
 }
 
-main {
-  background-color: steelblue;
-  min-height: calc(100vh - 100px);
-}
-
 footer {
   background-color: #fff;
   height: 50px;
