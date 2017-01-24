@@ -1,19 +1,14 @@
 * {
-  display: border-box;
+  box-sizing: border-box;
 }
 
 *:before, *:after {
-  display: inherit;
+  box-sizing: inherit;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
-  background-color: #fff;
-}
-
-header {
-  height: 50px;
   background-color: #fff;
 }
 
