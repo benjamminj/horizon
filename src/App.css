@@ -11,10 +11,3 @@
   min-height: 100vh;
   background-color: #fff;
 }
-
-footer {
-  background-color: #fff;
-  height: 50px;
-  position: absolute;
-  bottom: 0;
-}
