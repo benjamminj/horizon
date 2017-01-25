@@ -14,18 +14,29 @@ class Main extends Component {
   }
 
   componentDidMount () {
-    fetch('http://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400&formatted=0')
+    fetch('http://api.sunrise-sunset.org/json?lat=33.9319578&lng=-117.946175&formatted=0')
       .then(res => res.json())
       .then(json => {
+        console.log(json)
+
+        const { sunrise, sunset, day_length } = json.results
+
         this.setState({
-          sunrise: new Date(json.results.sunrise)
+          sunrise: toUTC(new Date(sunrise)),
+          sunset: toUTC(new Date(sunset)),
+          now: toUTC(new Date(Date.now())),
+          dayLength: day_length
         })
       })
   }
 
   render () {
+    const { sunrise, sunset, now } = this.state
+    const timeLeft = sunset - now
+
     return (
-      <main>{ JSON.stringify(this.state.sunrise, null, 4) }</main>
+      <main>
+      </main>
     )
   }
 }
