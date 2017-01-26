@@ -31,7 +31,11 @@ class Main extends Component {
   }
 
   countdown () {
-    return window.setInterval(() => { console.log('Ben') }, 1000)
+    return window.setInterval(() => {
+      this.setState({
+        timeLeft: this.state.timeLeft - 1000
+      })
+    }, 1000)
   }
 
   async getSunriseSunsetTimes (lat, lng) {
