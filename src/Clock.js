@@ -6,7 +6,7 @@ class Clock extends Component {
     const { time } = this.props
     const { hours, minutes, seconds } = this.formatTimeDisplay()
 
-    const timeDisplay = time ? <h1>{hours}:{minutes}:{seconds}</h1> : <h1></h1>
+    const timeDisplay = time ? <h1>{hours}:{minutes}:{seconds}</h1> : <h1 />
 
     return (
       <div>
