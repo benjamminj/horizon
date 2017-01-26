@@ -9,7 +9,7 @@ class Clock extends Component {
       <div>
         Time until { this.props.isDay ? 'sunset' : 'sunrise' }:
         <h1>
-          {hours || null}:{minutes || null}:{seconds || null}
+          {hours}:{minutes}:{seconds}
         </h1>
       </div>
     )
@@ -17,16 +17,21 @@ class Clock extends Component {
 
   formatTimeDisplay () {
     const { time } = this.props
+    const { padNumber } = this
 
     const hours = time / (1000 * 60 * 60)
     const minutes = (hours % 1) * 60
     const seconds = (minutes % 1) * 60
 
     return {
-      hours: Math.floor(hours),
-      minutes: Math.floor(minutes),
-      seconds: Math.floor(seconds)
+      hours: padNumber(Math.floor(hours)),
+      minutes: padNumber(Math.floor(minutes)),
+      seconds: padNumber(Math.floor(seconds))
     }
+  }
+
+  padNumber (number) {
+    return (`0${number}`).slice(-2)
   }
 }
 

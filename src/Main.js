@@ -49,6 +49,10 @@ class Main extends Component {
     })
   }
 
+  updateTimes () {
+    return window.setInterval(() => { console.log('Ben') }, 1000)
+  }
+
   isDay () {
     const { now, civilTwilightBegin, civilTwilightEnd } = this.state
 
