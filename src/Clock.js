@@ -3,14 +3,15 @@ import './Clock.css'
 
 class Clock extends Component {
   render () {
+    const { time } = this.props
     const { hours, minutes, seconds } = this.formatTimeDisplay()
+
+    const timeDisplay = time ? <h1>{hours}:{minutes}:{seconds}</h1> : <h1></h1>
 
     return (
       <div>
         Time until { this.props.isDay ? 'sunset' : 'sunrise' }:
-        <h1>
-          {hours}:{minutes}:{seconds}
-        </h1>
+        {timeDisplay}
       </div>
     )
   }

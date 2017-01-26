@@ -16,23 +16,22 @@ class Main extends Component {
 
   componentDidMount () {
     this.getTimesForLocation()
+
+    this.countdown()
   }
 
   render () {
-    const { sunset, sunrise, now } = this.state
+    const { timeLeft } = this.state
 
     return (
       <main>
-        <Clock time={this.isDay() ? sunset - now : sunrise - now} isDay={this.isDay()} />
+        <Clock time={timeLeft} isDay={this.isDay()} />
       </main>
     )
   }
 
-  async getTimesForLocation () {
-    const res = await fetch('http://ip-api.com/json')
-    const { lat, lon } = await res.json()
-
-    await this.getSunriseSunsetTimes(lat, lon)
+  countdown () {
+    return window.setInterval(() => { console.log('Ben') }, 1000)
   }
 
   async getSunriseSunsetTimes (lat, lng) {
@@ -47,10 +46,23 @@ class Main extends Component {
       now: toUTC(new Date(Date.now())),
       dayLength: results.day_length * 1000
     })
+
+    this.getTimeLeft()
   }
 
-  updateTimes () {
-    return window.setInterval(() => { console.log('Ben') }, 1000)
+  async getTimesForLocation () {
+    const res = await fetch('http://ip-api.com/json')
+    const { lat, lon } = await res.json()
+
+    await this.getSunriseSunsetTimes(lat, lon)
+  }
+
+  getTimeLeft () {
+    const { sunrise, sunset, now } = this.state
+
+    this.setState({
+      timeLeft: this.isDay() ? sunset - now : sunrise - now
+    })
   }
 
   isDay () {
