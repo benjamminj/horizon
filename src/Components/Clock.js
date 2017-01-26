@@ -3,10 +3,10 @@ import './Clock.css'
 
 class Clock extends Component {
   render () {
-    const { time } = this.props
+    const { timeLeft } = this.props
     const { hours, minutes, seconds } = this.formatTimeDisplay()
 
-    const timeDisplay = time ? <h1>{hours}:{minutes}:{seconds}</h1> : <h1 />
+    const timeDisplay = timeLeft ? <h1>{hours}:{minutes}:{seconds}</h1> : <h1 />
 
     return (
       <div className='time-display'>
@@ -17,10 +17,10 @@ class Clock extends Component {
   }
 
   formatTimeDisplay () {
-    const { time } = this.props
+    const { timeLeft } = this.props
     const { padNumber } = this
 
-    const hours = time / (1000 * 60 * 60)
+    const hours = timeLeft / (1000 * 60 * 60)
     const minutes = (hours % 1) * 60
     const seconds = (minutes % 1) * 60
 
@@ -40,7 +40,7 @@ const { bool, number } = PropTypes
 
 Clock.propTypes = {
   isDay: bool,
-  time: number
+  timeLeft: number
 }
 
 export default Clock

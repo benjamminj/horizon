@@ -23,10 +23,12 @@ class App extends Component {
   }
 
   render () {
+    const { timeLeft } = this.state
+
     return (
       <div>
         <Header />
-        <Main />
+        <Main timeLeft={timeLeft} isDay={this.isDay()} />
         <Footer />
       </div>
     )
