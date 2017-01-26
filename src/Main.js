@@ -23,7 +23,7 @@ class Main extends Component {
 
     return (
       <main>
-        <Clock time={this.isDay() ? sunset - now : sunrise - now} />
+        <Clock time={this.isDay() ? sunset - now : sunrise - now} isDay={this.isDay()} />
       </main>
     )
   }

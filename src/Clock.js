@@ -3,10 +3,15 @@ import './Clock.css'
 
 class Clock extends Component {
   render () {
-    this.formatTimeDisplay()
+    const { hours, minutes, seconds } = this.formatTimeDisplay()
 
     return (
-      <div>{ this.props.time / (1000 * 60 * 60) }</div>
+      <div>
+        Time until { this.props.isDay ? 'sunset' : 'sunrise' }:
+        <h1>
+          {hours || null}:{minutes || null}:{seconds || null}
+        </h1>
+      </div>
     )
   }
 
@@ -25,9 +30,10 @@ class Clock extends Component {
   }
 }
 
-const { number } = PropTypes
+const { bool, number } = PropTypes
 
 Clock.propTypes = {
+  isDay: bool,
   time: number
 }
 
