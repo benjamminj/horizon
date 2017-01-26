@@ -1,3 +1,7 @@
+export const setBackground = (state) => {
+
+}
+
 export const toUTC = (date) => {
   const args = [
     date.getFullYear(),
@@ -11,4 +15,4 @@ export const toUTC = (date) => {
   return Date.UTC(...args)
 }
 
-export default { toUTC }
+export default { setBackground, toUTC }
