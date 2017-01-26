@@ -55,13 +55,16 @@ class App extends Component {
   }
 
   async getTimesForLocation () {
-    const res = await fetch('//ip-api.com/json?callback=?')
-      .then(this.processStatus)
-      .catch()
-    console.log(res)
-    const { lat, lon } = await res.json()
+    try {
+      const res = await fetch('//ip-api.com/json?callback=?')
+      console.log(res)
+      const { lat, lon } = await res.json()
 
-    await this.getSunriseSunsetTimes(lat, lon)
+      await this.getSunriseSunsetTimes(lat, lon)
+    } catch {
+      console.log('BOOOOO')
+    }
+
   }
 
   countdown () {
