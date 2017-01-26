@@ -61,10 +61,9 @@ class App extends Component {
       const { lat, lon } = await res.json()
 
       await this.getSunriseSunsetTimes(lat, lon)
-    } catch {
-      console.log('BOOOOO')
+    } catch (err) {
+      console.log('BOOOOO', err)
     }
-
   }
 
   countdown () {
