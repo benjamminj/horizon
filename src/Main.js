@@ -3,6 +3,7 @@ import 'whatwg-fetch'
 import React, { Component } from 'react'
 import './Main.css'
 
+import Clock from './Clock'
 import { toUTC } from './Utils'
 
 const { fetch } = window
@@ -18,8 +19,12 @@ class Main extends Component {
   }
 
   render () {
+    const { sunset, sunrise, now } = this.state
+
     return (
-      <main></main>
+      <main>
+        <Clock time={this.isDay() ? sunset - now : sunrise - now} />
+      </main>
     )
   }
 
@@ -34,22 +39,20 @@ class Main extends Component {
     const res = await fetch(`http://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`)
     const { results } = await res.json()
 
-    const { sunrise, sunset, day_length } = results
-
     this.setState({
-      sunrise: toUTC(new Date(sunrise)),
-      sunset: toUTC(new Date(sunset)),
+      civilTwilightBegin: toUTC(new Date(results.civil_twilight_begin)),
+      civilTwilightEnd: toUTC(new Date(results.civil_twilight_end)),
+      sunrise: toUTC(new Date(results.sunrise)),
+      sunset: toUTC(new Date(results.sunset)),
       now: toUTC(new Date(Date.now())),
-      dayLength: day_length
+      dayLength: results.day_length * 1000
     })
-
-    console.log(this.state)
   }
 
   isDay () {
-    const { now, sunset } = this.state
+    const { now, civilTwilightBegin, civilTwilightEnd } = this.state
 
-    return (sunset - now) > 0
+    return (civilTwilightBegin - now) < 0 && (civilTwilightEnd - now) > 0
   }
 }
 
