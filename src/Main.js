@@ -14,30 +14,42 @@ class Main extends Component {
   }
 
   componentDidMount () {
-    fetch('http://api.sunrise-sunset.org/json?lat=33.9319578&lng=-117.946175&formatted=0')
-      .then(res => res.json())
-      .then(json => {
-        console.log(json)
-
-        const { sunrise, sunset, day_length } = json.results
-
-        this.setState({
-          sunrise: toUTC(new Date(sunrise)),
-          sunset: toUTC(new Date(sunset)),
-          now: toUTC(new Date(Date.now())),
-          dayLength: day_length
-        })
-      })
+    this.getTimesForLocation()
   }
 
   render () {
-    const { sunrise, sunset, now } = this.state
-    const timeLeft = sunset - now
-
     return (
-      <main>
-      </main>
+      <main></main>
     )
+  }
+
+  isDay () {
+    const { now, sunset } = this.state
+
+    return (sunset - now) > 0
+  }
+
+  async getTimesForLocation () {
+    const res = await fetch('http://ip-api.com/json')
+    const { lat, lon } = await res.json()
+
+    await this.getSunriseSunsetTimes(lat, lon)
+  }
+
+  async getSunriseSunsetTimes (lat, lng) {
+    const res = await fetch(`http://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`)
+    const { results } = await res.json()
+
+    const { sunrise, sunset, day_length } = results
+
+    this.setState({
+      sunrise: toUTC(new Date(sunrise)),
+      sunset: toUTC(new Date(sunset)),
+      now: toUTC(new Date(Date.now())),
+      dayLength: day_length
+    })
+
+    console.log(this.state)
   }
 }
 
