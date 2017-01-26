@@ -23,12 +23,6 @@ class Main extends Component {
     )
   }
 
-  isDay () {
-    const { now, sunset } = this.state
-
-    return (sunset - now) > 0
-  }
-
   async getTimesForLocation () {
     const res = await fetch('http://ip-api.com/json')
     const { lat, lon } = await res.json()
@@ -50,6 +44,12 @@ class Main extends Component {
     })
 
     console.log(this.state)
+  }
+
+  isDay () {
+    const { now, sunset } = this.state
+
+    return (sunset - now) > 0
   }
 }
 
