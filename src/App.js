@@ -38,9 +38,9 @@ class App extends Component {
 
   async getSunriseSunsetTimes (lat, lng) {
     const res = await fetch(`//api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`)
+    console.log(res)
     const { results } = await res.json()
 
-    console.log(res)
 
     this.setState({
       civilTwilightBegin: toUTC(new Date(results.civil_twilight_begin)),
@@ -56,9 +56,9 @@ class App extends Component {
 
   async getTimesForLocation () {
     const res = await fetch('//ip-api.com/json')
+    console.log(res)
     const { lat, lon } = await res.json()
 
-    console.log(res)
 
     await this.getSunriseSunsetTimes(lat, lon)
   }
