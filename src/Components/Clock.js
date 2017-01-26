@@ -9,7 +9,7 @@ class Clock extends Component {
     const timeDisplay = time ? <h1>{hours}:{minutes}:{seconds}</h1> : <h1 />
 
     return (
-      <div className={'time-display'}>
+      <div className='time-display'>
         Time until { this.props.isDay ? 'sunset' : 'sunrise' }:
         {timeDisplay}
       </div>

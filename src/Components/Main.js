@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import './Main.css'
 
 import Clock from './Clock'
-import { toUTC } from './Utils'
+import { toUTC } from '../Utils'
 
 const { fetch } = window
 
