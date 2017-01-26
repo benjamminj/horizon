@@ -1,0 +1,18 @@
+footer {
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #fff;
+}
+
+footer h6 {
+  font-size: 8px;
+  font-weight: 100
+}
+
+footer h6 a {
+  color: #fff;
+}
