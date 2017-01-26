@@ -5,7 +5,7 @@ import { toUTC } from './Utils'
 import './App.css'
 
 import Header from './components/Header'
-import Main from './components/Main'
+import Clock from './components/Clock'
 import Footer from './components/Footer'
 
 const { fetch } = window
@@ -28,7 +28,9 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Main timeLeft={timeLeft} isDay={this.isDay()} />
+        <main>
+          <Clock timeLeft={timeLeft} isDay={this.isDay()} />
+        </main>
         <Footer />
       </div>
     )
