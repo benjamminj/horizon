@@ -56,9 +56,10 @@ class App extends Component {
 
   async getTimesForLocation () {
     const res = await fetch('//ip-api.com/json')
+      .then(this.processStatus)
+      .catch()
     console.log(res)
     const { lat, lon } = await res.json()
-
 
     await this.getSunriseSunsetTimes(lat, lon)
   }
@@ -83,6 +84,14 @@ class App extends Component {
     const { now, civilTwilightBegin, civilTwilightEnd } = this.state
 
     return (civilTwilightBegin - now) < 0 && (civilTwilightEnd - now) > 0
+  }
+
+  processStatus (res) {
+    if (res.status === 200) {
+      return Promise.resolve(res)
+    } else {
+      return Promise.reject(new Error(res.statusText))
+    }
   }
 }
 
