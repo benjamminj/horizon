@@ -37,7 +37,7 @@ class App extends Component {
   }
 
   async getSunriseSunsetTimes (lat, lng) {
-    const res = await fetch(`http://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`)
+    const res = await fetch(`//api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`)
     const { results } = await res.json()
 
     this.setState({
@@ -53,7 +53,7 @@ class App extends Component {
   }
 
   async getTimesForLocation () {
-    const res = await fetch('http://ip-api.com/json')
+    const res = await fetch('//ip-api.com/json')
     const { lat, lon } = await res.json()
 
     await this.getSunriseSunsetTimes(lat, lon)
