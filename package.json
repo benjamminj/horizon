@@ -69,7 +69,7 @@
     "winston": "^2.3.1"
   },
   "scripts": {
-    "start": "node server",
+    "start": "node server/server.js",
     "dev-client": "node scripts/start.js",
     "dev": "nodemon server",
     "build": "node scripts/build.js",

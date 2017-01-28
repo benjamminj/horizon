@@ -1,7 +1,11 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import path from 'path'
-import proxy from 'express-http-proxy'
+// import express from 'express'
+// import bodyParser from 'body-parser'
+// import path from 'path'
+// import proxy from 'express-http-proxy'
+
+const express = require('express')
+const bodyParser = require('bodyParser')
+const path = require('path')
 
 const app = express()
 
