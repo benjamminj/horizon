@@ -4,7 +4,7 @@
 // import proxy from 'express-http-proxy'
 
 const express = require('express')
-const bodyParser = require('bodyParser')
+const bodyParser = require('body-parser')
 const path = require('path')
 
 const app = express()
