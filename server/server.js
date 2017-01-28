@@ -37,6 +37,6 @@ app.get('/test', (req, res) => {
   res.status(200).json({ msg: 'It works' })
 })
 
-app.listen('8080', () => {
+app.listen(PORT, () => {
   console.log(`Listening to server on ${PORT}`)
 })
