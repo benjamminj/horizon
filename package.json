@@ -68,7 +68,7 @@
     "winston": "^2.3.1"
   },
   "scripts": {
-    "dev-client": "cd client && node scripts/start.js",
+    "dev-client": "node scripts/start.js",
     "dev": "nodemon server",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
