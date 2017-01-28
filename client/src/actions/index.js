@@ -1,5 +1,4 @@
-const ADD_LOCATION = 'ADD_LOCATION'
-const ADD_SUNRISE_SUNSET_RESULTS = 'ADD_SUNRISE_SUNSET_RESULTS'
+import { ADD_LOCATION, ADD_SUNRISE_SUNSET_RESULTS } from './actionTypes'
 
 export const addLocation = (location) => {
   return {
