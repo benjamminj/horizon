@@ -24,7 +24,8 @@
   },
   "scripts": {
     "start": "forever index.js",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "deploy": "git subtree push --prefix server heroku master"
   },
   "engines": {
     "node": "6.9.1"
