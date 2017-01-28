@@ -25,12 +25,10 @@
   "scripts": {
     "start": "forever index.js",
     "dev": "nodemon",
-    "deploy": "git subtree push --prefix server heroku master"
+    "deploy": "cd .. && git subtree push --prefix server heroku master"
   },
   "engines": {
-    "node": "6.9.1"
+    "node": "7.3.0"
   },
-  "peerDependencies": {
-    "number-is-nan": "^1.0.1"
-  }
+  "peerDependencies": {}
 }
