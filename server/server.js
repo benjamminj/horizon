@@ -1,5 +1,6 @@
 import express from 'express'
 import bodyParser from 'body-parser'
+import path from 'path'
 import proxy from 'express-http-proxy'
 
 const app = express()
@@ -13,20 +14,24 @@ app.all('/', (req, res, next) => {
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use('/', express.static('../client/build'))
+app.use(express.static(path.join(__dirname, '../client/build')))
 
-app.use('/api/sunrise-sunset/lat=:lat&lng=:lng', proxy('api.sunrise-sunset.org/json', {
-  forwardPathAsync: (req, res) => {
-    return new Promise((resolve, reject) => {
-      console.log('Request for proxy')
-      const { lat, lng } = req.params
+// app.use('/api/sunrise-sunset/lat=:lat&lng=:lng', proxy('api.sunrise-sunset.org/json', {
+//   forwardPathAsync: (req, res) => {
+//     return new Promise((resolve, reject) => {
+//       console.log('Request for proxy')
+//       const { lat, lng } = req.params
 
-      resolve(`http://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`)
-    })
-  }
-}))
+//       resolve(`http://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`)
+//     })
+//   }
+// }))
 
 const PORT = process.env.PORT || 8080
+
+app.get('/test', (req, res) => {
+  res.status(200).json({ msg: 'It works' })
+})
 
 app.listen('8080', () => {
   console.log(`Listening to server on ${PORT}`)
