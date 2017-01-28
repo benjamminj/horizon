@@ -65,11 +65,13 @@
     "nodemon": "^1.11.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0",
     "whatwg-fetch": "^2.0.2",
     "winston": "^2.3.1"
   },
   "scripts": {
-    "start": "node server",
+    "start": "forever server",
     "dev-client": "node scripts/start.js",
     "dev": "nodemon server",
     "build": "node scripts/build.js",

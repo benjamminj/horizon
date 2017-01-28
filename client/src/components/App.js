@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import 'whatwg-fetch'
 import 'fetchp'
 
-import { toUTC } from './Utils'
+import { toUTC } from '../Utils'
 import './App.css'
 
-import Header from './components/Header'
-import Clock from './components/Clock'
-import Footer from './components/Footer'
+import Header from './Header'
+import Clock from './Clock'
+import Footer from './Footer'
 
-import { API_SERVER } from './config'
+import { API_SERVER } from '../config'
 
 class App extends Component {
   constructor (props) {
