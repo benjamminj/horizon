@@ -24,6 +24,8 @@ app.use('/api/sunrise-sunset/lat=:lat&lng=:lng', proxy('api.sunrise-sunset.org/j
   }
 }))
 
+const PORT = process.env.PORT || 8080
+
 app.listen('8080', () => {
-  console.log('Listening to server on localhost:8080')
+  console.log(`Listening to server on ${PORT}`)
 })
