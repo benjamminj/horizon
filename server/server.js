@@ -1,11 +1,11 @@
-// import express from 'express'
-// import bodyParser from 'body-parser'
-// import path from 'path'
-// import proxy from 'express-http-proxy'
+import express from 'express'
+import bodyParser from 'body-parser'
+import path from 'path'
+import proxy from 'express-http-proxy'
 
-const express = require('express')
-const bodyParser = require('body-parser')
-const path = require('path')
+// const express = require('express')
+// const bodyParser = require('body-parser')
+// const path = require('path')
 
 const app = express()
 
@@ -20,16 +20,16 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(express.static(path.join(__dirname, '../client/build')))
 
-// app.use('/api/sunrise-sunset/lat=:lat&lng=:lng', proxy('api.sunrise-sunset.org/json', {
-//   forwardPathAsync: (req, res) => {
-//     return new Promise((resolve, reject) => {
-//       console.log('Request for proxy')
-//       const { lat, lng } = req.params
+app.use('/api/sunrise-sunset/lat=:lat&lng=:lng', proxy('api.sunrise-sunset.org/json', {
+  forwardPathAsync: (req, res) => {
+    return new Promise((resolve, reject) => {
+      console.log('Request for proxy')
+      const { lat, lng } = req.params
 
-//       resolve(`http://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`)
-//     })
-//   }
-// }))
+      resolve(`http://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`)
+    })
+  }
+}))
 
 const PORT = process.env.PORT || 8080
 
