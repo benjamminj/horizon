@@ -3,10 +3,6 @@ import bodyParser from 'body-parser'
 import path from 'path'
 import proxy from 'express-http-proxy'
 
-// const express = require('express')
-// const bodyParser = require('body-parser')
-// const path = require('path')
-
 const app = express()
 
 app.all('/', (req, res, next) => {
