@@ -39,7 +39,7 @@ class App extends Component {
 
   async getSunriseSunsetTimes (lat, lng) {
     try {
-      const res = await window.fetch(`//api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`).then(res => res.json())
+      const res = await window.fetch(`/api/sunrise-sunset/lat=${lat}?lng=${lng}`).then(res => res.json())
       console.log(res)
       const { results } = await res
 
