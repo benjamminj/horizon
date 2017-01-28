@@ -13,7 +13,7 @@ app.all('/', (req, res, next) => {
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(express.static('../client/build'))
+app.use('/', express.static('../client/build'))
 
 app.use('/api/sunrise-sunset/lat=:lat&lng=:lng', proxy('api.sunrise-sunset.org/json', {
   forwardPathAsync: (req, res) => {
