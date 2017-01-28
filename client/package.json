@@ -27,12 +27,11 @@
     "winston": "^2.3.1"
   },
   "scripts": {
-    "dev": "react-scripts start",
-    "start": "forever server",
-    "server": "nodemon server",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "npm run build&&gh-pages -d build"
-  }
+  },
+  "homepage": "https://benjaminj6.github.io/sunrise-sunset/"
 }

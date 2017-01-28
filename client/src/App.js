@@ -9,7 +9,7 @@ import Header from './components/Header'
 import Clock from './components/Clock'
 import Footer from './components/Footer'
 
-// const { fetchJsonp } = window
+import { API_SERVER } from './config'
 
 class App extends Component {
   constructor (props) {
@@ -39,9 +39,9 @@ class App extends Component {
 
   async getSunriseSunsetTimes (lat, lng) {
     try {
-      const res = await window.fetch(`/api/sunrise-sunset/lat=${lat}?lng=${lng}`).then(res => res.json())
-      console.log(res)
-      const { results } = await res
+      const res = await window.fetch(`//${API_SERVER}/api/sunrise-sunset/lat=${lat}&lng=${lng}`)
+
+      const { results } = await res.json()
 
       this.setState({
         civilTwilightBegin: toUTC(new Date(results.civil_twilight_begin)),
@@ -60,7 +60,7 @@ class App extends Component {
 
   async getTimesForLocation () {
     try {
-      const res = await window.fetch('https://freegeoip.net/json/').then(res => res.json())
+      const res = await window.fetch('//freegeoip.net/json/').then(res => res.json())
       const { latitude, longitude } = await res
 
       await this.getSunriseSunsetTimes(latitude, longitude)
