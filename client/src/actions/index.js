@@ -1,4 +1,5 @@
-import { ADD_LOCATION, ADD_SUNRISE_SUNSET_RESULTS } from './actionTypes'
+const ADD_LOCATION = 'ADD_LOCATION'
+const ADD_SUNRISE_SUNSET_RESULTS = 'ADD_SUNRISE_SUNSET_RESULTS'
 
 export const addLocation = (location) => {
   return {
@@ -13,3 +14,5 @@ export const addSunriseSunsetResults = (results) => {
     results
   }
 }
+
+export default { addLocation, addSunriseSunsetResults }
