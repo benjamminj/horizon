@@ -6,7 +6,7 @@ export const toUTC = (date) => {
   const args = [
     date.getFullYear(),
     date.getMonth(),
-    date.getDay(),
+    date.getDate(),
     date.getHours(),
     date.getMinutes(),
     date.getSeconds()
