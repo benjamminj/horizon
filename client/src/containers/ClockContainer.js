@@ -1,12 +1,17 @@
 import { connect } from 'react-redux'
+
 import Clock from '../components/Clock'
+import { isDay } from '../Utils'
 
 const mapStateToProps = (state, ownProps) => {
-  const { isDay, sunset, sunrise, now } = state
+  const { sunriseSunsetData: data } = state
+  const { sunset, sunrise, now } = data
+
+  const day = isDay(data)
 
   return {
-    isDay,
-    timeLeft: isDay ? sunset - now : sunrise - now
+    day,
+    timeLeft: day ? sunset - now : sunrise - now
   }
 }
 

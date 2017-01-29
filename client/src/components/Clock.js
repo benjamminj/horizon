@@ -10,7 +10,7 @@ class Clock extends Component {
 
     return (
       <div className='time-display'>
-        Time until { this.props.isDay ? 'sunset' : 'sunrise' }:
+        Time until { this.props.day ? 'sunset' : 'sunrise' }:
         {timeDisplay}
       </div>
     )
@@ -39,7 +39,7 @@ class Clock extends Component {
 const { bool, number } = PropTypes
 
 Clock.propTypes = {
-  isDay: bool,
+  day: bool,
   timeLeft: number
 }
 

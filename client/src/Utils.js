@@ -15,4 +15,10 @@ export const toUTC = (date) => {
   return Date.UTC(...args)
 }
 
+export const isDay = (sunriseSunsetData) => {
+  const { civilTwilightBegin, civilTwilightEnd, now } = sunriseSunsetData
+
+  return (civilTwilightBegin - now) < 0 && (civilTwilightEnd - now) > 0
+}
+
 export default { setBackground, toUTC }
