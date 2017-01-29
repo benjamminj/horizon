@@ -29,7 +29,7 @@ const fetchSunriseSunsetSuccess = (res) => {
     civilTwilightEnd: toUTC(new Date(res.civil_twilight_end)),
     sunrise: toUTC(new Date(res.sunrise)),
     sunset: toUTC(new Date(res.sunset)),
-    now: toUTC(new Date(Date.now())),
+    now: Date.now(),
     dayLength: res.day_length * 1000
   }
 
@@ -65,14 +65,14 @@ export const fetchSunriseSunsetData = (location) => {
   }
 }
 
-export const updateSunriseTime = (location) => {
+export const updateSunriseTime = (location, date) => {
   return async (dispatch) => {
     const { lat, lng } = location
 
     dispatch(fetchSunriseSunsetRequest())
 
     try {
-      const res = await fetch(`${API_SERVER}/api/sunrise-sunset/lat=${lat}&lng=${lng}&date=tomorrow`)
+      const res = await fetch(`${API_SERVER}/api/sunrise-sunset/lat=${lat}&lng=${lng}&date=${date}`)
       const { results } = await res.json()
 
       dispatch(updateSunriseSuccess(results))
