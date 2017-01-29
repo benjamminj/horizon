@@ -10,6 +10,8 @@ import {
   HANDLE_TIME_LEFT_AFTER_SUNSET_FAILURE
 } from '../actions/timeLeftActions'
 
+import { INC_NOW } from '../actions/updateNowActions'
+
 export default (state = {}, action) => {
   switch (action.type) {
     case FETCH_SUNRISE_SUNSET_REQUEST:
@@ -35,6 +37,7 @@ export default (state = {}, action) => {
         isLoading: false,
         loadSuccess: true
       }
+    // Perhaps abstract into own reducer / piece ?
     case GET_TIME_LEFT:
     case HANDLE_TIME_LEFT_AFTER_SUNSET:
       const { timeLeft } = action
@@ -47,6 +50,14 @@ export default (state = {}, action) => {
       return {
         ...state,
         ...err
+      }
+    // Perhap abstract into own reducer?
+    case INC_NOW:
+      const { now } = action
+
+      return {
+        ...state,
+        now
       }
     default:
       return state
