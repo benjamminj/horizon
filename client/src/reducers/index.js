@@ -6,7 +6,7 @@ import {
   FETCH_SUNRISE_SUNSET_FAILURE,
   FETCH_SUNRISE_SUNSET_SUCCESS } from '../actions/fetchSunriseSunsetActions'
 
-export const addLocationReducer = (state = {}, action) => {
+export const location = (state = {}, action) => {
   switch (action.type) {
     case ADD_LOCATION:
       console.log('ADding location')
@@ -17,7 +17,7 @@ export const addLocationReducer = (state = {}, action) => {
   }
 }
 
-export const fetchSunriseSunsetReducer = (state = {}, action) => {
+export const sunriseSunsetData = (state = {}, action) => {
   switch (action.type) {
     case FETCH_SUNRISE_SUNSET_REQUEST:
       return {
@@ -42,7 +42,7 @@ export const fetchSunriseSunsetReducer = (state = {}, action) => {
         ...{
           isLoading: false,
           loadSuccess: true,
-          data: results
+          ...results
         }
       }
     default:
@@ -51,5 +51,6 @@ export const fetchSunriseSunsetReducer = (state = {}, action) => {
 }
 
 export default combineReducers({
-  addLocationReducer
+  location,
+  sunriseSunsetData
 })

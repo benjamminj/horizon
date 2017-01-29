@@ -7,6 +7,10 @@ import store from './store'
 import App from './components/App'
 import './index.css'
 
+import { fetchSunriseSunsetData } from './actions/fetchSunriseSunsetActions'
+
+store.dispatch(fetchSunriseSunsetData({ lat: 33.1234, lng: -117.1234 }))
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
