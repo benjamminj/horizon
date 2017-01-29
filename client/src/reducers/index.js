@@ -41,7 +41,7 @@ export const location = (state = {}, action) => {
         }
       }
     default:
-      return
+      return state
   }
 }
 

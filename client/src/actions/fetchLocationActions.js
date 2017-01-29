@@ -30,9 +30,9 @@ export const fetchLocation = () => {
 
     try {
       const res = await fetch('//freegeoip.net/json/')
-      const { latitude, longitude } = await res
+      const { latitude, longitude } = await res.json()
 
-      dispatch(fetchLocationSuccess({ latitude, longitude }))
+      dispatch(fetchLocationSuccess({ lat: latitude, lng: longitude }))
     } catch (err) {
       dispatch(fetchLocationFailure(err))
     }

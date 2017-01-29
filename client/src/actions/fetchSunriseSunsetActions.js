@@ -6,6 +6,7 @@ import { toUTC } from '../Utils'
 export const FETCH_SUNRISE_SUNSET_REQUEST = 'FETCH_SUNRISE_SUNSET_REQUEST'
 export const FETCH_SUNRISE_SUNSET_FAILURE = 'FETCH_SUNRISE_SUNSET_FAILURE'
 export const FETCH_SUNRISE_SUNSET_SUCCESS = 'FETCH_SUNRISE_SUNSET_SUCCESS'
+export const UPDATE_SUNRISE_TIME = 'UPDATE_SUNRISE_TIME'
 
 const fetchSunriseSunsetRequest = () => {
   return {
@@ -38,6 +39,15 @@ const fetchSunriseSunsetSuccess = (res) => {
   }
 }
 
+const updateSunriseTime = (res) => {
+  const sunrise = toUTC(new Date(res.sunrise)
+
+  return {
+    type: UPDATE_SUNRISE_TIME,
+    sunrise
+  }
+}
+
 export const fetchSunriseSunsetData = (location) => {
   return async (dispatch) => {
     const { lat, lng } = location
@@ -49,6 +59,23 @@ export const fetchSunriseSunsetData = (location) => {
       const { results } = await res.json()
 
       dispatch(fetchSunriseSunsetSuccess(results))
+    } catch (err) {
+      dispatch(fetchSunriseSunsetFailure(err))
+    }
+  }
+}
+
+export const updateSunriseTime = (location) => {
+  return async (dispatch) => {
+    const { lat, lng } = location
+
+    dispatch(fetchSunriseSunsetRequest())
+
+    try {
+      const res = await fetch(`${API_SERVER}/api/sunrise-sunset/lat=${lat}&lng=${lng}&date=tomorrow`)
+      const { results } = await res.json()
+
+      dispatch(updateSunriseSuccess(results))
     } catch (err) {
       dispatch(fetchSunriseSunsetFailure(err))
     }
