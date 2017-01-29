@@ -16,13 +16,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(express.static(path.join(__dirname, '../client/build')))
 
-app.use('/api/sunrise-sunset/lat=:lat&lng=:lng', proxy('api.sunrise-sunset.org/json', {
+app.use('/api/sunrise-sunset/lat=:lat&lng=:lng&date=:date', proxy('api.sunrise-sunset.org/json', {
   forwardPathAsync: (req, res) => {
     return new Promise((resolve, reject) => {
       console.log('Request for proxy')
-      const { lat, lng } = req.params
+      const { date, lat, lng } = req.params
 
-      resolve(`http://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`)
+      resolve(`http://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&date=${date}&formatted=0`)
     })
   }
 }))
