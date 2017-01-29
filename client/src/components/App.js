@@ -6,7 +6,7 @@ import { toUTC } from '../Utils'
 import './App.css'
 
 import Header from './Header'
-import Clock from './Clock'
+import ClockContainer from '../containers/ClockContainer'
 import Footer from './Footer'
 
 import { API_SERVER } from '../config'
@@ -24,13 +24,13 @@ class App extends Component {
   }
 
   render () {
-    const { timeLeft } = this.state
+    // const { timeLeft } = this.state
 
     return (
       <div>
         <Header />
         <main>
-          <Clock timeLeft={timeLeft} isDay={this.isDay()} />
+          <ClockContainer />
         </main>
         <Footer />
       </div>
