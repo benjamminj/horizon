@@ -43,15 +43,7 @@ export const getTimeLeft = (payload) => {
       if (isAfterSunsetToday) {
         const res = await fetch(`${API_SERVER}/api/sunrise-sunset/lat=${lat}&lng=${lng}&date=tomorrow`)
         const { results } = await res.json()
-
-        console.log(results)
-
         const newSunrise = toUTC(new Date(results.sunrise))
-
-        console.log(newSunrise)
-        console.log(now)
-
-        console.log(newSunrise - now)
 
         dispatch(getTimeLeftAfterSunset({ newSunrise, now }))
       } else {

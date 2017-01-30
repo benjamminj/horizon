@@ -2,6 +2,14 @@ import React, { Component, PropTypes } from 'react'
 import './Clock.css'
 
 class Clock extends Component {
+  componentDidMount () {
+    const { now, startCount, isLoading, loadSuccess } = this.props
+
+    if (!isLoading && loadSuccess) {
+      startCount(now)
+    }
+  }
+
   render () {
     const { timeLeft } = this.props
     const { hours, minutes, seconds } = this.formatTimeDisplay()
@@ -36,11 +44,15 @@ class Clock extends Component {
   }
 }
 
-const { bool, number } = PropTypes
+const { bool, number, func } = PropTypes
 
 Clock.propTypes = {
-  day: bool,
-  timeLeft: number
+  day: bool.isRequired,
+  timeLeft: number,
+  now: number,
+  startCount: func,
+  isLoading: bool.isRequired,
+  loadSuccess: bool.isRequired
 }
 
 export default Clock

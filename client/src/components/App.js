@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import 'whatwg-fetch'
-import 'fetchp'
 
 // import { toUTC } from '../Utils'
 import './App.css'
@@ -69,35 +67,35 @@ class App extends Component {
   //   }
   // }
 
-  countdown () {
-    return window.setInterval(() => {
-      this.setState({
-        timeLeft: this.state.timeLeft - 1000
-      })
-    }, 1000)
-  }
+  // countdown () {
+  //   return window.setInterval(() => {
+  //     this.setState({
+  //       timeLeft: this.state.timeLeft - 1000
+  //     })
+  //   }, 1000)
+  // }
 
-  getTimeLeft () {
-    const { sunrise, sunset, now } = this.state
+  // getTimeLeft () {
+  //   const { sunrise, sunset, now } = this.state
 
-    this.setState({
-      timeLeft: this.isDay() ? sunset - now : sunrise - now
-    })
-  }
+  //   this.setState({
+  //     timeLeft: this.isDay() ? sunset - now : sunrise - now
+  //   })
+  // }
 
-  isDay () {
-    const { now, civilTwilightBegin, civilTwilightEnd } = this.state
+  // isDay () {
+  //   const { now, civilTwilightBegin, civilTwilightEnd } = this.state
 
-    return (civilTwilightBegin - now) < 0 && (civilTwilightEnd - now) > 0
-  }
+  //   return (civilTwilightBegin - now) < 0 && (civilTwilightEnd - now) > 0
+  // }
 
-  processStatus (res) {
-    if (res.status === 200) {
-      return Promise.resolve(res)
-    } else {
-      return Promise.reject(new Error(res.statusText))
-    }
-  }
+  // processStatus (res) {
+  //   if (res.status === 200) {
+  //     return Promise.resolve(res)
+  //   } else {
+  //     return Promise.reject(new Error(res.statusText))
+  //   }
+  // }
 }
 
 export default App

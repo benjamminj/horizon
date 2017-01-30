@@ -12,7 +12,12 @@ import {
 
 import { INC_NOW } from '../actions/updateNowActions'
 
-export default (state = {}, action) => {
+const initialState = {
+  isLoading: false,
+  loadSuccess: false
+}
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_SUNRISE_SUNSET_REQUEST:
       return {
