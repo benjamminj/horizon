@@ -6,6 +6,8 @@ import Header from './Header'
 import ClockContainer from '../containers/ClockContainer'
 import Footer from './Footer'
 
+import AppStyles from './AppStyles'
+
 class App extends Component {
   constructor (props) {
     super(props)
@@ -29,8 +31,10 @@ class App extends Component {
   render () {
     const { loadSuccess } = this.props.times
 
+    const styles = AppStyles(this.props)
+
     return (
-      <div>
+      <div style={styles}>
         <Header />
         <main>
           {loadSuccess &&
