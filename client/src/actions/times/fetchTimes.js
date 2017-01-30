@@ -34,13 +34,9 @@ const fetchTimesSuccess = (res) => {
     dayLength: res.day_length * 1000
   }
 
-  const { civilTwilightBegin, civilTwilightEnd, now } = results
-  const isDay = (civilTwilightBegin - now) < 0 && (civilTwilightEnd - now) > 0
-
   return {
     type: FETCH_SUNRISE_SUNSET_SUCCESS,
-    results,
-    isDay
+    results
   }
 }
 

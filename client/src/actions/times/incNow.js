@@ -1,7 +1,8 @@
 import { INC_NOW } from './actionTypes'
 
-export default (times) => {
-  const { now, sunrise, sunset, isDay } = times
+export default (status, times) => {
+  const { now, sunrise, sunset } = times
+  const { isDay } = status
 
   const newNow = now + 1000
 

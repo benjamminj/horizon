@@ -7,11 +7,12 @@ import { getIsDay } from '../actions/status'
 import App from '../components/App'
 
 const mapStateToProps = (state, ownProps) => {
-  const { location, times } = state
+  const { location, times, status } = state
 
   return {
     times,
-    location
+    location,
+    status
   }
 }
 

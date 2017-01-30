@@ -9,11 +9,6 @@ import Footer from './Footer'
 import AppStyles from './AppStyles'
 
 class App extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {}
-  }
-
   componentDidMount () {
     this.props.fetchLocation()
   }
@@ -31,9 +26,11 @@ class App extends Component {
   }
 
   render () {
-    const { loadSuccess } = this.props.times
+    const { times, status } = this.props
 
-    const styles = AppStyles(this.props.times)
+    const { loadSuccess } = times
+
+    const styles = AppStyles(status, times)
 
     return (
       <div style={styles}>
@@ -56,7 +53,8 @@ App.propTypes = {
   location: object.isRequired,
   fetchLocation: func.isRequired,
   fetchTimes: func.isRequired,
-  getIsDay: func.isRequired
+  getIsDay: func.isRequired,
+  status: object.isRequired
 }
 
 export default App

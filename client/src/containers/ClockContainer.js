@@ -6,7 +6,7 @@ import { isDay } from '../Utils'
 import { getTimeLeft, incNow } from '../actions/times'
 
 const mapStateToProps = (state, ownProps) => {
-  const { times } = state
+  const { times, status } = state
   const { now, isLoading, loadSuccess, timeLeft } = times
 
   const day = isDay(times)
@@ -17,19 +17,20 @@ const mapStateToProps = (state, ownProps) => {
     now,
     isLoading,
     loadSuccess,
-    times
+    times,
+    status
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    increaseCount: (times) => {
+    increaseCount: (status, times) => {
       window.setTimeout(() => {
-        dispatch(incNow(times))
+        dispatch(incNow(status, times))
       }, 1000)
     },
-    getTimeLeft: (times) => {
-      dispatch(getTimeLeft(times))
+    getTimeLeft: (status, times) => {
+      dispatch(getTimeLeft(status, times))
     }
   }
 }

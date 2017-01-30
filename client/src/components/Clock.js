@@ -3,15 +3,15 @@ import './Clock.css'
 
 class Clock extends Component {
   componentDidMount () {
-    const { getTimeLeft, times } = this.props
+    const { getTimeLeft, times, status } = this.props
 
-    getTimeLeft(times)
+    getTimeLeft(status, times)
   }
 
   componentDidUpdate () {
-    const { increaseCount, times } = this.props
+    const { increaseCount, times, status } = this.props
 
-    increaseCount(times)
+    increaseCount(status, times)
   }
 
   render () {
@@ -58,7 +58,8 @@ Clock.propTypes = {
   isLoading: bool.isRequired,
   loadSuccess: bool.isRequired,
   getTimeLeft: func.isRequired,
-  times: object.isRequired
+  times: object.isRequired,
+  status: object.isRequired
 }
 
 export default Clock
