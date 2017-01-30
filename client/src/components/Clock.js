@@ -10,6 +10,10 @@ class Clock extends Component {
     }
   }
 
+  componentWillUpdate () {
+    console.log('Updating!!!')
+  }
+
   render () {
     const { timeLeft } = this.props
     const { hours, minutes, seconds } = this.formatTimeDisplay()

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import store from './store'
 
-import App from './components/App'
+import AppContainer from './containers/AppContainer'
 import './index.css'
 
 import { fetchSunriseSunsetData } from './actions/fetchSunriseSunsetActions'
@@ -16,7 +16,7 @@ store.dispatch(fetchLocation())
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <AppContainer />
   </Provider>,
   document.getElementById('root')
 )

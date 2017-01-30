@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 // import { toUTC } from '../Utils'
 import './App.css'
@@ -21,14 +21,21 @@ class App extends Component {
     // this.countdown()
   }
 
+  componentWillUpdate () {
+    console.log('Updating APP')
+  }
+
   render () {
     // const { timeLeft } = this.state
+    const { loadSuccess } = this.props.times
 
     return (
       <div>
         <Header />
         <main>
-          <ClockContainer />
+          {loadSuccess &&
+            <ClockContainer />
+          }
         </main>
         <Footer />
       </div>
@@ -96,6 +103,13 @@ class App extends Component {
   //     return Promise.reject(new Error(res.statusText))
   //   }
   // }
+}
+
+const { object } = PropTypes
+
+App.propTypes = {
+  times: object.isRequired,
+  location: object.isRequired
 }
 
 export default App
