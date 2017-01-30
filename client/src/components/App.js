@@ -12,6 +12,20 @@ class App extends Component {
     this.state = {}
   }
 
+  componentDidMount () {
+    this.props.fetchLocation()
+
+    console.log(this.props.location)
+  }
+
+  componentDidUpdate (prev) {
+    const { location, fetchTimes } = this.props
+
+    if (prev.location.isLoading && !location.isLoading) {
+      fetchTimes(location)
+    }
+  }
+
   render () {
     const { loadSuccess } = this.props.times
 
@@ -29,11 +43,13 @@ class App extends Component {
   }
 }
 
-const { object } = PropTypes
+const { object, func } = PropTypes
 
 App.propTypes = {
   times: object.isRequired,
-  location: object.isRequired
+  location: object.isRequired,
+  fetchLocation: func.isRequired,
+  fetchTimes: func.isRequired
 }
 
 export default App
