@@ -1,8 +1,10 @@
 import fetch from 'isomorphic-fetch'
 
-export const FETCH_LOCATION_REQUEST = 'FETCH_LOCATION_REQUEST'
-export const FETCH_LOCATION_FAILURE = 'FETCH_LOCATION_FAILURE'
-export const FETCH_LOCATION_SUCCESS = 'FETCH_LOCATION_SUCCESS'
+import {
+  FETCH_LOCATION_REQUEST,
+  FETCH_LOCATION_FAILURE,
+  FETCH_LOCATION_SUCCESS
+} from './actionTypes'
 
 const fetchLocationRequest = () => {
   return {
@@ -24,7 +26,7 @@ const fetchLocationSuccess = (res) => {
   }
 }
 
-export const fetchLocation = () => {
+export default () => {
   return async (dispatch) => {
     dispatch(fetchLocationRequest())
 

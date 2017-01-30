@@ -1,8 +1,10 @@
-import {
+import { actionTypes } from '../actions/location'
+
+const {
   FETCH_LOCATION_REQUEST,
   FETCH_LOCATION_FAILURE,
   FETCH_LOCATION_SUCCESS
-} from '../actions/locationActions'
+} = actionTypes
 
 export default (state = {}, action) => {
   switch (action.type) {
