@@ -8,7 +8,7 @@ import {
   GET_TIME_LEFT,
   HANDLE_TIME_LEFT_AFTER_SUNSET,
   HANDLE_TIME_LEFT_AFTER_SUNSET_FAILURE
-} from '../actions/timeLeftActions'
+} from '../actions/times/actionTypes'
 
 import { INC_NOW } from '../actions/updateNowActions'
 

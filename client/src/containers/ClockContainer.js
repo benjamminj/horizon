@@ -4,7 +4,7 @@ import Clock from '../components/Clock'
 import { isDay } from '../Utils'
 
 import { incNow } from '../actions/updateNowActions'
-import { getTimeLeft } from '../actions/timeLeftActions'
+import { getTimeLeft } from '../actions/times'
 
 const mapStateToProps = (state, ownProps) => {
   const { times } = state
