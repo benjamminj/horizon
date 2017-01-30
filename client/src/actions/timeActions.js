@@ -8,13 +8,13 @@ export const FETCH_SUNRISE_SUNSET_FAILURE = 'FETCH_SUNRISE_SUNSET_FAILURE'
 export const FETCH_SUNRISE_SUNSET_SUCCESS = 'FETCH_SUNRISE_SUNSET_SUCCESS'
 export const UPDATE_SUNRISE_SUCCESS = 'UPDATE_SUNRISE_SUCCESS'
 
-const fetchSunriseSunsetRequest = () => {
+const fetchTimesRequest = () => {
   return {
     type: FETCH_SUNRISE_SUNSET_REQUEST
   }
 }
 
-const fetchSunriseSunsetFailure = (err) => {
+const fetchTimesFailure = (err) => {
   console.log(err)
 
   return {
@@ -23,7 +23,7 @@ const fetchSunriseSunsetFailure = (err) => {
   }
 }
 
-const fetchSunriseSunsetSuccess = (res) => {
+const fetchTimesSuccess = (res) => {
   const results = {
     civilTwilightBegin: toUTC(new Date(res.civil_twilight_begin)),
     civilTwilightEnd: toUTC(new Date(res.civil_twilight_end)),
@@ -52,19 +52,19 @@ const updateSunriseSuccess = (res) => {
   }
 }
 
-export const fetchSunriseSunsetData = (location) => {
+export const fetchTimes = (location) => {
   return async (dispatch) => {
     const { lat, lng } = location
 
-    dispatch(fetchSunriseSunsetRequest())
+    dispatch(fetchTimesRequest())
 
     try {
       const res = await fetch(`${API_SERVER}/api/sunrise-sunset/lat=${lat}&lng=${lng}&date=today`)
       const { results } = await res.json()
 
-      dispatch(fetchSunriseSunsetSuccess(results))
+      dispatch(fetchTimesSuccess(results))
     } catch (err) {
-      dispatch(fetchSunriseSunsetFailure(err))
+      dispatch(fetchTimesFailure(err))
     }
   }
 }
@@ -73,7 +73,7 @@ export const updateSunriseTime = (location, date) => {
   return async (dispatch) => {
     const { lat, lng } = location
 
-    dispatch(fetchSunriseSunsetRequest())
+    dispatch(fetchTimesRequest())
 
     try {
       const res = await fetch(`${API_SERVER}/api/sunrise-sunset/lat=${lat}&lng=${lng}&date=${date}`)
@@ -81,7 +81,7 @@ export const updateSunriseTime = (location, date) => {
 
       dispatch(updateSunriseSuccess(results))
     } catch (err) {
-      dispatch(fetchSunriseSunsetFailure(err))
+      dispatch(fetchTimesFailure(err))
     }
   }
 }
