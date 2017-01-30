@@ -1,14 +1,13 @@
-import {
+import { actionTypes } from '../actions/times'
+
+const {
   FETCH_SUNRISE_SUNSET_REQUEST,
   FETCH_SUNRISE_SUNSET_FAILURE,
-  FETCH_SUNRISE_SUNSET_SUCCESS
-} from '../actions/timeActions'
-
-import {
+  FETCH_SUNRISE_SUNSET_SUCCESS,
   GET_TIME_LEFT,
   HANDLE_TIME_LEFT_AFTER_SUNSET,
   HANDLE_TIME_LEFT_AFTER_SUNSET_FAILURE
-} from '../actions/times/actionTypes'
+} = actionTypes
 
 import { INC_NOW } from '../actions/updateNowActions'
 
