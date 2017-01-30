@@ -3,14 +3,24 @@ import './Clock.css'
 
 class Clock extends Component {
   componentDidMount () {
-    const { now, startCount, isLoading, loadSuccess } = this.props
+    // const { now, startCount, isLoading, loadSuccess } = this.props
+    const { getTimeLeft, times } = this.props
 
-    if (!isLoading && loadSuccess) {
-      startCount(now)
-    }
+    // if (!isLoading && loadSuccess) {
+    //   startCount(now)
+    // }
+
+    console.log('Component attached')
+    console.log('now', times.now)
+
+    getTimeLeft(times)
   }
 
   componentWillUpdate () {
+    // const { startCount, times } = this.props
+
+    // startCount(times.now)
+
     console.log('Updating!!!')
   }
 
@@ -48,7 +58,7 @@ class Clock extends Component {
   }
 }
 
-const { bool, number, func } = PropTypes
+const { bool, number, func, object } = PropTypes
 
 Clock.propTypes = {
   day: bool.isRequired,
@@ -56,7 +66,9 @@ Clock.propTypes = {
   now: number,
   startCount: func,
   isLoading: bool.isRequired,
-  loadSuccess: bool.isRequired
+  loadSuccess: bool.isRequired,
+  getTimeLeft: func.isRequired,
+  times: object.isRequired
 }
 
 export default Clock

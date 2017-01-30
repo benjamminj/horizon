@@ -62,7 +62,8 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
-        now
+        now,
+        timeLeft
       }
     default:
       return state

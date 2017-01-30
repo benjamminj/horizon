@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   componentWillUpdate () {
-    console.log('Updating APP')
+    // console.log('Updating APP')
   }
 
   render () {

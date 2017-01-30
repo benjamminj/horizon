@@ -1,8 +1,10 @@
 export const INC_NOW = 'INC_NOW'
 
-export const incNow = (now) => {
+export const incNow = (times) => {
+  // const { now, sunrise, sunset, isDay } =
+
   return {
     type: INC_NOW,
-    now: now + 1000
+    now: times.now + 1000
   }
 }
