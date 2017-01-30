@@ -7,7 +7,7 @@ import { incNow } from '../actions/updateNowActions'
 import { getTimeLeft } from '../actions/timeLeftActions'
 
 const mapStateToProps = (state, ownProps) => {
-  const { sunriseSunsetData: times } = state
+  const { times } = state
   const { now, isLoading, loadSuccess, timeLeft } = times
 
   const day = isDay(times)

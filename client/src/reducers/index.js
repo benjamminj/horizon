@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
-import sunriseSunsetData from './sunriseSunsetData'
+import times from './times'
 import location from './location'
 
 export default combineReducers({
   location,
-  sunriseSunsetData
+  times
 })

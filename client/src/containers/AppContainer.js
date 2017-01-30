@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 
-import { fetchSunriseSunsetData } from '../actions/fetchSunriseSunsetActions'
+import { fetchSunriseSunsetData } from '../actions/timeActions'
 import { fetchLocation } from '../actions/locationActions'
 
 import App from '../components/App'
 
 const mapStateToProps = (state, ownProps) => {
-  const { location, sunriseSunsetData: times } = state
+  const { location, times } = state
 
   return {
     times,
