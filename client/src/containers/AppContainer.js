@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 
 import { fetchTimes } from '../actions/times'
 import { fetchLocation } from '../actions/location'
+import { getIsDay } from '../actions/status'
 
 import App from '../components/App'
 
@@ -21,6 +22,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     fetchLocation: () => {
       dispatch(fetchLocation())
+    },
+    getIsDay: (prev, state) => {
+      dispatch(getIsDay(prev, state))
     }
   }
 }

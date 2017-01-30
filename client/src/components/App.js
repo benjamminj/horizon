@@ -16,15 +16,17 @@ class App extends Component {
 
   componentDidMount () {
     this.props.fetchLocation()
-
-    console.log(this.props.location)
   }
 
   componentDidUpdate (prev) {
-    const { location, fetchTimes } = this.props
+    const { location, fetchTimes, getIsDay, times } = this.props
 
     if (prev.location.isLoading && !location.isLoading) {
       fetchTimes(location)
+    }
+
+    if (!prev.times.loadSuccess && times.loadSuccess) {
+      getIsDay(times)
     }
   }
 
@@ -53,7 +55,8 @@ App.propTypes = {
   times: object.isRequired,
   location: object.isRequired,
   fetchLocation: func.isRequired,
-  fetchTimes: func.isRequired
+  fetchTimes: func.isRequired,
+  getIsDay: func.isRequired
 }
 
 export default App
