@@ -3,6 +3,12 @@ import fetch from 'isomorphic-fetch'
 import { API_SERVER } from '../../config'
 import { toUTC } from '../../Utils'
 
+import {
+  FETCH_SUNRISE_SUNSET_REQUEST,
+  FETCH_SUNRISE_SUNSET_FAILURE,
+  FETCH_SUNRISE_SUNSET_SUCCESS
+} from './actionTypes'
+
 const fetchTimesRequest = () => {
   return {
     type: FETCH_SUNRISE_SUNSET_REQUEST
@@ -38,16 +44,7 @@ const fetchTimesSuccess = (res) => {
   }
 }
 
-const updateSunriseSuccess = (res) => {
-  const sunrise = toUTC(new Date(res.sunrise))
-
-  return {
-    type: UPDATE_SUNRISE_SUCCESS,
-    sunrise
-  }
-}
-
-export const fetchTimes = (location) => {
+export default (location) => {
   return async (dispatch) => {
     const { lat, lng } = location
 
@@ -58,23 +55,6 @@ export const fetchTimes = (location) => {
       const { results } = await res.json()
 
       dispatch(fetchTimesSuccess(results))
-    } catch (err) {
-      dispatch(fetchTimesFailure(err))
-    }
-  }
-}
-
-export const updateSunriseTime = (location, date) => {
-  return async (dispatch) => {
-    const { lat, lng } = location
-
-    dispatch(fetchTimesRequest())
-
-    try {
-      const res = await fetch(`${API_SERVER}/api/sunrise-sunset/lat=${lat}&lng=${lng}&date=${date}`)
-      const { results } = await res.json()
-
-      dispatch(updateSunriseSuccess(results))
     } catch (err) {
       dispatch(fetchTimesFailure(err))
     }

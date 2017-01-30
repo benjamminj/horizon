@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { fetchTimes } from '../actions/timeActions'
+import { fetchTimes } from '../actions/times'
 import { fetchLocation } from '../actions/locationActions'
 
 import App from '../components/App'
