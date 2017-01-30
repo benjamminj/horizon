@@ -31,7 +31,7 @@ class App extends Component {
   render () {
     const { loadSuccess } = this.props.times
 
-    const styles = AppStyles(this.props)
+    const styles = AppStyles(this.props.times)
 
     return (
       <div style={styles}>
