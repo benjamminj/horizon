@@ -3,26 +3,13 @@ import './Clock.css'
 
 class Clock extends Component {
   componentDidMount () {
-    // const { now, startCount, isLoading, loadSuccess } = this.props
     const { getTimeLeft, times } = this.props
-
-    // if (!isLoading && loadSuccess) {
-    //   startCount(now)
-    // }
-
-    console.log('Component attached')
-    console.log('now', times.now)
 
     getTimeLeft(times)
   }
 
-  componentWillUpdate () {
-    console.log('Updating!!!')
-  }
-
   componentDidUpdate () {
     const { increaseCount, times } = this.props
-    console.log('Updated')
 
     increaseCount(times)
   }
@@ -43,16 +30,11 @@ class Clock extends Component {
 
   formatTimeDisplay () {
     const { timeLeft } = this.props.times
-    console.log('FORMAT TIME DISPLAY')
-    console.log('TIME LEFT', timeLeft)
     const { padNumber } = this
 
     const hours = timeLeft / (1000 * 60 * 60)
     const minutes = (hours % 1) * 60
     const seconds = (minutes % 1) * 60
-
-    console.log(`${hours} : ${minutes} : ${seconds}`)
-    console.log('TIME LEFT', timeLeft)
 
     return {
       hours: padNumber(Math.floor(hours)),
