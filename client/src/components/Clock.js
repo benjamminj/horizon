@@ -17,15 +17,18 @@ class Clock extends Component {
   }
 
   componentWillUpdate () {
-    // const { startCount, times } = this.props
-
-    // startCount(times.now)
-
     console.log('Updating!!!')
   }
 
+  componentDidUpdate () {
+    const { increaseCount, times } = this.props
+    console.log('Updated')
+
+    increaseCount(times)
+  }
+
   render () {
-    const { timeLeft } = this.props
+    const { timeLeft } = this.props.times
     const { hours, minutes, seconds } = this.formatTimeDisplay()
 
     const timeDisplay = timeLeft ? <h1>{hours}:{minutes}:{seconds}</h1> : <h1 />
@@ -39,12 +42,17 @@ class Clock extends Component {
   }
 
   formatTimeDisplay () {
-    const { timeLeft } = this.props
+    const { timeLeft } = this.props.times
+    console.log('FORMAT TIME DISPLAY')
+    console.log('TIME LEFT', timeLeft)
     const { padNumber } = this
 
     const hours = timeLeft / (1000 * 60 * 60)
     const minutes = (hours % 1) * 60
     const seconds = (minutes % 1) * 60
+
+    console.log(`${hours} : ${minutes} : ${seconds}`)
+    console.log('TIME LEFT', timeLeft)
 
     return {
       hours: padNumber(Math.floor(hours)),
@@ -64,7 +72,7 @@ Clock.propTypes = {
   day: bool.isRequired,
   timeLeft: number,
   now: number,
-  startCount: func,
+  increaseCount: func,
   isLoading: bool.isRequired,
   loadSuccess: bool.isRequired,
   getTimeLeft: func.isRequired,

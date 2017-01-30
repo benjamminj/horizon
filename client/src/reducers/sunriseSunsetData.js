@@ -34,11 +34,12 @@ export default (state = initialState, action) => {
         loadSuccess: false
       }
     case FETCH_SUNRISE_SUNSET_SUCCESS:
-      const { results } = action
+      const { results, isDay } = action
 
       return {
         ...state,
         ...results,
+        isDay,
         isLoading: false,
         loadSuccess: true
       }
@@ -58,12 +59,12 @@ export default (state = initialState, action) => {
       }
     // Perhap abstract into own reducer?
     case INC_NOW:
-      const { now } = action
+      // const { now } = action
 
       return {
         ...state,
-        now,
-        timeLeft
+        now: action.now,
+        timeLeft: action.timeLeft
       }
     default:
       return state

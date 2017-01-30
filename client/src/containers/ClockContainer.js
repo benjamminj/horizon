@@ -24,9 +24,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    startCount: (now) => {
-      window.setInterval(() => {
-        dispatch(incNow(now))
+    increaseCount: (times) => {
+      window.setTimeout(() => {
+        dispatch(incNow(times))
       }, 1000)
     },
     getTimeLeft: (times) => {
