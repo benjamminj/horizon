@@ -6,10 +6,9 @@ const {
   FETCH_SUNRISE_SUNSET_SUCCESS,
   GET_TIME_LEFT,
   HANDLE_TIME_LEFT_AFTER_SUNSET,
-  HANDLE_TIME_LEFT_AFTER_SUNSET_FAILURE
+  HANDLE_TIME_LEFT_AFTER_SUNSET_FAILURE,
+  INC_NOW
 } = actionTypes
-
-import { INC_NOW } from '../actions/updateNowActions'
 
 const initialState = {
   isLoading: false,
