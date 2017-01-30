@@ -2,7 +2,7 @@ import {
   FETCH_LOCATION_REQUEST,
   FETCH_LOCATION_FAILURE,
   FETCH_LOCATION_SUCCESS
-} from '../actions/fetchLocationActions'
+} from '../actions/locationActions'
 
 export default (state = {}, action) => {
   switch (action.type) {

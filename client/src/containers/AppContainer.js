@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import { fetchSunriseSunsetData } from '../actions/fetchSunriseSunsetActions'
-import { fetchLocation } from '../actions/fetchLocationActions'
+import { fetchLocation } from '../actions/locationActions'
 
 import App from '../components/App'
 

@@ -2,7 +2,7 @@ import {
   FETCH_SUNRISE_SUNSET_REQUEST,
   FETCH_SUNRISE_SUNSET_FAILURE,
   FETCH_SUNRISE_SUNSET_SUCCESS
-} from '../actions/fetchSunriseSunsetActions'
+} from '../actions/timeActions'
 
 import {
   GET_TIME_LEFT,
