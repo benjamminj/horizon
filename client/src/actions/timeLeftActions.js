@@ -5,8 +5,8 @@ import { toUTC } from '../Utils'
 // import { updateSunriseTime } from './fetchSunriseSunsetActions'
 
 export const GET_TIME_LEFT = 'GET_TIME_LEFT'
-export const HANDLE_TIME_LEFT_AFTER_SUNSET = 'HANDLE_TIME_LEFT_AFTER_SUNSET'
-export const HANDLE_TIME_LEFT_AFTER_SUNSET_FAILURE = 'HANDLE_TIME_LEFT_AFTER_SUNSET_FAILURE'
+export const GET_TIME_LEFT_FAILURE = 'GET_TIME_LEFT_FAILURE'
+export const UPDATE_TIME_LEFT_AFTER_SUNSET = 'UPDATE_TIME_LEFT_AFTER_SUNSET'
 
 const getTimeLeftDefault = (payload) => {
   const { isDay, sunset, sunrise, now } = payload
@@ -17,18 +17,18 @@ const getTimeLeftDefault = (payload) => {
   }
 }
 
-const getTimeLeftAfterSunset = (payload) => {
+const updateTimeLeftAfterSunset = (payload) => {
   const { newSunrise, now } = payload
 
   return {
-    type: HANDLE_TIME_LEFT_AFTER_SUNSET,
+    type: UPDATE_TIME_LEFT_AFTER_SUNSET,
     timeLeft: newSunrise - now
   }
 }
 
 const getTimeLeftError = (err) => {
   return {
-    type: HANDLE_TIME_LEFT_AFTER_SUNSET_FAILURE,
+    type: GET_TIME_LEFT_FAILURE,
     err
   }
 }
@@ -45,7 +45,7 @@ export const getTimeLeft = (payload) => {
         const { results } = await res.json()
         const newSunrise = toUTC(new Date(results.sunrise))
 
-        dispatch(getTimeLeftAfterSunset({ newSunrise, now }))
+        dispatch(updateTimeLeftAfterSunset({ newSunrise, now }))
       } else {
         dispatch(getTimeLeftDefault({ isDay, sunset, sunrise, now }))
       }

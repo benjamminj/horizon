@@ -1,13 +1,13 @@
 import {
   GET_TIME_LEFT,
-  HANDLE_TIME_LEFT_AFTER_SUNSET,
-  HANDLE_TIME_LEFT_AFTER_SUNSET_FAILURE
+  GET_TIME_LEFT_FAILURE,
+  UPDATE_TIME_LEFT_AFTER_SUNSET
 } from '../actions/timeLeftActions'
 
 export default (state = {}, action) => {
   switch (action.type) {
     case GET_TIME_LEFT:
-    case HANDLE_TIME_LEFT_AFTER_SUNSET:
+    case UPDATE_TIME_LEFT_AFTER_SUNSET:
       const { timeLeft } = action
 
       return {
@@ -16,7 +16,7 @@ export default (state = {}, action) => {
           timeLeft
         }
       }
-    case HANDLE_TIME_LEFT_AFTER_SUNSET_FAILURE:
+    case GET_TIME_LEFT_FAILURE:
       const { err } = action
 
       return {
