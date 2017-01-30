@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import Clock from '../components/Clock'
-import { isDay } from '../Utils'
+// import { isDay } from '../Utils'
 
 import { getTimeLeft, incNow } from '../actions/times'
 
@@ -9,10 +9,7 @@ const mapStateToProps = (state, ownProps) => {
   const { times, status } = state
   const { now, isLoading, loadSuccess, timeLeft } = times
 
-  const day = isDay(times)
-
   return {
-    day,
     timeLeft,
     now,
     isLoading,
