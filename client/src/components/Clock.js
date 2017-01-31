@@ -6,6 +6,7 @@ class Clock extends Component {
     const { getTimeLeft, status, times } = this.props
 
     getTimeLeft(status, times)
+    this.props.changeLightLevel(times, status)
   }
 
   componentDidUpdate () {
@@ -55,6 +56,7 @@ class Clock extends Component {
 const { func, object } = PropTypes
 
 Clock.propTypes = {
+  changeLightLevel: func.isRequired,
   getTimeLeft: func.isRequired,
   increaseCount: func,
   status: object.isRequired,

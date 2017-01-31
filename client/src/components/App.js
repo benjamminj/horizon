@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   componentDidUpdate (prev) {
-    const { location, fetchTimes, getIsDay, times, status } = this.props
+    const { location, fetchTimes, getIsDay, times } = this.props
 
     if (prev.location.isLoading && !location.isLoading) {
       fetchTimes(location)
@@ -22,8 +22,9 @@ class App extends Component {
 
     if (!prev.times.loadSuccess && times.loadSuccess) {
       getIsDay(times)
-      this.props.changeLightLevel(times, status)
     }
+
+    this.checkForLightChange()
   }
 
   render () {
@@ -45,12 +46,21 @@ class App extends Component {
       </div>
     )
   }
+
+  checkForLightChange () {
+    console.log('Not slowing down yet?')
+
+    const { status, times } = this.props // eslint-disable-line
+    const { now, sunrise, sunset, civilTwilightEnd, civilTwilightBegin } = times // eslint-disable-line
+    const { isDay } = times // eslint-disable-line
+
+    // Will need to check the various options and then return / dispatch various actions based ont he results
+  }
 }
 
 const { object, func } = PropTypes
 
 App.propTypes = {
-  changeLightLevel: func.isRequired,
   fetchLocation: func.isRequired,
   fetchTimes: func.isRequired,
   getIsDay: func.isRequired,

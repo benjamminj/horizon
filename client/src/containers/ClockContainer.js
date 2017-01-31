@@ -4,16 +4,12 @@ import Clock from '../components/Clock'
 // import { isDay } from '../Utils'
 
 import { getTimeLeft, incNow } from '../actions/times'
+import { changeLightLevel } from '../actions/status'
 
 const mapStateToProps = (state, ownProps) => {
   const { times, status } = state
-  const { now, isLoading, loadSuccess, timeLeft } = times
 
   return {
-    timeLeft,
-    now,
-    isLoading,
-    loadSuccess,
     times,
     status
   }
@@ -28,6 +24,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     getTimeLeft: (status, times) => {
       dispatch(getTimeLeft(status, times))
+    },
+    changeLightLevel: (lightLevel) => {
+      dispatch(changeLightLevel(lightLevel))
     }
   }
 }

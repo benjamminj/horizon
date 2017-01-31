@@ -12,8 +12,12 @@ function generateBackground (color1, color2, color3) {
 
 export default (status, times) => {
   const { isLoading, loadSuccess } = times
+  const { lightLevel } = status
+
+  const isLoaded = !isLoading && loadSuccess
+  const isNight = lightLevel === 'NIGHT'
 
   return {
-    background: !isLoading && loadSuccess ? `darkgreen` : `black`
+    background: isLoaded && isNight ? `darkgreen` : `black`
   }
 }
