@@ -6,13 +6,14 @@ class Clock extends Component {
     const { getTimeLeft, status, times } = this.props
 
     getTimeLeft(status, times)
-    this.props.changeLightLevel(times, status)
+    // this.props.changeLightLevel('DAY')
   }
 
   componentDidUpdate () {
     const { increaseCount, status, times } = this.props
 
     increaseCount(status, times)
+    this.checkForLightLevelChange()
   }
 
   render () {
@@ -30,6 +31,20 @@ class Clock extends Component {
         {timeDisplay}
       </div>
     )
+  }
+
+  checkForLightLevelChange () {
+    const { now, sunset, sunrise, civilTwilightBegin, civilTwilightEnd } = this.props.times
+    // const { isDay } = this.props.status
+
+    const sunriseEnd = sunrise + (1000 * 60 * 5)
+    const sunsetEnd = sunset + (1000 * 60 * 5)
+
+    const breakpoints = [civilTwilightBegin, sunrise, sunriseEnd, sunset, sunsetEnd, civilTwilightEnd]
+    // const lightLevels = ['AM_CIVIL_TWILIGHT', 'SUNRISE', 'DAY', 'SUNSET', 'PM_CIVIL_TWILIGHT', 'NIGHT']
+    console.log(breakpoints.findIndex((breakpoint) => now === breakpoint))
+
+    return breakpoints.findIndex((breakpoint) => now === breakpoint)
   }
 
   formatTimeDisplay () {

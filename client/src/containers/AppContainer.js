@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import { fetchTimes } from '../actions/times'
 import { fetchLocation } from '../actions/location'
-import { getIsDay } from '../actions/status'
+import { getIsDay, changeLightLevel } from '../actions/status'
 
 import App from '../components/App'
 
@@ -26,6 +26,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     getIsDay: (prev, state) => {
       dispatch(getIsDay(prev, state))
+    },
+    changeLightLevel: (lightLevel) => {
+      dispatch(changeLightLevel(lightLevel))
     }
   }
 }

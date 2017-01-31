@@ -24,7 +24,9 @@ class App extends Component {
       getIsDay(times)
     }
 
-    this.checkForLightChange()
+    // const lightLevel = this.checkForLightChange()
+
+    // this.props.changeLightLevel(lightLevel)
   }
 
   render () {
@@ -47,32 +49,32 @@ class App extends Component {
     )
   }
 
-  checkForLightChange () {
-    console.log('Not slowing down yet?')
+  // checkForLightChange () {
+  //   console.log('Not slowing down yet?')
 
-    const { status, times } = this.props // eslint-disable-line
-    const { now, sunrise, sunset, civilTwilightEnd, civilTwilightBegin } = times // eslint-disable-line
-    const { isDay } = status // eslint-disable-line
+  //   const { status, times } = this.props // eslint-disable-line
+  //   const { now, sunrise, sunset, civilTwilightEnd, civilTwilightBegin } = times // eslint-disable-line
+  //   const { isDay, lightLevel } = status // eslint-disable-line
 
-    // Will need to check the various options and then return / dispatch various actions based ont he results
-    let lightLevel
+  //   // Will need to check the various options and then return / dispatch various actions based ont he results
+  //   let currentLevel
 
-    if (isDay && sunset - now < 0) {
-      lightLevel = 'SUNSET'
-    } else if (isDay && sunrise - now > 0) {
-      lightLevel = 'SUNRISE'
-    } else if (isDay && civilTwilightEnd - now > 0 && sunset - now < 0) {
-      lightLevel = 'PM_TWILIGHT'
-    } else if (isDay && civilTwilightBegin - now > 0) {
-      lightLevel = 'AM_TWILIGHT'
-    } else if (!isDay) {
-      lightLevel = 'NIGHT'
-    } else {
-      lightLevel = 'DAY'
-    }
+  //   if (isDay && sunset - now < 0) {
+  //     currentLevel = 'SUNSET'
+  //   } else if (isDay && sunrise - now > 0) {
+  //     currentLevel = 'SUNRISE'
+  //   } else if (isDay && civilTwilightEnd - now > 0 && sunset - now < 0) {
+  //     currentLevel = 'PM_TWILIGHT'
+  //   } else if (isDay && civilTwilightBegin - now > 0) {
+  //     currentLevel = 'AM_TWILIGHT'
+  //   } else if (!isDay) {
+  //     currentLevel = 'NIGHT'
+  //   } else {
+  //     currentLevel = 'DAY'
+  //   }
 
-    console.log(lightLevel)
-  }
+  //   return currentLevel === lightLevel ? null
+  // }
 }
 
 const { object, func } = PropTypes
@@ -83,7 +85,8 @@ App.propTypes = {
   getIsDay: func.isRequired,
   location: object.isRequired,
   times: object.isRequired,
-  status: object.isRequired
+  status: object.isRequired,
+  changeLightLevel: func.isRequired
 }
 
 export default App
