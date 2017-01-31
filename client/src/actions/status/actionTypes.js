@@ -1,1 +1,2 @@
 export const GET_IS_DAY = 'GET_IS_DAY'
+export const CHANGE_LIGHT_LEVEL = 'CHANGE_LIGHT_LEVEL'
