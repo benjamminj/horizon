@@ -10,29 +10,26 @@ export default (state = {}, action) => {
   switch (action.type) {
     case FETCH_LOCATION_REQUEST:
       return {
-        state, ...{ isLoading: true }
+        ...state,
+        isLoading: true
       }
     case FETCH_LOCATION_FAILURE:
       const { err } = action
 
       return {
-        state,
-        ...{
-          isLoading: false,
-          loadSuccess: false,
-          err
-        }
+        ...state,
+        isLoading: false,
+        loadSuccess: false,
+        err
       }
     case FETCH_LOCATION_SUCCESS:
       const { res } = action
 
       return {
-        state,
-        ...{
-          isLoading: false,
-          loadSuccess: true,
-          ...res
-        }
+        ...state,
+        ...res,
+        isLoading: false,
+        loadSuccess: true
       }
     default:
       return state
