@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   componentDidUpdate (prev) {
-    const { location, fetchTimes, getIsDay, times } = this.props
+    const { location, fetchTimes, getIsDay, times, status } = this.props
 
     if (prev.location.isLoading && !location.isLoading) {
       fetchTimes(location)
@@ -22,6 +22,7 @@ class App extends Component {
 
     if (!prev.times.loadSuccess && times.loadSuccess) {
       getIsDay(times)
+      this.props.changeLightLevel(times, status)
     }
   }
 
@@ -49,11 +50,12 @@ class App extends Component {
 const { object, func } = PropTypes
 
 App.propTypes = {
-  times: object.isRequired,
-  location: object.isRequired,
+  changeLightLevel: func.isRequired,
   fetchLocation: func.isRequired,
   fetchTimes: func.isRequired,
   getIsDay: func.isRequired,
+  location: object.isRequired,
+  times: object.isRequired,
   status: object.isRequired
 }
 
