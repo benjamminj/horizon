@@ -11,6 +11,10 @@ import AppStyles from './AppStyles'
 class App extends Component {
   componentDidMount () {
     this.props.fetchLocation()
+
+    setTimeout(() => {
+      this.props.changeLightLevel('SUNRISE')
+    }, 5000)
   }
 
   componentDidUpdate (prev) {
@@ -23,10 +27,6 @@ class App extends Component {
     if (!prev.times.loadSuccess && times.loadSuccess) {
       getIsDay(times)
     }
-
-    // const lightLevel = this.checkForLightChange()
-
-    // this.props.changeLightLevel(lightLevel)
   }
 
   render () {
@@ -34,7 +34,7 @@ class App extends Component {
 
     const { loadSuccess } = times
 
-    const styles = AppStyles(status, times)
+    const styles = AppStyles(status.lightLevel)
 
     return (
       <div style={styles}>

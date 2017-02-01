@@ -10,14 +10,21 @@ function generateBackground (color1, color2, color3) {
   return `radial-gradient(ellipse 800% 100% at 50% 100%, rgb(${color1}), rgb(${intColor1}), rgb(${color2}), rgb(${intColor2}), rgb(${color3}))`
 }
 
-export default (status, times) => {
-  const { isLoading, loadSuccess } = times
-  const { lightLevel } = status
-
-  const isLoaded = !isLoading && loadSuccess
-  const isNight = lightLevel === 'NIGHT'
-
-  return {
-    background: isLoaded && isNight ? `darkgreen` : `black`
+export default (lightLevel) => {
+  switch (lightLevel) {
+    case 'AM_CIVIL_TWILIGHT':
+      return { background: 'peru' }
+    case 'SUNRISE':
+      return { background: 'orange', transition: 'background 1s linear' }
+    case 'DAY':
+      return { background: 'goldenrod' }
+    case 'SUNSET':
+      return { background: 'aquamarine' }
+    case 'PM_CIVIL_TWILIGHT':
+      return { background: 'purple' }
+    case 'NIGHT':
+      return { background: 'red' }
+    default:
+      return { background: 'green' }
   }
 }
