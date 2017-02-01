@@ -18,6 +18,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    // Eventually turn this into a timer that gets fired upon everything being ready
     increaseCount: (times) => {
       window.setTimeout(() => {
         dispatch(incNow(times))

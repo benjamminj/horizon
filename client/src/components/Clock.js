@@ -9,6 +9,8 @@ class Clock extends Component {
     const { lat, lng } = location
 
     getTimeLeft({ isDay, sunrise, sunset, now, lat, lng })
+
+    this.getInitialLightLevel()
   }
 
   componentDidUpdate (prev) {
@@ -59,15 +61,12 @@ class Clock extends Component {
     const breakpoints = [civilTwilightBegin, sunrise, sunriseEnd, sunset, sunsetEnd, civilTwilightEnd]
     const lightLevels = ['AM_CIVIL_TWILIGHT', 'SUNRISE', 'DAY', 'SUNSET', 'PM_CIVIL_TWILIGHT', 'NIGHT']
 
-    console.log('civil Twilight Begin', civilTwilightBegin)
-    console.log('civil Twilight end', civilTwilightEnd)
-
     const level = breakpoints.findIndex((breakpoint, i, arr) => {
       // Issue is that UTC time is based in GMT from the API call so sometimes at night the civ twilight / sunset times are no longer accurate
       return (breakpoint < now) && (now < arr[i + 1])
     })
 
-    // console.log('INSIDE LEVELS', level)
+    console.log('INSIDE LEVELS', level)
     return lightLevels[level]
   }
 

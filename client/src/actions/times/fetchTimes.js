@@ -48,16 +48,13 @@ export default (location) => {
 
     try {
       const today = new Date(Date.now())
-      // const offset = today.getTimezoneOffset() * (60 * 1000)
 
       let year = today.getFullYear()
       let date = today.getDate()
       let month = today.getMonth() + 1
-      // console.log(year, month, date)
+
       const res = await fetch(`${API_SERVER}/api/sunrise-sunset/lat=${lat}&lng=${lng}&date=${year}-${month}-${date}`)
       const { results } = await res.json()
-
-      console.log(results)
 
       dispatch(fetchTimesSuccess(results))
     } catch (err) {
