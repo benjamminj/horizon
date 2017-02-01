@@ -21,9 +21,12 @@ const getTimeLeftDefault = (payload) => {
 const updateTimeLeftAfterSunset = (payload) => {
   const { newSunrise, now } = payload
 
+  console.log('in action', newSunrise - now)
+
   return {
     type: UPDATE_TIME_LEFT_AFTER_SUNSET,
-    timeLeft: newSunrise - now
+    timeLeft: newSunrise - now,
+    newSunrise
   }
 }
 
@@ -39,10 +42,16 @@ export default (payload) => {
 
   const isAfterSunsetToday = sunrise - now < 0 && sunset - now < 0
 
+  // TODO -- abstract into helper function
+  const tomorrow = new Date(now + (24 * 60 * 60 * 1000))
+  const year = tomorrow.getFullYear()
+  const month = tomorrow.getMonth() + 1
+  const date = tomorrow.getDate()
+
   return async (dispatch) => {
     try {
       if (isAfterSunsetToday) {
-        const res = await fetch(`${API_SERVER}/api/sunrise-sunset/lat=${lat}&lng=${lng}&date=tomorrow`)
+        const res = await fetch(`${API_SERVER}/api/sunrise-sunset/lat=${lat}&lng=${lng}&date=${year}-${month}-${date}`)
         const { results } = await res.json()
         const newSunrise = toUTC(new Date(results.sunrise))
 

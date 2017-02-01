@@ -5,7 +5,7 @@ const {
   FETCH_SUNRISE_SUNSET_FAILURE,
   FETCH_SUNRISE_SUNSET_SUCCESS,
   GET_TIME_LEFT,
-  HANDLE_TIME_LEFT_AFTER_SUNSET,
+  UPDATE_TIME_LEFT_AFTER_SUNSET,
   HANDLE_TIME_LEFT_AFTER_SUNSET_FAILURE,
   INC_NOW
 } = actionTypes
@@ -43,12 +43,19 @@ export default (state = initialState, action) => {
       }
     // Perhaps abstract into own reducer / piece ?
     case GET_TIME_LEFT:
-    case HANDLE_TIME_LEFT_AFTER_SUNSET:
       const { timeLeft } = action
 
       return {
         ...state,
         timeLeft
+      }
+    case UPDATE_TIME_LEFT_AFTER_SUNSET:
+      const { newSunrise } = action
+
+      return {
+        ...state,
+        timeLeft: action.timeLeft,
+        sunrise: newSunrise
       }
     case HANDLE_TIME_LEFT_AFTER_SUNSET_FAILURE:
       return {

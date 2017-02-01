@@ -2,6 +2,7 @@
 
 <!-- 1. Need to add action to update the sunrise time _after_ sunset to avoid bugs -->
 2. Need to add action to redo api calls after midnight to update state
+3. Fix issue with API call going to wrong date in the evening bc of UTC time diff
 
 #### STYLE
 

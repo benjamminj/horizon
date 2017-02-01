@@ -3,10 +3,12 @@ import './Clock.css'
 
 class Clock extends Component {
   componentDidMount () {
-    const { getTimeLeft, status, times } = this.props
+    const { getTimeLeft, status, times, location } = this.props
+    const { sunrise, sunset, now } = times
+    const { isDay } = status
+    const { lat, lng } = location
 
-    getTimeLeft(status, times)
-    // this.props.changeLightLevel('DAY')
+    getTimeLeft({ isDay, sunrise, sunset, now, lat, lng })
   }
 
   componentDidUpdate () {
@@ -41,10 +43,29 @@ class Clock extends Component {
     const sunsetEnd = sunset + (1000 * 60 * 5)
 
     const breakpoints = [civilTwilightBegin, sunrise, sunriseEnd, sunset, sunsetEnd, civilTwilightEnd]
-    // const lightLevels = ['AM_CIVIL_TWILIGHT', 'SUNRISE', 'DAY', 'SUNSET', 'PM_CIVIL_TWILIGHT', 'NIGHT']
-    console.log(breakpoints.findIndex((breakpoint) => now === breakpoint))
 
     return breakpoints.findIndex((breakpoint) => now === breakpoint)
+  }
+
+  getInitialLightLevel () {
+    const { now, sunset, sunrise, civilTwilightBegin, civilTwilightEnd } = this.props.times
+
+    const sunriseEnd = sunrise + (1000 * 60 * 5)
+    const sunsetEnd = sunset + (1000 * 60 * 5)
+
+    const breakpoints = [civilTwilightBegin, sunrise, sunriseEnd, sunset, sunsetEnd, civilTwilightEnd]
+    const lightLevels = ['AM_CIVIL_TWILIGHT', 'SUNRISE', 'DAY', 'SUNSET', 'PM_CIVIL_TWILIGHT', 'NIGHT']
+
+    console.log('civil Twilight Begin', civilTwilightBegin)
+    console.log('civil Twilight end', civilTwilightEnd)
+
+    const level = breakpoints.findIndex((breakpoint, i, arr) => {
+      // Issue is that UTC time is based in GMT from the API call so sometimes at night the civ twilight / sunset times are no longer accurate
+      return (breakpoint < now) && (now < arr[i + 1])
+    })
+
+    // console.log('INSIDE LEVELS', level)
+    return lightLevels[level]
   }
 
   formatTimeDisplay () {
@@ -75,7 +96,8 @@ Clock.propTypes = {
   getTimeLeft: func.isRequired,
   increaseCount: func,
   status: object.isRequired,
-  times: object.isRequired
+  times: object.isRequired,
+  location: object.isRequired
 }
 
 export default Clock

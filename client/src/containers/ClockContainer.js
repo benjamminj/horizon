@@ -7,11 +7,12 @@ import { getTimeLeft, incNow } from '../actions/times'
 import { changeLightLevel } from '../actions/status'
 
 const mapStateToProps = (state, ownProps) => {
-  const { times, status } = state
+  const { times, status, location } = state
 
   return {
     times,
-    status
+    status,
+    location
   }
 }
 
@@ -22,8 +23,8 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(incNow(status, times))
       }, 1000)
     },
-    getTimeLeft: (status, times) => {
-      dispatch(getTimeLeft(status, times))
+    getTimeLeft: (payload) => {
+      dispatch(getTimeLeft(payload))
     },
     changeLightLevel: (lightLevel) => {
       dispatch(changeLightLevel(lightLevel))
