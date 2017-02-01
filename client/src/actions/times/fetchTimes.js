@@ -23,20 +23,28 @@ const fetchTimesFailure = (err) => {
 }
 
 const fetchTimesSuccess = (res) => {
-  // console.log(res)
+  const keys = Object.keys(res)
+  const vals = Object.values(res)
 
-  const results = {
-    civilTwilightBegin: toUTC(new Date(res.civil_twilight_begin)),
-    civilTwilightEnd: toUTC(new Date(res.civil_twilight_end)),
-    sunrise: toUTC(new Date(res.sunrise)),
-    sunset: toUTC(new Date(res.sunset)),
-    now: Date.now(),
-    dayLength: res.day_length * 1000
-  }
+  const breakpoints = keys.map((key, i) => {
+    const levels = [
+      { name: 'waiting_sunrise', cond: /_twilight_/ },
+      { name: 'sunrise', cond: /^sunrise$/ },
+      { name: 'waiting_sunset', cond: /^solar_noon$/ },
+      { name: 'sunset', cond: /^sunset$/ }
+    ]
+
+    return {
+      id: key,
+      time: toUTC(new Date(vals[i])),
+      status: levels.find(el => el.cond.test(key)).name
+    }
+  }).sort((cur, next) => cur.time - next.time)
 
   return {
     type: FETCH_SUNRISE_SUNSET_SUCCESS,
-    results
+    results: res,
+    breakpoints
   }
 }
 
@@ -56,6 +64,7 @@ export default (location) => {
       const res = await fetch(`${API_SERVER}/api/sunrise-sunset/lat=${lat}&lng=${lng}&date=${year}-${month}-${date}`)
       const { results } = await res.json()
 
+      delete results.day_length
       dispatch(fetchTimesSuccess(results))
     } catch (err) {
       dispatch(fetchTimesFailure(err))
