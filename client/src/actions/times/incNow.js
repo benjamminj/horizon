@@ -1,14 +1,12 @@
+/* eslint-disable */
 import { INC_NOW } from './actionTypes'
 
-export default (status, times) => {
-  const { now, sunrise, sunset } = times
-  const { isDay } = status
-
-  const newNow = now + 1000
+export default (times) => {
+  const { now, timeLeft } = times
 
   return {
     type: INC_NOW,
-    now: newNow,
-    timeLeft: isDay ? sunset - newNow : sunrise - newNow
+    now: now + 1000,
+    timeLeft: timeLeft - 1000
   }
 }

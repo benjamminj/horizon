@@ -11,10 +11,13 @@ class Clock extends Component {
     getTimeLeft({ isDay, sunrise, sunset, now, lat, lng })
   }
 
-  componentDidUpdate () {
-    const { increaseCount, status, times } = this.props
+  componentDidUpdate (prev) {
+    const { increaseCount, times } = this.props
 
-    increaseCount(status, times)
+    if (times.timeLeft) {
+      increaseCount(times)
+    }
+
     this.checkForLightLevelChange()
   }
 

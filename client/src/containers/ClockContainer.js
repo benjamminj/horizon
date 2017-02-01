@@ -18,13 +18,13 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    increaseCount: (status, times) => {
+    increaseCount: (times) => {
       window.setTimeout(() => {
-        dispatch(incNow(status, times))
+        dispatch(incNow(times))
       }, 1000)
     },
-    getTimeLeft: (payload) => {
-      dispatch(getTimeLeft(payload))
+    getTimeLeft: (times) => {
+      dispatch(getTimeLeft(times))
     },
     changeLightLevel: (lightLevel) => {
       dispatch(changeLightLevel(lightLevel))
