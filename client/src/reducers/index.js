@@ -1,11 +1,14 @@
+/* eslint-disable */
 import { combineReducers } from 'redux'
 
-import times from './times'
 import location from './location'
-import status from './status'
+import breakpoints from './breakpoints'
+import currentIndex from './currentIndex'
+import remaining from './remaining'
 
 export default combineReducers({
   location,
-  status,
-  times
+  breakpoints,
+  currentIndex,
+  remaining
 })
