@@ -29,7 +29,7 @@ const getLocation = (location) => {
 
 const getLocationSuccess = () => {
   return {
-    type: GET_LOCATION_SUCCESS,
+    type: GET_LOCATION_SUCCESS
   }
 }
 
