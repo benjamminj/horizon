@@ -1,32 +1,34 @@
 import fetch from 'isomorphic-fetch'
 
-import { API_SERVER } from '../../config'
-import { toUTC } from '../../Utils'
-
-// import {
-//   FETCH_SUNRISE_SUNSET_REQUEST,
-//   FETCH_SUNRISE_SUNSET_FAILURE,
-//   FETCH_SUNRISE_SUNSET_SUCCESS
-// } from './actionTypes'
+import { API_SERVER } from '../config'
+import { toUTC } from '../Utils'
 
 export const GET_BREAKPOINTS_REQUEST = 'GET_BREAKPOINTS_REQUEST'
 export const GET_BREAKPOINTS_FAIL = 'GET_BREAKPOINTS_REQUEST'
 export const GET_BREAKPOINTS = 'GET_BREAKPOINTS'
+export const GET_BREAKPOINTS_SUCCESS = 'GET_BREAKPOINTS_SUCCESS'
 
-const fetchTimesRequest = () => {
+// Status methods will be routed to the status reducer
+const getBreakpointsRequest = () => {
   return {
     type: GET_BREAKPOINTS_REQUEST
   }
 }
 
-const fetchTimesFailure = (err) => {
+const getBreakpointsFail = (err) => {
   return {
     type: GET_BREAKPOINTS_FAIL,
     err
   }
 }
 
-const fetchTimesSuccess = (res) => {
+const getBreakpointsSuccess = () => {
+  return {
+    type: GET_BREAKPOINTS_SUCCESS
+  }
+}
+
+const getBreakpoints = (res) => {
   const keys = Object.keys(res)
   const vals = Object.values(res)
 
@@ -47,7 +49,6 @@ const fetchTimesSuccess = (res) => {
 
   return {
     type: GET_BREAKPOINTS,
-    results: res,
     breakpoints
   }
 }
@@ -56,7 +57,7 @@ export default (location) => {
   return async (dispatch) => {
     const { lat, lng } = location
 
-    dispatch(fetchTimesRequest())
+    dispatch(getBreakpointsRequest())
 
     try {
       const today = new Date(Date.now())
@@ -70,9 +71,10 @@ export default (location) => {
 
       delete results.day_length
 
-      dispatch(fetchTimesSuccess(results))
+      dispatch(getBreakpoints(results))
+      dispatch(getBreakpointsSuccess())
     } catch (err) {
-      dispatch(fetchTimesFailure(err))
+      dispatch(getBreakpointsFail(err))
     }
   }
 }
