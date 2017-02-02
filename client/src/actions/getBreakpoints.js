@@ -1,7 +1,4 @@
-/* eslint-disable */
-// import fetch from 'isomorphic-fetch'
-
-import { API_SERVER } from '../config'
+import {reqSunriseSunsetAPI} from './async/apiRequests'
 import { toUTC } from '../Utils'
 
 import {
@@ -56,12 +53,8 @@ const getBreakpoints = (res) => {
   }
 }
 
-import {reqSunriseSunsetAPI} from './async/apiRequests'
-
-export default (location) => {
+export default ({ lat, lng }) => {
   return async (dispatch) => {
-    const { lat, lng } = location
-
     dispatch(getBreakpointsRequest())
 
     try {

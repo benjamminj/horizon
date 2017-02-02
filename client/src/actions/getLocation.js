@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+import { reqGeolocationAPI } from './async'
 
 import {
   GET_LOCATION_REQUEST,
@@ -38,10 +38,9 @@ export default () => {
     dispatch(getLocationRequest())
 
     try {
-      const res = await fetch('//freegeoip.net/json/')
-      const { latitude, longitude } = await res.json()
+      const { latitude: lat, longitude: lng } = await reqGeolocationAPI()
 
-      dispatch(getLocation({ lat: latitude, lng: longitude }))
+      dispatch(getLocation({ lat, lng }))
       dispatch(getLocationSuccess())
     } catch (err) {
       dispatch(getLocationFail(err))
