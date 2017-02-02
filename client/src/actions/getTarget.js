@@ -1,4 +1,4 @@
-const GET_CURRENT_TARGET = 'GET_CURRENT_TARGET'
+export const GET_CURRENT_TARGET = 'GET_CURRENT_TARGET'
 
 const targetIndexes = {
   sunrise: 3,
