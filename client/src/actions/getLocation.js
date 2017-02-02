@@ -7,27 +7,27 @@ import {
   GET_LOCATION
 } from './actionTypes'
 
-const getLocationRequest = () => {
+function getLocationRequest () {
   return {
     type: GET_LOCATION_REQUEST
   }
 }
 
-const getLocationFail = (err) => {
+function getLocationFail (err) {
   return {
     type: GET_LOCATION_FAIL,
     err
   }
 }
 
-const getLocation = (location) => {
+function getLocation (location) {
   return {
     type: GET_LOCATION,
     location
   }
 }
 
-const getLocationSuccess = () => {
+function getLocationSuccess () {
   return {
     type: GET_LOCATION_SUCCESS
   }
