@@ -43,7 +43,7 @@ function getBreakpoints (res) {
     return {
       id: key,
       time: toUTC(new Date(vals[i])),
-      status: levels.find(el => el.cond.test(key)).name
+      status: levels.find((el) => el.cond.test(key)).name
     }
   }).sort((cur, next) => cur.time - next.time)
 

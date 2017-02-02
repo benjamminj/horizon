@@ -12,6 +12,6 @@ export default (breakpoints) => {
 
   return {
     type: GET_CURRENT_INDEX,
-    currentIndex
+    currentIndex: currentIndex > 0 || 0
   }
 }

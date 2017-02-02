@@ -17,4 +17,4 @@ export const GET_CURRENT_INDEX = 'GET_CURRENT_INDEX'
 export const GET_REMAINING = 'GET_REMAINING'
 
 // Target
-export const GET_CURRENT_TARGET = 'GET_CURRENT_TARGET'
+export const GET_TARGET = 'GET_TARGET'
