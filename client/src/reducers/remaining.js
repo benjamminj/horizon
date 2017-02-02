@@ -1,4 +1,4 @@
-import { GET_REMAINING } from '../actions/getRemaining'
+import { GET_REMAINING } from '../actions/actionTypes'
 
 export default (remaining = null, action) => {
   switch (action.type) {

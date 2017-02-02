@@ -1,4 +1,4 @@
-export const GET_REMAINING = 'GET_REMAINING'
+import { GET_REMAINING } from './actionTypes'
 
 export default (targetTime) => {
   return {

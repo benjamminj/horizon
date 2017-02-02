@@ -1,4 +1,4 @@
-import { GET_CURRENT_INDEX } from '../actions/getCurrentIndex'
+import { GET_CURRENT_INDEX } from '../actions/actionTypes'
 
 export default (state = null, action) => {
   switch (action.type) {

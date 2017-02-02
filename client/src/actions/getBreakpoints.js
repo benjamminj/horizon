@@ -3,10 +3,12 @@ import fetch from 'isomorphic-fetch'
 import { API_SERVER } from '../config'
 import { toUTC } from '../Utils'
 
-export const GET_BREAKPOINTS_REQUEST = 'GET_BREAKPOINTS_REQUEST'
-export const GET_BREAKPOINTS_FAIL = 'GET_BREAKPOINTS_REQUEST'
-export const GET_BREAKPOINTS = 'GET_BREAKPOINTS'
-export const GET_BREAKPOINTS_SUCCESS = 'GET_BREAKPOINTS_SUCCESS'
+import {
+  GET_BREAKPOINTS,
+  GET_BREAKPOINTS_FAIL,
+  GET_BREAKPOINTS_REQUEST,
+  GET_BREAKPOINTS_SUCCESS
+} from './actionTypes'
 
 // Status methods will be routed to the status reducer
 const getBreakpointsRequest = () => {

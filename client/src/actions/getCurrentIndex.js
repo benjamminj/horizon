@@ -1,4 +1,4 @@
-export const GET_CURRENT_INDEX = 'GET_CURRENT_INDEX'
+import { GET_CURRENT_INDEX } from './actionTypes'
 
 export default (breakpoints) => {
   const now = Date.now()

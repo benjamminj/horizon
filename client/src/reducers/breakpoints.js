@@ -1,4 +1,4 @@
-import { GET_BREAKPOINTS } from '../actions/getBreakpoints.js'
+import { GET_BREAKPOINTS } from '../actions/actionTypes'
 
 export default (state = [], action) => {
   switch (action.type) {

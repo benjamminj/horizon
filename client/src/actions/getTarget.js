@@ -1,4 +1,4 @@
-export const GET_CURRENT_TARGET = 'GET_CURRENT_TARGET'
+import { GET_CURRENT_TARGET } from './actionTypes'
 
 const targetIndexes = {
   sunrise: 3,
