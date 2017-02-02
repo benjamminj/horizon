@@ -25,7 +25,7 @@ export async function reqSunriseSunsetAPI (lat, lng) {
   }
 }
 
-export async function reqGeolocation () {
+export async function reqGeolocationAPI () {
   try {
     const json = await apiRequest(GEOLOCATION_API)
 
