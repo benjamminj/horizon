@@ -3,8 +3,11 @@ import { GET_CURRENT_INDEX } from './actionTypes'
 export default (breakpoints) => {
   const now = Date.now()
 
-  const currentIndex = breakpoints.findIndex(({ time }, i) => {
-    return (time <= now) && (now < breakpoints[i + 1].time)
+  const currentIndex = breakpoints.findIndex(({ time }, i, arr) => {
+    const { length } = arr
+    const next = i < length - 1 ? arr[i + 1] : arr[length - 1]
+
+    return (time <= now) && (now < next.time)
   })
 
   return {
