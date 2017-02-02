@@ -9,26 +9,26 @@ import {
 } from './actionTypes'
 
 // Status methods will be routed to the status reducer
-const getBreakpointsRequest = () => {
+function getBreakpointsRequest () {
   return {
     type: GET_BREAKPOINTS_REQUEST
   }
 }
 
-const getBreakpointsFail = (err) => {
+function getBreakpointsFail (err) {
   return {
     type: GET_BREAKPOINTS_FAIL,
     err
   }
 }
 
-const getBreakpointsSuccess = () => {
+function getBreakpointsSuccess () {
   return {
     type: GET_BREAKPOINTS_SUCCESS
   }
 }
 
-const getBreakpoints = (res) => {
+function getBreakpoints (res) {
   const keys = Object.keys(res)
   const vals = Object.values(res)
 
