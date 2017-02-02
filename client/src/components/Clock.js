@@ -1,23 +1,28 @@
-/* eslint-disable */
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react' // eslint-disable-line
 import './Clock.css'
 
-export default ({ now, breakpoints: bps, currentIndex: i }) => {
-  const isWaiting = /^waiting/g.test(bps[i].status)
-
-  const pad = (num) => (`0${Math.floor(num)}`).slice(-2)
-
-  const hours = bps[i].time / (1000 * 60 * 60)
+const Clock = ({ remaining, name, waiting }) => {
+  const hours = remaining / (1000 * 60 * 60)
   const minutes = (hours % 1) * 60
   const seconds = (minutes % 1) * 60
+  const pad = (num) => (`0${Math.floor(num)}`).slice(-2)
 
   return (
-    <div className="time-display">
-      <h6>{ isWaiting ? `Time until ${bps[i + 1].status}` : `${bps[i].status} is happening! Go outside and see`}</h6>
-      {isWaiting &&
+    <div className='time-display'>
+      <h6>{waiting ? `time until ${name}:` : `${name} is happening right now`}</h6>
+      {waiting &&
         <h1>{pad(hours)}:{pad(minutes)}:{pad(seconds)}</h1>
-
       }
     </div>
   )
 }
+
+const { number, bool, string } = PropTypes
+
+Clock.propTypes = {
+  name: string.isRequired,
+  remaining: number.isRequired,
+  waiting: bool.isRequired
+}
+
+export default Clock
