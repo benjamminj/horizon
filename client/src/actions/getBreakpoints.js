@@ -1,4 +1,5 @@
-import fetch from 'isomorphic-fetch'
+/* eslint-disable */
+// import fetch from 'isomorphic-fetch'
 
 import { API_SERVER } from '../config'
 import { toUTC } from '../Utils'
@@ -55,6 +56,8 @@ const getBreakpoints = (res) => {
   }
 }
 
+import {reqSunriseSunsetAPI} from './async/apiRequests'
+
 export default (location) => {
   return async (dispatch) => {
     const { lat, lng } = location
@@ -62,14 +65,7 @@ export default (location) => {
     dispatch(getBreakpointsRequest())
 
     try {
-      const today = new Date(Date.now())
-
-      let year = today.getFullYear()
-      let date = today.getDate()
-      let month = today.getMonth() + 1
-
-      const res = await fetch(`${API_SERVER}/api/sunrise-sunset/lat=${lat}&lng=${lng}&date=${year}-${month}-${date}`)
-      const { results } = await res.json()
+      const { results } = await reqSunriseSunsetAPI(lat, lng)
 
       delete results.day_length
 
