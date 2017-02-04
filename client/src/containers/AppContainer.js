@@ -1,34 +1,27 @@
 import { connect } from 'react-redux'
 
-import { fetchTimes } from '../actions/times'
-import { fetchLocation } from '../actions/location'
-import { getIsDay, changeLightLevel } from '../actions/status'
+import { onAppLoad } from '../actions/async'
+import getRemaining from '../actions/getRemaining'
 
 import App from '../components/App'
 
-const mapStateToProps = (state, ownProps) => {
-  const { location, times, status } = state
+function mapStateToProps (state) {
+  const { remaining, target, breakpoints } = state
 
   return {
-    times,
-    location,
-    status
+    loaded: remaining ? true : false, //eslint-disable-line
+    target,
+    breakpoints
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+function mapDispatchToProps (dispatch) {
   return {
-    fetchTimes: (location) => {
-      dispatch(fetchTimes(location))
-    },
-    fetchLocation: () => {
-      dispatch(fetchLocation())
-    },
-    getIsDay: (prev, state) => {
-      dispatch(getIsDay(prev, state))
-    },
-    changeLightLevel: (lightLevel) => {
-      dispatch(changeLightLevel(lightLevel))
+    onAppLoad: () => dispatch(onAppLoad()),
+    startTimer: (targetTime) => {
+      setInterval(() => {
+        dispatch(getRemaining(targetTime))
+      }, 1000)
     }
   }
 }
