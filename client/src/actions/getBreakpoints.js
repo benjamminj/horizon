@@ -55,12 +55,13 @@ function getBreakpoints (res) {
   }
 }
 
-export default ({ lat, lng }) => {
+export default (location) => {
   return async (dispatch) => {
     dispatch(getBreakpointsRequest())
 
     try {
-      const { results } = await reqSunriseSunsetAPI(lat, lng)
+      const today = new Date(Date.now())
+      const { results } = await reqSunriseSunsetAPI(location, today)
 
       delete results.day_length
 

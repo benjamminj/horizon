@@ -12,12 +12,11 @@ async function apiRequest (url) {
   }
 }
 
-export async function reqSunriseSunsetAPI (lat, lng) {
-  const today = new Date(Date.now())
-  const date = [today.getFullYear(), today.getMonth() + 1, today.getDate()]
+export async function reqSunriseSunsetAPI ({ lat, lng }, date) {
+  const formattedDate = [date.getFullYear(), date.getMonth() + 1, date.getDate()]
 
   try {
-    const json = await apiRequest(`${SUNRISE_SUNSET_API}/api/sunrise-sunset/lat=${lat}&lng=${lng}&date=${date.join('-')}`)
+    const json = await apiRequest(`${SUNRISE_SUNSET_API}/api/sunrise-sunset/lat=${lat}&lng=${lng}&date=${formattedDate.join('-')}`)
 
     return json
   } catch (err) {
