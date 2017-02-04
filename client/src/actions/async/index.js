@@ -1,3 +1,2 @@
-import * as apiRequests from './apiRequests'
-
-export const { reqSunriseSunsetAPI, reqGeolocationAPI } = apiRequests
+export { reqSunriseSunsetAPI, reqGeolocationAPI } from './apiRequests'
+export { default as onAppLoad } from './onAppLoad'

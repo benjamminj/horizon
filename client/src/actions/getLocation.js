@@ -5,7 +5,7 @@ import {
   GET_LOCATION_FAIL,
   GET_LOCATION_SUCCESS,
   GET_LOCATION
-} from './actionTypes'
+} from './constants/actionTypes'
 
 function getLocationRequest () {
   return {
@@ -40,8 +40,8 @@ export default () => {
     try {
       const { latitude: lat, longitude: lng } = await reqGeolocationAPI()
 
-      dispatch(getLocation({ lat, lng }))
       dispatch(getLocationSuccess())
+      return dispatch(getLocation({ lat, lng }))
     } catch (err) {
       dispatch(getLocationFail(err))
     }

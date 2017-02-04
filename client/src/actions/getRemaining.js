@@ -1,4 +1,4 @@
-import { GET_REMAINING } from './actionTypes'
+import { GET_REMAINING } from './constants/actionTypes'
 
 export default (targetTime) => {
   return {

@@ -1,4 +1,4 @@
-import { GET_CURRENT_INDEX } from './actionTypes'
+import { GET_CURRENT_INDEX } from './constants/actionTypes'
 
 export default (breakpoints) => {
   const now = Date.now()
@@ -12,6 +12,6 @@ export default (breakpoints) => {
 
   return {
     type: GET_CURRENT_INDEX,
-    currentIndex: currentIndex > 0 || 0
+    currentIndex: currentIndex > 0 ? currentIndex : 0
   }
 }

@@ -1,8 +1,8 @@
-import { GET_TARGET } from './actionTypes'
+import { GET_TARGET } from './constants/actionTypes'
 
 const targetIndexes = {
   sunrise: 3,
-  sunset: 5
+  sunset: 6
 }
 
 export default (status) => {

@@ -6,7 +6,7 @@ import {
   GET_BREAKPOINTS_FAIL,
   GET_BREAKPOINTS_REQUEST,
   GET_BREAKPOINTS_SUCCESS
-} from './actionTypes'
+} from './constants/actionTypes'
 
 // Status methods will be routed to the status reducer
 function getBreakpointsRequest () {
@@ -32,14 +32,16 @@ function getBreakpoints (res) {
   const keys = Object.keys(res)
   const vals = Object.values(res)
 
-  const breakpoints = keys.map((key, i) => {
-    const levels = [
-      { name: 'waiting_sunrise', cond: /_twilight_/ },
-      { name: 'sunrise', cond: /^sunrise$/ },
-      { name: 'waiting_sunset', cond: /^solar_noon$/ },
-      { name: 'sunset', cond: /^sunset$/ }
-    ]
+  console.log(keys, vals)
 
+  const levels = [
+    { name: 'waiting_sunrise', cond: /_twilight_|sunset_end/ },
+    { name: 'sunrise', cond: /^sunrise$/ },
+    { name: 'waiting_sunset', cond: /^solar_noon$|sunrise_end/ },
+    { name: 'sunset', cond: /^sunset$/ }
+  ]
+
+  const breakpoints = keys.map((key, i) => {
     return {
       id: key,
       time: toUTC(new Date(vals[i])),
@@ -62,10 +64,19 @@ export default ({ lat, lng }) => {
 
       delete results.day_length
 
-      dispatch(getBreakpoints(results))
+      addEndTime(results, 'sunrise')
+      addEndTime(results, 'sunset')
+
       dispatch(getBreakpointsSuccess())
+      return dispatch(getBreakpoints(results))
     } catch (err) {
       dispatch(getBreakpointsFail(err))
     }
   }
+}
+
+function addEndTime (obj, key) {
+  const date = new Date(obj[key])
+
+  obj[`${key}_end`] = date.setMinutes(date.getMinutes() + 5)
 }
