@@ -1,6 +1,6 @@
 import {
   GET_LOCATION
-} from '../actions/actionTypes'
+} from '../actions/constants/actionTypes'
 
 export default (state = {}, action) => {
   switch (action.type) {

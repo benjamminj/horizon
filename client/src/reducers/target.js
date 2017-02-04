@@ -1,4 +1,4 @@
-import { GET_TARGET } from '../actions/actionTypes'
+import { GET_TARGET } from '../actions/constants/actionTypes'
 
 export default (state = null, action) => {
   switch (action.type) {
