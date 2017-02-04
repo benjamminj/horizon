@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react' // eslint-disable-line
+import React, { PropTypes } from 'react'
 import './Clock.css'
 
 const Clock = ({ remaining, name, waiting }) => {
@@ -21,7 +21,7 @@ const { number, bool, string } = PropTypes
 
 Clock.propTypes = {
   name: string.isRequired,
-  remaining: number.isRequired,
+  remaining: number,
   waiting: bool.isRequired
 }
 
