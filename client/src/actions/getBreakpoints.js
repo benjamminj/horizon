@@ -1,4 +1,4 @@
-import {reqSunriseSunsetAPI} from './async/apiRequests'
+import { reqSunriseSunsetAPI } from './async/apiRequests'
 import { toUTC } from '../Utils'
 
 import {
@@ -11,20 +11,24 @@ import {
 // Status methods will be routed to the status reducer
 function getBreakpointsRequest () {
   return {
-    type: GET_BREAKPOINTS_REQUEST
+    type: GET_BREAKPOINTS_REQUEST,
+    loading: true
   }
 }
 
 function getBreakpointsFail (err) {
   return {
     type: GET_BREAKPOINTS_FAIL,
+    loading: false,
     err
   }
 }
 
 function getBreakpointsSuccess () {
   return {
-    type: GET_BREAKPOINTS_SUCCESS
+    type: GET_BREAKPOINTS_SUCCESS,
+    loading: false,
+    success: true
   }
 }
 

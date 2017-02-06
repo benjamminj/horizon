@@ -9,13 +9,15 @@ import {
 
 function getLocationRequest () {
   return {
-    type: GET_LOCATION_REQUEST
+    type: GET_LOCATION_REQUEST,
+    loading: true
   }
 }
 
 function getLocationFail (err) {
   return {
     type: GET_LOCATION_FAIL,
+    loading: false,
     err
   }
 }
@@ -29,7 +31,9 @@ function getLocation (location) {
 
 function getLocationSuccess () {
   return {
-    type: GET_LOCATION_SUCCESS
+    type: GET_LOCATION_SUCCESS,
+    loading: false,
+    success: true
   }
 }
 
