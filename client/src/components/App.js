@@ -9,25 +9,41 @@ import Footer from './Footer'
 
 import AppStyles from './AppStyles'
 
-import Clock from '../components/Clock'
+import Sun from './Sun'
 
 class App extends Component {
   async componentDidMount () {
     const appLoaded = await this.props.onAppLoad()
 
-    if (appLoaded) {
-      console.log(this.props.breakpoints[this.props.target])
+    if (appLoaded && this.props.target) {
+      console.log(this.props.breakpoints, this.props.target)
 
       this.props.startTimer(this.props.breakpoints[this.props.target].time)
     }
   }
 
+  componentWillUpdate () {
+    console.log('updating?')
+  }
+
   render () {
+    const { loaded } = this.props
+
+    const styles = {
+      background: loaded ? 'skyblue' : 'rgba(255, 255, 255, 0.3)'
+    }
+
     return (
-      <div>
+      <div id="app" style={styles}>
+        {loaded &&
+          <Sun
+          percent={75}
+          nightLevel={0.5} />
+        }
+
         <Header></Header>
         <main>
-          {this.props.loaded &&
+          {loaded &&
             <ClockContainer />
           }
         </main>
@@ -37,12 +53,14 @@ class App extends Component {
   }
 }
 
-const { bool, func } = PropTypes
+const { bool, func, array, number } = PropTypes
 
 App.propTypes = {
   loaded: bool,
   onAppLoad: func,
-  startTimer: func
+  startTimer: func,
+  breakpoints: array,
+  target: number
 }
 
 export default App
