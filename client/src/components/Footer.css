@@ -6,6 +6,9 @@ footer {
   justify-content: center;
 
   color: #fff;
+
+  position: relative;
+  z-index: 2;
 }
 
 footer h6 {
@@ -14,5 +17,5 @@ footer h6 {
 }
 
 footer h6 a {
-  color: #fff;
+  color: inherit;
 }
