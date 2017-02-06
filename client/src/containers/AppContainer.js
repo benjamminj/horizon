@@ -5,13 +5,9 @@ import getRemaining from '../actions/getRemaining'
 
 import App from '../components/App'
 
-function mapStateToProps (state) {
-  const { remaining, location, target, breakpoints, loaded } = state // eslint-disable-line
-
-  console.log(loaded)
-
+function mapStateToProps ({ loaded, target, breakpoints }) {
   return {
-    loaded, //eslint-disable-line
+    loaded,
     target,
     breakpoints
   }
@@ -28,9 +24,8 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-const AppContainer = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App)
 
-export default AppContainer
