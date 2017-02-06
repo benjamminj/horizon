@@ -4,6 +4,13 @@ import getCurrentIndex from '../getCurrentIndex'
 import getRemaining from '../getRemaining'
 import getTarget from '../getTarget'
 
+function appLoaded () {
+  return {
+    type: 'APP_LOAD_SUCCESS',
+    loaded: true
+  }
+}
+
 export default () => {
   return async (dispatch) => {
     try {
@@ -13,7 +20,7 @@ export default () => {
       const { target } = dispatch(getTarget(breakpoints[currentIndex].status))
       const { remaining } = dispatch(getRemaining(breakpoints[target].time))
 
-      return { loaded: remaining ? true : false } // eslint-disable-line
+      return remaining ? dispatch(appLoaded()) : null
     } catch (err) {
       return err
     }
