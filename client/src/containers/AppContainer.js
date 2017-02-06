@@ -6,10 +6,12 @@ import getRemaining from '../actions/getRemaining'
 import App from '../components/App'
 
 function mapStateToProps (state) {
-  const { remaining, target, breakpoints } = state
+  const { remaining, location, target, breakpoints, loaded } = state // eslint-disable-line
+
+  console.log(loaded)
 
   return {
-    loaded: remaining ? true : false, //eslint-disable-line
+    loaded, //eslint-disable-line
     target,
     breakpoints
   }
