@@ -1,5 +1,5 @@
 import { reqSunriseSunsetAPI } from './async/apiRequests'
-import { toUTC } from '../Utils'
+import { formatBreakpoints } from './utils'
 
 import {
   GET_BREAKPOINTS,
@@ -33,29 +33,9 @@ function getBreakpointsSuccess () {
 }
 
 function getBreakpoints (res) {
-  const keys = Object.keys(res)
-  const vals = Object.values(res)
-
-  console.log(keys, vals)
-
-  const levels = [
-    { name: 'waiting_sunrise', cond: /_twilight_|sunset_end/ },
-    { name: 'sunrise', cond: /^sunrise$/ },
-    { name: 'waiting_sunset', cond: /^solar_noon$|sunrise_end/ },
-    { name: 'sunset', cond: /^sunset$/ }
-  ]
-
-  const breakpoints = keys.map((key, i) => {
-    return {
-      id: key,
-      time: toUTC(new Date(vals[i])),
-      status: levels.find((el) => el.cond.test(key)).name
-    }
-  }).sort((cur, next) => cur.time - next.time)
-
   return {
     type: GET_BREAKPOINTS,
-    breakpoints
+    breakpoints: formatBreakpoints(res)
   }
 }
 

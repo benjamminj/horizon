@@ -1,5 +1,5 @@
 import { reqSunriseSunsetAPI } from './async/apiRequests'
-import { toUTC } from '../Utils'
+import { formatBreakpoints } from './utils'
 
 import { UPDATE_AM_BREAKPOINTS } from './constants/actionTypes'
 
@@ -24,30 +24,6 @@ export function updateSunriseTimes (breakpoints, location) {
       console.log(err)
     }
   }
-}
-
-function formatBreakpoints (data) {
-  const keys = Object.keys(data)
-  const vals = Object.values(data)
-
-  console.log(keys, vals)
-
-  const levels = [
-    { name: 'waiting_sunrise', cond: /_twilight_|sunset_end/ },
-    { name: 'sunrise', cond: /^sunrise$/ },
-    { name: 'waiting_sunset', cond: /^solar_noon$|sunrise_end/ },
-    { name: 'sunset', cond: /^sunset$/ }
-  ]
-
-  const breakpoints = keys.map((key, i) => {
-    return {
-      id: key,
-      time: toUTC(new Date(vals[i])),
-      status: levels.find((el) => el.cond.test(key)).name
-    }
-  }).sort((cur, next) => cur.time - next.time)
-
-  return breakpoints
 }
 
 function updateAMBreakpoints (newBreakpoints) {
