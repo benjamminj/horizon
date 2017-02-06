@@ -9,7 +9,7 @@ import Footer from './Footer'
 
 import AppStyles from './AppStyles'
 
-import Sun from './Sun'
+import SunContainer from '../containers/SunContainer'
 
 class App extends Component {
   async componentDidMount () {
@@ -36,9 +36,7 @@ class App extends Component {
     return (
       <div id="app" style={styles}>
         {loaded &&
-          <Sun
-          percent={75}
-          nightLevel={0.5} />
+          <SunContainer />
         }
 
         <Header></Header>
