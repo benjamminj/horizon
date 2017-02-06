@@ -1,6 +1,5 @@
-/* eslint-disable */
 import fetch from 'isomorphic-fetch'
-import { SUNRISE_SUNSET_API, GEOLOCATION_API } from '../constants/urls' // eslint-disable-line
+import { SUNRISE_SUNSET_API, GEOLOCATION_API } from '../constants/urls'
 
 async function apiRequest (url) {
   try {
