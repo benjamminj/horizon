@@ -48,7 +48,7 @@ const Sun = ({ percent, nightLevel }) => {
 const { number } = PropTypes
 
 Sun.propTypes = {
-  percent: (props, propName) => props[propName] <= 100 ? null : new Error(`${propName} must be less than or equal to 150`),
+  percent: (props, propName) => props[propName] <= 100 ? null : new Error(`${propName} must be less than or equal to 100`),
   nightLevel: number.isRequired
 }
 
