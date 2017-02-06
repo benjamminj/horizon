@@ -1,29 +1,21 @@
-/* eslint-disable */
 import React, { Component, PropTypes } from 'react'
-import './App.css'
 
-
-import Header from './Header'
 import ClockContainer from '../containers/ClockContainer'
 import Footer from './Footer'
-
-import AppStyles from './AppStyles'
-
+import Header from './Header'
 import SunContainer from '../containers/SunContainer'
+
+import './App.css'
 
 class App extends Component {
   async componentDidMount () {
     const appLoaded = await this.props.onAppLoad()
 
     if (appLoaded && this.props.target) {
-      console.log(this.props.breakpoints, this.props.target)
+      const { breakpoints, startTimer, target } = this.props
 
-      this.props.startTimer(this.props.breakpoints[this.props.target].time)
+      startTimer(breakpoints[target].time)
     }
-  }
-
-  componentWillUpdate () {
-    console.log('updating?')
   }
 
   render () {
@@ -34,30 +26,29 @@ class App extends Component {
     }
 
     return (
-      <div id="app" style={styles}>
-        {loaded &&
-          <SunContainer />
-        }
-
-        <Header></Header>
+      <div id='app' style={styles}>
+        <Header />
         <main>
           {loaded &&
             <ClockContainer />
           }
         </main>
-        <Footer></Footer>
+        <Footer />
+        {loaded &&
+          <SunContainer />
+        }
       </div>
     )
   }
 }
 
-const { bool, func, array, number } = PropTypes
+const { array, bool, func, number } = PropTypes
 
 App.propTypes = {
+  breakpoints: array,
   loaded: bool,
   onAppLoad: func,
   startTimer: func,
-  breakpoints: array,
   target: number
 }
 
