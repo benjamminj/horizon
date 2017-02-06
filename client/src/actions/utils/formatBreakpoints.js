@@ -8,13 +8,13 @@ const levels = [
 ]
 
 const lightLevels = [
-  { cond: /astronomical_twilight_end/, val: 0 }, // night
-  { cond: /astronomical_twilight_begin|nautical_twilight_end/, val: 5 }, // astronomical twilight
-  { cond: /nautical_twilight_begin|civil_twilight_end/, val: 10 }, // nautical twilight
-  { cond: /civil_twilight_begin|sunset_end/, val: 15 }, // civil twilight
-  { cond: /^sun+(rise|set)$/, val: 50 }, // sunrise / sunset
-  { cond: /^sunrise_end$/, val: 55 }, // sunrise end
-  { cond: /solar_noon/, val: 100 } // noon
+  { cond: /astronomical_twilight_end/, day: 0 }, // night
+  { cond: /astronomical_twilight_begin|nautical_twilight_end/, day: 5 }, // astronomical twilight
+  { cond: /nautical_twilight_begin|civil_twilight_end/, day: 10 }, // nautical twilight
+  { cond: /civil_twilight_begin|sunset_end/, day: 15 }, // civil twilight
+  { cond: /^sun+(rise|set)$/, day: 50 }, // sunrise / sunset
+  { cond: /^sunrise_end$/, day: 55 }, // sunrise end
+  { cond: /solar_noon/, day: 100 } // noon
 ]
 
 export default function (data) {
@@ -26,7 +26,7 @@ export default function (data) {
       id: key,
       time: toUTC(new Date(vals[i])),
       status: levels.find((el) => el.cond.test(key)).name,
-      lightLevel: lightLevels.find((el) => el.cond.test((key))).val
+      lightLevel: lightLevels.find((el) => el.cond.test((key))).day
     }
   }).sort((cur, next) => cur.time - next.time)
 }
