@@ -19,7 +19,7 @@ export function updateSunriseTimes (breakpoints, location) {
 
       const oldData = breakpoints.slice(4)
 
-      dispatch(updateAMBreakpoints(mergeData.concat(oldData)))
+      return dispatch(updateAMBreakpoints(mergeData.concat(oldData)))
     } catch (err) {
       console.log(err)
     }
