@@ -7,15 +7,16 @@ const mapStateToProps = ({ breakpoints, currentIndex, remaining }, ownProps) => 
   const next = (currentIndex !== breakpoints.length - 1) ? breakpoints[currentIndex + 1] : breakpoints[0]
 
 
-  const distance = next.time - current.time
-  const percentToNext = (distance - remaining) / distance
+  const timeBetween = next.time - current.time
+  const timeToNext = timeBetween - ((current.time + Date.now()) / timeBetween)
+
+  const percentToNext = timeToNext / timeBetween
   const distanceToNext = next.lightLevel * percentToNext
   const percent = next.lightLevel > current.lightLevel ? (next.lightLevel - distanceToNext) : (current.lightLevel - distanceToNext)
 
   const nightLevelGoneHeight = 30
-  const nightDistance = next.lightLevel - current.lightLevel
   const isNight = percent < nightLevelGoneHeight
-
+  const nightDistance = Math.abs(next.lightLevel - current.lightLevel)
   const nightLevel = isNight ? 1 - ((nightDistance * percentToNext) / nightLevelGoneHeight) : 0
 
   return {
