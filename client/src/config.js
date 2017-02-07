@@ -1,3 +1,3 @@
-export const API_SERVER = '//benjaminjohnson-sunrise-sunset.herokuapp.com'
+export const API_SERVER = '/'
 
 export default { API_SERVER }
