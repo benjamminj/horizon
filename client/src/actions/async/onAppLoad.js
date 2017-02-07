@@ -21,7 +21,7 @@ export default () => {
 
       let { breakpoints } = await dispatch(getBreakpoints(location))
 
-      const { currentIndex } = dispatch(getCurrentIndex(breakpoints))
+      const { currentIndex } = dispatch(getCurrentIndex(breakpoints, Date.now()))
 
       if (currentIndex >= 6) {
         let updated = await dispatch(updateSunriseTimes(breakpoints, location))

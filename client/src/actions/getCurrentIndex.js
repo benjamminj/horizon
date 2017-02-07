@@ -1,8 +1,6 @@
 import { GET_CURRENT_INDEX } from './constants/actionTypes'
 
-export default (breakpoints) => {
-  const now = Date.now()
-
+export default (breakpoints, now) => {
   const currentIndex = breakpoints.findIndex(({ time }, i, arr) => {
     const { length } = arr
     const next = i < length - 1 ? arr[i + 1] : arr[length - 1]
