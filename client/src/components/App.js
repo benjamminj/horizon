@@ -9,13 +9,7 @@ import './App.css'
 
 class App extends Component {
   async componentDidMount () {
-    const appLoaded = await this.props.onAppLoad()
-
-    if (appLoaded && this.props.target) {
-      const { breakpoints, startTimer, target } = this.props
-
-      startTimer(breakpoints[target].time)
-    }
+    this.props.onAppLoad()
   }
 
   render () {
@@ -42,14 +36,11 @@ class App extends Component {
   }
 }
 
-const { array, bool, func, number } = PropTypes
+const { bool, func } = PropTypes
 
 App.propTypes = {
-  breakpoints: array,
   loaded: bool,
-  onAppLoad: func,
-  startTimer: func,
-  target: number
+  onAppLoad: func
 }
 
 export default App
