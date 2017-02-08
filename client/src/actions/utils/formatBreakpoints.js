@@ -18,6 +18,10 @@ const lightLevels = [
 ]
 
 export default function (data) {
+  delete data.day_length
+  addEndTime(data, 'sunrise')
+  addEndTime(data, 'sunset')
+
   const keys = Object.keys(data)
   const vals = Object.values(data)
 
@@ -29,4 +33,10 @@ export default function (data) {
       lightLevel: lightLevels.find((el) => el.cond.test((key))).day
     }
   }).sort((cur, next) => cur.time - next.time)
+}
+
+function addEndTime (obj, key) {
+  const date = new Date(obj[key])
+
+  obj[`${key}_end`] = date.setMinutes(date.getMinutes() + 5)
 }
