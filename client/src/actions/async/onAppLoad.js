@@ -5,6 +5,8 @@ import getCurrentIndex from '../getCurrentIndex'
 import getRemaining from '../getRemaining'
 import getTarget from '../getTarget'
 
+import runTimer from './runTimer'
+
 import { updateSunriseTimes } from '../updateBreakpoints'
 
 function appLoaded () {
@@ -29,8 +31,18 @@ export default () => {
       }
 
       const { target } = dispatch(getTarget(breakpoints[currentIndex].status))
-      dispatch(getRemaining(breakpoints[target].time))
+      dispatch(getRemaining(breakpoints[target].time, Date.now()))
 
+      const loadedState = {
+        breakpoints,
+        currentIndex,
+        target,
+        location
+      }
+
+      console.log(loadedState)
+
+      dispatch(runTimer(loadedState))
       return dispatch(appLoaded())
     } catch (err) {
       return err
