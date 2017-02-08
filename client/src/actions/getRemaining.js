@@ -1,8 +1,8 @@
 import { GET_REMAINING } from './constants/actionTypes'
 
-export default (targetTime) => {
+export default (targetTime, now) => {
   return {
     type: GET_REMAINING,
-    remaining: targetTime - Date.now()
+    remaining: targetTime - now
   }
 }

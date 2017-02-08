@@ -32,10 +32,10 @@ function getBreakpointsSuccess () {
   }
 }
 
-function getBreakpoints (res) {
+function getBreakpoints (breakpoints) {
   return {
     type: GET_BREAKPOINTS,
-    breakpoints: formatBreakpoints(res)
+    breakpoints
   }
 }
 
@@ -46,22 +46,12 @@ export default (location) => {
     try {
       const today = new Date(Date.now())
       const { results } = await reqSunriseSunsetAPI(location, today)
-
-      delete results.day_length
-
-      addEndTime(results, 'sunrise')
-      addEndTime(results, 'sunset')
+      const breakpoints = formatBreakpoints(results)
 
       dispatch(getBreakpointsSuccess())
-      return dispatch(getBreakpoints(results))
+      return dispatch(getBreakpoints(breakpoints))
     } catch (err) {
       dispatch(getBreakpointsFail(err))
     }
   }
-}
-
-function addEndTime (obj, key) {
-  const date = new Date(obj[key])
-
-  obj[`${key}_end`] = date.setMinutes(date.getMinutes() + 5)
 }

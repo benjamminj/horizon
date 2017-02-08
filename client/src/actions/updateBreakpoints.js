@@ -9,14 +9,7 @@ export function updateSunriseTimes (breakpoints, location) {
       const tomorrow = new Date((Date.now() + (1000 * 60 * 60 * 24)))
 
       const { results } = await reqSunriseSunsetAPI(location, tomorrow)
-
-      delete results.day_length
-
-      addEndTime(results, 'sunrise')
-      addEndTime(results, 'sunset')
-
       const mergeData = formatBreakpoints(results).slice(0, 4)
-
       const oldData = breakpoints.slice(4)
 
       return dispatch(updateAMBreakpoints(mergeData.concat(oldData)))
@@ -31,10 +24,4 @@ function updateAMBreakpoints (newBreakpoints) {
     type: UPDATE_AM_BREAKPOINTS,
     breakpoints: newBreakpoints
   }
-}
-
-function addEndTime (obj, key) {
-  const date = new Date(obj[key])
-
-  obj[`${key}_end`] = date.setMinutes(date.getMinutes() + 5)
 }
