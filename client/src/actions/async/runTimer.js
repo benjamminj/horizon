@@ -4,13 +4,6 @@ import getBreakpoints from '../getBreakpoints'
 import { updateSunriseTimes } from '../updateBreakpoints'
 import { isFinalIndex } from '../utils'
 
-const incCurrentIndex = (currentIndex, isLastIndex) => {
-  return {
-    type: 'INC_CURRENT_INDEX',
-    currentIndex: isLastIndex ? 0 : currentIndex + 1
-  }
-}
-
 const refreshBreakpointsData = (isSunset, breakpoints, location) => {
   return async (dispatch) => {
     let updatedBreakpointsData

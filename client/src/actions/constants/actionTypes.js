@@ -7,6 +7,7 @@ export const UPDATE_AM_BREAKPOINTS = 'UPDATE_AM_BREAKPOINTS'
 
 // Current Index
 export const GET_CURRENT_INDEX = 'GET_CURRENT_INDEX'
+export const INC_CURRENT_INDEX = 'INC_CURRENT_INDEX'
 
 // Remaining
 export const GET_REMAINING = 'GET_REMAINING'
