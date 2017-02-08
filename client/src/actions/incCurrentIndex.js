@@ -1,4 +1,4 @@
-import { INC_CURRENT_INDEX } from '../constants/actionTypes'
+import { INC_CURRENT_INDEX } from './constants/actionTypes'
 
 export default (currentIndex, isLastIndex) => {
   return {
