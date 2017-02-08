@@ -3,6 +3,7 @@ import getTarget from '../getTarget'
 import getBreakpoints from '../getBreakpoints'
 import { updateSunriseTimes } from '../updateBreakpoints'
 import { isFinalIndex } from '../utils'
+import incCurrentIndex from '../incCurrentIndex'
 
 const refreshBreakpointsData = (isSunset, breakpoints, location) => {
   return async (dispatch) => {
