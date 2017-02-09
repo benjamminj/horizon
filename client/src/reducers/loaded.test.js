@@ -18,7 +18,7 @@ const unknownAction = {
 }
 
 test('should have default state of `null`', () => {
-  expect(loadedReducer(undefined, unknownAction)).toBeNull
+  expect(loadedReducer(undefined, unknownAction)).toBeNull()
 })
 
 test('should return previous state if action is unknown', () => {
