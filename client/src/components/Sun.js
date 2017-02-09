@@ -7,7 +7,10 @@ const Sun = ({ percent }) => {
 
   // Sky brightens to blue bw 50 and 70
   const dayLevel = percent > 50 ? (percent - 50) / (70 - 50) : 0
-  const nightLevel = percent < 50 ? ((50 - percent) / 50) : 0
+
+  // Sky darkens to night bw 50 and 0
+  const nightLevel = percent < 30 ? ((30 - percent) / 30) : 0
+  const duskLevel = percent < 50 ? (50 - percent) / (50 - 20) : 0
 
   const day = `radial-gradient(${sunHeight / 2}px at 50% center,
     rgba(255, 255, 255, ${dayLevel}),
@@ -15,7 +18,16 @@ const Sun = ({ percent }) => {
     rgba(179, 240, 247, ${dayLevel}) 4%,
     rgba(140, 216, 247, ${dayLevel}) 7%,
     rgba(135, 206, 235, ${dayLevel}) 10%,
-    rgba(135, 206, 235, ${dayLevel}) 65%)`
+    rgba(135, 206, 235, ${dayLevel}) 65%
+  )`
+
+  const night = `linear-gradient(rgba(0, 0, 0, ${nightLevel}), rgba(0, 0, 0, ${nightLevel}))`
+
+  const dusk = `radial-gradient(${sunHeight / 2}px at 50% center,
+    rgba(102, 79, 119, ${duskLevel}),
+    rgba(45, 67, 101, ${duskLevel}) 30%,
+    rgba(48, 69, 86, ${duskLevel}) 50%
+  )`
 
   const sun = `radial-gradient(${sunHeight / 2}px at 50% center,
     #fff823,
@@ -24,13 +36,8 @@ const Sun = ({ percent }) => {
     #fd5a1c 40%
   )`
 
-  const night = `radial-gradient(${sunHeight / 2}px at 50% center,
-    rgba(49, 0, 0, ${nightLevel}),
-    rgba(0, 20, 50, ${nightLevel}) 30%,
-    rgba(0, 20, 50, ${nightLevel}) 50%)`
-
   const stylesObj = {
-    background: `${day}, ${night}, ${sun}`,
+    background: `${day}, ${night}, ${dusk}, ${sun}`,
     height: sunHeight,
     top: `-${percent * 2}%`
   }

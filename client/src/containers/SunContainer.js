@@ -2,7 +2,7 @@
 import { connect } from 'react-redux'
 import Sun from '../components/Sun'
 
-const mapStateToProps = ({ breakpoints, currentIndex, remaining }, ownProps) => {
+const mapStateToProps = ({ breakpoints, currentIndex }, ownProps) => {
 
   const current = breakpoints[currentIndex]
   const next = (currentIndex !== breakpoints.length - 1) ? breakpoints[currentIndex + 1] : breakpoints[0]
@@ -17,7 +17,7 @@ const mapStateToProps = ({ breakpoints, currentIndex, remaining }, ownProps) => 
   const percent = next.lightLevel > current.lightLevel ? (next.lightLevel - distanceToNext) : (current.lightLevel - distanceToNext)
 
   return {
-    percent
+    percent: 25
   }
 }
 

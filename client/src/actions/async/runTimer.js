@@ -5,6 +5,7 @@ import { updateSunriseTimes } from '../updateBreakpoints'
 import { isFinalIndex } from '../utils'
 import incCurrentIndex from '../incCurrentIndex'
 
+// TODO -- Need to move into updateBreakpoints.js
 const refreshBreakpointsData = (isSunset, breakpoints, location) => {
   return async (dispatch) => {
     let updatedBreakpointsData
@@ -48,17 +49,22 @@ const handleIsNext = ({ currentIndex, isFinalBreakpoint, targetTime, now }) => {
   }
 }
 
-const runTimer = (state) => {
-  const { breakpoints, target, location } = state
-  let { currentIndex } = state
-  console.log('here')
-
+const setupTimer = ({ breakpoints, currentIndex, target }) => {
   const isFinalBreakpoint = isFinalIndex(currentIndex, breakpoints)
+  const nextTime = isFinalBreakpoint ? breakpoints[0].time : breakpoints[currentIndex + 1].time
 
   // If time is sunset / sunrise (target === null), set timer target to the next breakpoint
   const targetTime = target ? breakpoints[target].time : breakpoints[currentIndex + 1].time
-  let nextTime = isFinalBreakpoint ? breakpoints[0].time : breakpoints[currentIndex + 1].time
 
+  return { isFinalBreakpoint, nextTime, targetTime }
+}
+
+const runTimer = (state) => {
+  const { breakpoints, target, location } = state
+  let { currentIndex } = state
+  const { isFinalBreakpoint, nextTime, targetTime } = setupTimer(state)
+
+  console.log('here')
   return async (dispatch) => {
     dispatch(getRemaining(targetTime, Date.now()))
 
@@ -66,15 +72,17 @@ const runTimer = (state) => {
       const now = Date.now()
 
       if (targetTime <= now + 999) {
+        console.log('is target time')
         clearInterval(timer)
         state = await dispatch(handleIsTarget(state))
         dispatch(runTimer(state))
       } else if (nextTime <= now + 999) {
+        console.log('is next time')
         clearInterval(timer)
-
         currentIndex = dispatch(handleIsNext({ currentIndex, isFinalBreakpoint, targetTime, now }))
         dispatch(runTimer({ breakpoints, currentIndex, target, location }))
       } else {
+        console.log('default action -- dec remaining')
         dispatch(getRemaining(targetTime, now))
       }
     }, 1000)
