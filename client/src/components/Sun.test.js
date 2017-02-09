@@ -24,7 +24,7 @@ test('should have `top: -0%` when percent is 0', () => {
 })
 
 test('should have `nightLevel === 0` when percent >= 50', () => {
-  const nightLevelTest = /rgba\(0, 20, 50, 0\)/
+  const nightLevelTest = /rgba\(0, 0, 0, 0\)/
 
   expect(defaultWrapper.html()).toMatch(nightLevelTest)
 
@@ -35,13 +35,13 @@ test('should have `nightLevel === 0` when percent >= 50', () => {
   expect(wrapper.html()).toMatch(nightLevelTest)
 })
 
-test('should have `nightLevel > 0 && nightLevel < 1` when percent is between 0 and 50', () => {
-  const nightLevelTest = /rgba\(0, 20, 50, 0\.[\d]*\)/
+test('should have `nightLevel > 0 && nightLevel < 1` when percent is between 0 and 30', () => {
+  const nightLevelTest = /rgba\(0, 0, 0, 0\.[\d]*\)/
 
-  let wrapper = shallow(<Sun percent={45} />)
+  let wrapper = shallow(<Sun percent={29} />)
   expect(wrapper.html()).toMatch(nightLevelTest)
 
-  wrapper = shallow(<Sun percent={25} />)
+  wrapper = shallow(<Sun percent={15} />)
   expect(wrapper.html()).toMatch(nightLevelTest)
 
   wrapper = shallow(<Sun percent={1} />)
@@ -49,7 +49,7 @@ test('should have `nightLevel > 0 && nightLevel < 1` when percent is between 0 a
 })
 
 test('should have `nightLevel === 1` when percent === 0', () => {
-  const nightLevelTest = /rgba\(0, 20, 50, 1\)/
+  const nightLevelTest = /rgba\(0, 0, 0, 1\)/
 
   const wrapper = shallow(<Sun percent={0} />)
   expect(wrapper.html()).toMatch(nightLevelTest)

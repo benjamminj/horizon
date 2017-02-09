@@ -8,7 +8,7 @@ const Sun = ({ percent }) => {
   // Sky brightens to blue bw 50 and 70
   const dayLevel = percent > 50 ? (percent - 50) / (70 - 50) : 0
 
-  // Sky darkens to night bw 50 and 0
+  // Sky darkens to night bw 30 and 0
   const nightLevel = percent < 30 ? ((30 - percent) / 30) : 0
   const duskLevel = percent < 50 ? (50 - percent) / (50 - 20) : 0
 
