@@ -14,7 +14,9 @@ const mapStateToProps = ({ breakpoints, currentIndex }, ownProps) => {
 
   const distanceToNext = next.lightLevel > current.lightLevel ? (next.lightLevel * percentToNext) : current.lightLevel * percentToNext
 
-  const percent = next.lightLevel > current.lightLevel ? (next.lightLevel - distanceToNext) : (current.lightLevel - distanceToNext)
+  const percent = next.lightLevel > current.lightLevel ? (next.lightLevel - distanceToNext) : distanceToNext
+
+  console.log(current.lightLevel, distanceToNext) // last edit was t odescending values -- make percent just the distance to next.
 
   return {
     percent
