@@ -25,7 +25,8 @@
     "start": "react-scripts start",
     "build": "REACT_APP_SERVER=//benjaminjohnson-sunrise-sunset.herokuapp.com react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "coverage": "npm run test -- --coverage"
   },
   "proxy": "http://localhost:3001/",
   "peerDependencies": {
