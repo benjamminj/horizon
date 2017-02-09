@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { combineReducers } from 'redux'
 
 import location from './location'
@@ -7,7 +6,6 @@ import currentIndex from './currentIndex'
 import remaining from './remaining'
 import target from './target'
 import loaded from './loaded'
-
 
 export default combineReducers({
   location,
