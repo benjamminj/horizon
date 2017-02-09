@@ -56,6 +56,7 @@ export default () => {
         breakpoints = await dispatch(refreshSunriseTimes(breakpoints, location))
       }
 
+      // will return null if it is sunrise / sunset
       const { target } = dispatch(getTarget(breakpoints[currentIndex].status))
 
       dispatch(runTimer({ breakpoints, currentIndex, target, location }))

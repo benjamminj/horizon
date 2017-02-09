@@ -19,7 +19,38 @@ const refreshBreakpointsData = (isSunset, breakpoints, location) => {
   }
 }
 
-const runTimer = ({ breakpoints, currentIndex, target, location }) => {
+const handleIsTarget = ({ breakpoints, currentIndex, target, location }) => {
+  return async (dispatch) => {
+    try {
+      const isSunset = target === 6 || target === 7
+      breakpoints = await dispatch(refreshBreakpointsData(isSunset, breakpoints, location))
+
+      const updatedCurrentIndexData = dispatch(incCurrentIndex(currentIndex, false))
+      currentIndex = updatedCurrentIndexData.currentIndex
+
+      const updatedTargetData = dispatch(getTarget(breakpoints[target + 1].status))
+      target = updatedTargetData.target
+
+      return { breakpoints, currentIndex, target, location }
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+}
+
+const handleIsNext = ({ currentIndex, isFinalBreakpoint, targetTime, now }) => {
+  return async (dispatch) => {
+    const updatedIndex = dispatch(incCurrentIndex(currentIndex, isFinalBreakpoint))
+    currentIndex = updatedIndex.currentIndex
+    dispatch(getRemaining(targetTime, now))
+
+    return currentIndex
+  }
+}
+
+const runTimer = (state) => {
+  const { breakpoints, target, location } = state
+  let { currentIndex } = state
   console.log('here')
 
   const isFinalBreakpoint = isFinalIndex(currentIndex, breakpoints)
@@ -36,31 +67,14 @@ const runTimer = ({ breakpoints, currentIndex, target, location }) => {
 
       if (targetTime <= now + 999) {
         clearInterval(timer)
-        console.log('case 1') // Status -- failed manual testing
-
-        // Perhaps abstract into its own function -- refreshData
-        const updatedCurrentIndexData = dispatch(incCurrentIndex(currentIndex, isFinalBreakpoint))
-        currentIndex = updatedCurrentIndexData.currentIndex
-
-        const isSunset = target === 6 || target === 7
-        breakpoints = await dispatch(refreshBreakpointsData(isSunset, breakpoints, location))
-
-        const updatedTargetData = dispatch(getTarget(breakpoints[target + 1].status))
-        target = updatedTargetData.target
-
-        // runs again -- new breakpoints, new currentIndex, new target (3 or 6), same loc
-        dispatch(runTimer({ breakpoints, currentIndex, target, location }))
+        state = await dispatch(handleIsTarget(state))
+        dispatch(runTimer(state))
       } else if (nextTime <= now + 999) {
-        console.log('case 2') // Status -- passed manual testing
         clearInterval(timer)
 
-        const updatedIndex = dispatch(incCurrentIndex(currentIndex, isFinalBreakpoint))
-        currentIndex = updatedIndex.currentIndex
-
-        dispatch(getRemaining(targetTime, now))
+        currentIndex = dispatch(handleIsNext({ currentIndex, isFinalBreakpoint, targetTime, now }))
         dispatch(runTimer({ breakpoints, currentIndex, target, location }))
       } else {
-        console.log('case 3') // Status -- passed manual testing
         dispatch(getRemaining(targetTime, now))
       }
     }, 1000)
