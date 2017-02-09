@@ -1,50 +1,67 @@
-/* eslint-disable */
 import getLocation from '../getLocation'
 import getBreakpoints from '../getBreakpoints'
 import getCurrentIndex from '../getCurrentIndex'
-import getRemaining from '../getRemaining'
 import getTarget from '../getTarget'
 
 import runTimer from './runTimer'
 
 import { updateSunriseTimes } from '../updateBreakpoints'
 
-function appLoaded () {
+const appLoaded = () => {
   return {
     type: 'APP_LOAD_SUCCESS',
     loaded: true
   }
 }
 
-export default () => {
+const appLoadFail = () => {
+  return {
+    type: 'APP_LOAD_FAIL',
+    loaded: false
+  }
+}
+
+const fetchRemoteData = () => {
   return async (dispatch) => {
     try {
       const { location } = await dispatch(getLocation())
+      const { breakpoints } = await dispatch(getBreakpoints(location))
 
-      let { breakpoints } = await dispatch(getBreakpoints(location))
+      return { breakpoints, location }
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+}
 
+const refreshSunriseTimes = (oldBreakpoints, location) => {
+  return async (dispatch) => {
+    try {
+      const { breakpoints } = await dispatch(updateSunriseTimes(oldBreakpoints, location))
+
+      return breakpoints
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+}
+
+export default () => {
+  return async (dispatch) => {
+    try {
+      let { breakpoints, location } = await dispatch(fetchRemoteData())
       const { currentIndex } = dispatch(getCurrentIndex(breakpoints, Date.now()))
 
       if (currentIndex >= 6) {
-        let updated = await dispatch(updateSunriseTimes(breakpoints, location))
-        breakpoints = updated.breakpoints
+        breakpoints = await dispatch(refreshSunriseTimes(breakpoints, location))
       }
 
       const { target } = dispatch(getTarget(breakpoints[currentIndex].status))
-      dispatch(getRemaining(breakpoints[target].time, Date.now()))
 
-      const loadedState = {
-        breakpoints,
-        currentIndex,
-        target,
-        location
-      }
-
-      console.log(loadedState)
-
-      dispatch(runTimer(loadedState))
-      return dispatch(appLoaded())
+      dispatch(runTimer({ breakpoints, currentIndex, target, location }))
+      dispatch(appLoaded())
     } catch (err) {
+      dispatch(appLoadFail())
       return err
     }
   }

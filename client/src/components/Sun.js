@@ -5,8 +5,8 @@ import './Sun.css'
 const Sun = ({ percent }) => {
   const sunHeight = Math.max(window.innerHeight * 4, window.innerWidth)
 
-  // Sky brightens to blue bw 50 and 75
-  const dayLevel = percent > 50 ? (percent - 50) / (75 - 50) : 0
+  // Sky brightens to blue bw 50 and 70
+  const dayLevel = percent > 50 ? (percent - 50) / (70 - 50) : 0
   const nightLevel = percent < 50 ? ((50 - percent) / 50) : 0
 
   const day = `radial-gradient(${sunHeight / 2}px at 50% center,
