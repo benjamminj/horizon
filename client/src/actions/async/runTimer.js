@@ -50,6 +50,7 @@ const handleIsNext = ({ currentIndex, isFinalBreakpoint, targetTime, now }) => {
 }
 
 const setupTimer = ({ breakpoints, currentIndex, target }) => {
+  console.log(breakpoints, currentIndex, target)
   const isFinalBreakpoint = isFinalIndex(currentIndex, breakpoints)
   const nextTime = isFinalBreakpoint ? breakpoints[0].time : breakpoints[currentIndex + 1].time
 
