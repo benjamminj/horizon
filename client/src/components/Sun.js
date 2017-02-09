@@ -2,14 +2,15 @@
 import React, { PropTypes } from 'react'
 import './Sun.css'
 
-const Sun = ({ percent, nightLevel }) => {
+const Sun = ({ percent }) => {
   const sunHeight = Math.max(window.innerHeight * 4, window.innerWidth)
 
   // Sky brightens to blue bw 50 and 75
-  const dayLevel = percent >= 50 ? (percent - 50) / (75 - 50) : 0
+  const dayLevel = percent > 50 ? (percent - 50) / (75 - 50) : 0
+  const nightLevel = percent < 50 ? ((50 - percent) / 50) : 0
 
-  const daySky = `radial-gradient(${sunHeight / 2}px at 50% center,
-    rgb(255, 255, 255),
+  const day = `radial-gradient(${sunHeight / 2}px at 50% center,
+    rgba(255, 255, 255, ${dayLevel}),
     rgba(249, 247, 232, ${dayLevel}) 2%,
     rgba(179, 240, 247, ${dayLevel}) 4%,
     rgba(140, 216, 247, ${dayLevel}) 7%,
@@ -17,25 +18,19 @@ const Sun = ({ percent, nightLevel }) => {
     rgba(135, 206, 235, ${dayLevel}) 65%)`
 
   const sun = `radial-gradient(${sunHeight / 2}px at 50% center,
-    rgb(255, 255, 255),
-    rgb(249, 247, 232) 2%,
-    rgb(255, 237, 170) 4%,
-    rgb(247, 199, 101) 7%,
-    rgb(249, 187, 73) 10%,
-    rgb(245, 173, 66) 13%,
-    rgb(245, 160, 73) 15%,
-    rgb(236, 147, 93) 18%,
-    rgb(234, 137, 107) 20%,
-    rgb(206, 92, 74) 30%,
-    rgb(162, 93, 96) 40%,
-    rgb(0, 50, 50) 60%)`
+    #fff823,
+    #ff9800 15%,
+    #fd7a1c 25%,
+    #fd5a1c 40%
+  )`
 
   const night = `radial-gradient(${sunHeight / 2}px at 50% center,
-    rgba(0, 0, 0, 0),
-    rgba(0, 5, 30, ${nightLevel}) 30%)`
+    rgba(49, 0, 0, ${nightLevel}),
+    rgba(0, 20, 50, ${nightLevel}) 30%,
+    rgba(0, 20, 50, ${nightLevel}) 50%)`
 
   const stylesObj = {
-    background: `${daySky}, ${night}, ${sun}`,
+    background: `${day}, ${night}, ${sun}`,
     height: sunHeight,
     top: `-${percent * 2}%`
   }
@@ -45,11 +40,8 @@ const Sun = ({ percent, nightLevel }) => {
   )
 }
 
-const { number } = PropTypes
-
 Sun.propTypes = {
-  percent: (props, propName) => props[propName] <= 100 ? null : new Error(`${propName} must be less than or equal to 100`),
-  nightLevel: number.isRequired
+  percent: (props, propName) => props[propName] <= 100 ? null : new Error(`${propName} must be less than or equal to 100`)
 }
 
 export default Sun
