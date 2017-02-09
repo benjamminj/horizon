@@ -2,21 +2,21 @@
 import { connect } from 'react-redux'
 import Sun from '../components/Sun'
 
-const mapStateToProps = ({ breakpoints, currentIndex }, ownProps) => {
+import isFinalIndex from '../actions/utils/isFinalIndex'
 
+const mapStateToProps = ({ breakpoints, currentIndex }, ownProps) => {
   const current = breakpoints[currentIndex]
-  const next = (currentIndex !== breakpoints.length - 1) ? breakpoints[currentIndex + 1] : breakpoints[0]
+  const next = !isFinalIndex(currentIndex, breakpoints) ? breakpoints[currentIndex + 1] : breakpoints[0]
 
   const timeBetween = next.time - current.time
-  const timeToNext = (next.time - Date.now())
+  const timeLeft = next.time - Date.now()
+  const percentLeft = timeLeft / timeBetween
 
-  const percentToNext = timeToNext / timeBetween
+  const distance = Math.abs(next.lightLevel - current.lightLevel)
+  const distanceLeft = distance * percentLeft
 
-  const distanceToNext = next.lightLevel > current.lightLevel ? (next.lightLevel * percentToNext) : current.lightLevel * percentToNext
-
-  const percent = next.lightLevel > current.lightLevel ? (next.lightLevel - distanceToNext) : distanceToNext
-
-  console.log(percent, distanceToNext) // last edit was t odescending values -- make percent just the distance to next.
+  const ascending = next.lightLevel > current.lightLevel
+  const percent = ascending ? (next.lightLevel - distanceLeft) : (next.lightLevel + distanceLeft)
 
   return {
     percent
