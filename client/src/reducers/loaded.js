@@ -1,6 +1,6 @@
 import { APP_LOAD_SUCCESS, APP_LOAD_FAIL } from '../actions/constants/actionTypes'
 
-export default (state = false, action) => {
+export default (state = null, action) => {
   switch (action.type) {
     case APP_LOAD_SUCCESS:
       return action.loaded
