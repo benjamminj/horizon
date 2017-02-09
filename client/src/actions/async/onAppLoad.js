@@ -6,17 +6,18 @@ import getTarget from '../getTarget'
 import runTimer from './runTimer'
 
 import { updateSunriseTimes } from '../updateBreakpoints'
+import { APP_LOAD_SUCCESS, APP_LOAD_FAIL } from '../constants/actionTypes'
 
 const appLoaded = () => {
   return {
-    type: 'APP_LOAD_SUCCESS',
+    type: APP_LOAD_SUCCESS,
     loaded: true
   }
 }
 
 const appLoadFail = () => {
   return {
-    type: 'APP_LOAD_FAIL',
+    type: APP_LOAD_FAIL,
     loaded: false
   }
 }

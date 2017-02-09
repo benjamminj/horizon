@@ -15,7 +15,12 @@ export const GET_REMAINING = 'GET_REMAINING'
 // Target
 export const GET_TARGET = 'GET_TARGET'
 
+// Loaded
+export const APP_LOAD_SUCCESS = 'APP_LOAD_SUCCESS'
+export const APP_LOAD_FAIL = 'APP_LOAD_FAIL'
+
 // Status
+// TODO -- see if this section can be removed
 export const GET_BREAKPOINTS_REQUEST = 'GET_BREAKPOINTS_REQUEST'
 export const GET_BREAKPOINTS_FAIL = 'GET_BREAKPOINTS_REQUEST'
 export const GET_BREAKPOINTS_SUCCESS = 'GET_BREAKPOINTS_SUCCESS'
