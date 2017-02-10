@@ -1,4 +1,4 @@
-import { GET_REMAINING } from './constants/actionTypes'
+import { GET_REMAINING } from './actionTypes'
 import getRemaining from './getRemaining'
 
 test('should return difference between the two times', () => {

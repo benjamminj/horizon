@@ -1,4 +1,4 @@
-import { INC_CURRENT_INDEX } from './constants/actionTypes'
+import { INC_CURRENT_INDEX } from './actionTypes'
 import incCurrentIndex from './incCurrentIndex'
 
 test('should return 1 higher than currentIndex if isFinalIndex === false', () => {
