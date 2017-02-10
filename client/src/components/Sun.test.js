@@ -68,7 +68,7 @@ test('should have `dayLevel === 0` when percent <= 50', () => {
 })
 
 test('should have `dayLevel > 1` when percent >= 70', () => {
-  const dayLevelTest = /rgba\(135, 206, 235, [12]+(\.\d*)?\)/
+  const dayLevelTest = /rgba\(135, 206, 235, [1-3]+(\.\d*)?\)/
 
   let wrapper = shallow(<Sun percent={75} />)
   expect(wrapper.html()).toMatch(dayLevelTest)

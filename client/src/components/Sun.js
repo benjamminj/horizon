@@ -6,11 +6,11 @@ const Sun = ({ percent }) => {
   const sunHeight = Math.max(window.innerHeight * 4, window.innerWidth)
 
   // Sky brightens to blue bw 50 and 70
-  const dayLevel = percent > 50 ? (percent - 50) / (70 - 50) : 0
+  const dayLevel = percent > 50 ? (percent - 50) / (65 - 50) : 0
 
   // Sky darkens to night bw 30 and 0
   const nightLevel = percent < 30 ? ((30 - percent) / 30) : 0
-  const duskLevel = percent < 50 ? (50 - percent) / (50 - 20) : 0
+  const duskLevel = percent < 50 ? (50 - percent) / (50 - 30) : 0
 
   const day = `radial-gradient(${sunHeight / 2}px at 50% center,
     rgba(255, 255, 255, ${dayLevel}),
@@ -24,7 +24,7 @@ const Sun = ({ percent }) => {
   const night = `linear-gradient(rgba(0, 0, 0, ${nightLevel}), rgba(0, 0, 0, ${nightLevel}))`
 
   const dusk = `radial-gradient(${sunHeight / 2}px at 50% center,
-    rgba(102, 79, 119, ${duskLevel}),
+    rgba(102, 79, 119, ${duskLevel / 2}),
     rgba(45, 67, 101, ${duskLevel}) 30%,
     rgba(48, 69, 86, ${duskLevel}) 50%
   )`
