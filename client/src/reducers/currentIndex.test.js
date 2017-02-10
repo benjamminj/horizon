@@ -1,4 +1,4 @@
-import { GET_CURRENT_INDEX, INC_CURRENT_INDEX } from '../actions/constants/actionTypes'
+import { GET_CURRENT_INDEX, INC_CURRENT_INDEX } from '../actions/actionTypes'
 import currentIndexReducer from './currentIndex.js'
 
 const state = 2

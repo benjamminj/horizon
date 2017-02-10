@@ -1,5 +1,5 @@
 import locationReducer from './location'
-import { GET_LOCATION } from '../actions/constants/actionTypes'
+import { GET_LOCATION } from '../actions/actionTypes'
 
 const state = {
   lat: 25,

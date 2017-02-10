@@ -1,5 +1,5 @@
 import loadedReducer from './loaded'
-import { APP_LOAD_SUCCESS, APP_LOAD_FAIL } from '../actions/constants/actionTypes.js'
+import { APP_LOAD_SUCCESS, APP_LOAD_FAIL } from '../actions/actionTypes.js'
 
 const state = false
 
