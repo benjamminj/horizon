@@ -1,9 +1,7 @@
-// TODO -- move to async folder
+import { reqSunriseSunsetAPI } from '../async'
+import { formatBreakpoints } from '../utils'
 
-import { reqSunriseSunsetAPI } from './async/apiRequests'
-import { formatBreakpoints } from './utils'
-
-import { GET_BREAKPOINTS } from './constants/actionTypes'
+import { GET_BREAKPOINTS } from '../actionTypes'
 
 function getBreakpoints (breakpoints) {
   return {

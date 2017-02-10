@@ -1,3 +1,4 @@
+// TODO -- move to util folder?
 import fetch from 'isomorphic-fetch'
 
 async function apiRequest (url) {

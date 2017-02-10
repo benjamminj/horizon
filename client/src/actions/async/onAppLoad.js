@@ -1,12 +1,11 @@
-import getLocation from '../getLocation'
-import getBreakpoints from '../getBreakpoints'
+import getLocation from '../location'
+import { getBreakpoints, updateSunriseTimes } from '../breakpoints'
 import getCurrentIndex from '../getCurrentIndex'
 import getTarget from '../getTarget'
 
 import runTimer from './runTimer'
 
-import { updateSunriseTimes } from '../updateBreakpoints'
-import { APP_LOAD_SUCCESS, APP_LOAD_FAIL } from '../constants/actionTypes'
+import { APP_LOAD_SUCCESS, APP_LOAD_FAIL } from '../actionTypes'
 
 const appLoaded = () => {
   return {

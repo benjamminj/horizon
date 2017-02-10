@@ -1,7 +1,6 @@
 import getRemaining from '../getRemaining'
 import getTarget from '../getTarget'
-import getBreakpoints from '../getBreakpoints'
-import { updateSunriseTimes } from '../updateBreakpoints'
+import { getBreakpoints, updateSunriseTimes } from '../breakpoints'
 import { isFinalIndex } from '../utils'
 import incCurrentIndex from '../incCurrentIndex'
 

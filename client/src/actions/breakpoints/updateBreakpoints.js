@@ -1,9 +1,9 @@
-import { reqSunriseSunsetAPI } from './async/apiRequests'
-import { formatBreakpoints } from './utils'
+import { reqSunriseSunsetAPI } from '../async'
+import { formatBreakpoints } from '../utils'
 
-import { UPDATE_AM_BREAKPOINTS } from './constants/actionTypes'
+import { UPDATE_AM_BREAKPOINTS } from '../actionTypes'
 
-export function updateSunriseTimes (breakpoints, location) {
+export default (breakpoints, location) => {
   return async (dispatch) => {
     try {
       const tomorrow = new Date((Date.now() + (1000 * 60 * 60 * 24)))

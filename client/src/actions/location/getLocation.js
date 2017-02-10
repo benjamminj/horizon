@@ -1,6 +1,6 @@
-import { reqGeolocationAPI } from './async'
+import { reqGeolocationAPI } from '../async'
 
-import { GET_LOCATION } from './constants/actionTypes'
+import { GET_LOCATION } from '../actionTypes'
 
 function getLocation (location) {
   return {

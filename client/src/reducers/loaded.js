@@ -1,4 +1,4 @@
-import { APP_LOAD_SUCCESS, APP_LOAD_FAIL } from '../actions/constants/actionTypes'
+import { APP_LOAD_SUCCESS, APP_LOAD_FAIL } from '../actions/actionTypes'
 
 export default (state = null, action) => {
   switch (action.type) {
