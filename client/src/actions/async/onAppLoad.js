@@ -1,4 +1,4 @@
-import getLocation from '../location'
+import { getLocation } from '../location'
 import { getBreakpoints, updateSunriseTimes } from '../breakpoints'
 import getCurrentIndex from '../getCurrentIndex'
 import getTarget from '../getTarget'
@@ -62,6 +62,7 @@ export default () => {
       dispatch(runTimer({ breakpoints, currentIndex, target, location }))
       dispatch(appLoaded())
     } catch (err) {
+      console.log(err)
       dispatch(appLoadFail())
     }
   }
