@@ -1,9 +1,9 @@
 import { getLocation } from '../location'
 import { getBreakpoints, updateSunriseTimes } from '../breakpoints'
-import getCurrentIndex from '../getCurrentIndex'
+import { getCurrentIndex } from '../currentIndex'
 import getTarget from '../getTarget'
-
 import runTimer from './runTimer'
+
 
 import { APP_LOAD_SUCCESS, APP_LOAD_FAIL } from '../actionTypes'
 

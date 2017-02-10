@@ -1,4 +1,4 @@
-import { GET_CURRENT_INDEX } from './actionTypes'
+import { GET_CURRENT_INDEX } from '../actionTypes'
 
 export default (breakpoints, now) => {
   const lastIndex = breakpoints.length - 1

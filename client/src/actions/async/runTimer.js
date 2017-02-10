@@ -2,7 +2,7 @@ import getRemaining from '../getRemaining'
 import getTarget from '../getTarget'
 import { getBreakpoints, updateSunriseTimes } from '../breakpoints'
 import { isFinalIndex } from '../utils'
-import incCurrentIndex from '../incCurrentIndex'
+import { incCurrentIndex } from '../currentIndex'
 
 // TODO -- Need to move into updateBreakpoints.js
 const refreshBreakpointsData = (isSunset, breakpoints, location) => {
