@@ -64,7 +64,6 @@ export default () => {
       dispatch(appLoaded())
     } catch (err) {
       dispatch(appLoadFail())
-      return err
     }
   }
 }
