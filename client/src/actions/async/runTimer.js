@@ -23,7 +23,7 @@ const refreshBreakpointsData = (isSunset, breakpoints, location) => {
 const handleIsTarget = ({ breakpoints, currentIndex, target, location }) => {
   return async (dispatch) => {
     try {
-      const isSunset = target === 6 || target === 7
+      const isSunset = target === 6
       breakpoints = await dispatch(refreshBreakpointsData(isSunset, breakpoints, location))
 
       const updatedCurrentIndexData = dispatch(incCurrentIndex(currentIndex, false))
@@ -50,7 +50,6 @@ const handleIsNext = ({ currentIndex, isFinalBreakpoint, targetTime, now }) => {
 }
 
 const setupTimer = ({ breakpoints, currentIndex, target }) => {
-  console.log(breakpoints, currentIndex, target)
   const isFinalBreakpoint = isFinalIndex(currentIndex, breakpoints)
   const nextTime = isFinalBreakpoint ? breakpoints[0].time : breakpoints[currentIndex + 1].time
 
@@ -65,7 +64,6 @@ const runTimer = (state) => {
   let { currentIndex } = state
   const { isFinalBreakpoint, nextTime, targetTime } = setupTimer(state)
 
-  console.log('here')
   return async (dispatch) => {
     dispatch(getRemaining(targetTime, Date.now()))
 
@@ -73,17 +71,14 @@ const runTimer = (state) => {
       const now = Date.now()
 
       if (targetTime <= now + 999) {
-        console.log('is target time')
         clearInterval(timer)
         state = await dispatch(handleIsTarget(state))
         dispatch(runTimer(state))
       } else if (nextTime <= now + 999) {
-        console.log('is next time')
         clearInterval(timer)
-        currentIndex = dispatch(handleIsNext({ currentIndex, isFinalBreakpoint, targetTime, now }))
+        currentIndex = await dispatch(handleIsNext({ currentIndex, isFinalBreakpoint, targetTime, now }))
         dispatch(runTimer({ breakpoints, currentIndex, target, location }))
       } else {
-        console.log('default action -- dec remaining')
         dispatch(getRemaining(targetTime, now))
       }
     }, 1000)
