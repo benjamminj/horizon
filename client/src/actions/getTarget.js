@@ -1,5 +1,6 @@
 import { GET_TARGET } from './constants/actionTypes'
 
+// assumes the breakpoints will always be created with length === 11
 const targetIndexes = {
   sunrise: 3,
   sunset: 6
