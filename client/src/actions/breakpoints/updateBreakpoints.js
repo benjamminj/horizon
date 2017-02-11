@@ -1,4 +1,4 @@
-import { reqSunriseSunsetAPI } from '../async'
+import { reqSunriseSunsetAPI } from '../apiRequests'
 import { formatBreakpoints } from '../utils'
 
 import { UPDATE_AM_BREAKPOINTS } from '../actionTypes'

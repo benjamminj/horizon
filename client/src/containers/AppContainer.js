@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { onAppLoad } from '../actions/async'
+import { onAppLoad } from '../actions/apiRequests'
 
 import App from '../components/App'
 

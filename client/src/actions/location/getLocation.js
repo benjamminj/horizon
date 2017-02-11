@@ -1,4 +1,4 @@
-import { reqGeolocationAPI } from '../async'
+import { reqGeolocationAPI } from '../apiRequests'
 
 import { GET_LOCATION } from '../actionTypes'
 
