@@ -1,4 +1,4 @@
-export const reqSunriseSunsetAPI = (location, today) => {
+export const reqSunriseSunsetAPI = (location) => {
   return new Promise((resolve, reject) => {
     if (location) {
 
