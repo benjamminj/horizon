@@ -23,11 +23,9 @@ export async function reqSunriseSunsetAPI ({ lat, lng }, date) {
   }
 }
 
-const GEOLOCATION_API = '//freegeoip.net/json/'
-
-export async function reqGeolocationAPI (url = GEOLOCATION_API) {
+export async function reqGeolocationAPI () {
   try {
-    const json = await apiRequest(url)
+    const json = await apiRequest('//freegeoip.net/json/')
 
     return json
   } catch (err) {
