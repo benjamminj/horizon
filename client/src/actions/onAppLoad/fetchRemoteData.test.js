@@ -53,3 +53,14 @@ describe('ok response', () => {
   })
 })
 
+describe('error', () => {
+  beforeAll(() => {
+    const { __configureGeolocation } = require('../apiRequests')
+    __configureGeolocation('error')
+  })
+
+  test('should throw an error to pass upward', () => {
+    expect(store.dispatch(fetchRemoteData())).toThrow()
+  })
+})
+
