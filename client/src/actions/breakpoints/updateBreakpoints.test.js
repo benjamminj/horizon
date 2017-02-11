@@ -40,6 +40,13 @@ test('should have an array of breakpoints in dispatched action', () => {
   expect(breakpoints[0].toString()).toBe('[object Object]')
 })
 
+test('should contain a combination of new and old breakpoints', () => {
+  const actions = store.getActions()
+  const { breakpoints } = actions[0]
+  expect(breakpoints.find(bp => /test/.test(bp.name))).toBeDefined()
+  expect(breakpoints.find(bp => /sunrise/.test(bp.id))).toBeDefined()
+})
+
 test('should throw error in catch block to pass upward', () => {
   expect(store.dispatch(updateBreakpoints())).toThrow()
 })
