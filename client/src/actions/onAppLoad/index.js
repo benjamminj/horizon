@@ -4,6 +4,7 @@ import { getCurrentIndex } from '../currentIndex'
 import getTarget from '../getTarget'
 import runTimer from './runTimer'
 
+import fetchRemoteData from './fetchRemoteData'
 
 import { APP_LOAD_SUCCESS, APP_LOAD_FAIL } from '../actionTypes'
 
@@ -18,19 +19,6 @@ const appLoadFail = () => {
   return {
     type: APP_LOAD_FAIL,
     loaded: false
-  }
-}
-
-const fetchRemoteData = () => {
-  return async (dispatch) => {
-    try {
-      const { location } = await dispatch(getLocation())
-      const { breakpoints } = await dispatch(getBreakpoints(location))
-
-      return { breakpoints, location }
-    } catch (err) {
-      throw new Error(err)
-    }
   }
 }
 
