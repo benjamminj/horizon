@@ -1,7 +1,6 @@
 export const reqSunriseSunsetAPI = (location) => {
   return new Promise((resolve, reject) => {
     if (location) {
-
       const baseDate = 1486794165218 // Feb 10, 2017 @ 10:23pm PST in UTC
       const minute = 1000 * 60
 
@@ -21,6 +20,25 @@ export const reqSunriseSunsetAPI = (location) => {
       resolve({ results })
     } else {
       reject(new Error('error fetching sunrise and sunset data'))
+    }
+  })
+}
+
+let ok = null
+export const __configureGeolocation = (error) => {
+  if (error) {
+    ok = false
+  } else {
+    ok = true
+  }
+}
+
+export const reqGeolocationAPI = () => {
+  return new Promise((resolve, reject) => {
+    if (ok) {
+      resolve({ latitude: 30, longitude: 100 })
+    } else {
+      reject(new Error('someting terrible happened'))
     }
   })
 }
