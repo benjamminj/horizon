@@ -14,7 +14,7 @@ export default (breakpoints, location) => {
 
       return dispatch(updateAMBreakpoints(mergeData.concat(oldData)))
     } catch (err) {
-      console.log(err)
+      throw new Error(err)
     }
   }
 }
