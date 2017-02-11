@@ -1,4 +1,4 @@
-import getRemaining from '../getRemaining'
+import { getRemaining } from '../remaining'
 import getTarget from '../getTarget'
 import { getBreakpoints, updateSunriseTimes } from '../breakpoints'
 import { isFinalIndex } from '../utils'

@@ -1,6 +1,5 @@
-import { formatBreakpoints, isFinalIndex } from './index'
+import * as utils from './index'
 
-test('should export the variables as functions', () => {
-  expect(typeof formatBreakpoints).toEqual('function')
-  expect(typeof isFinalIndex).toEqual('function')
+test('should export an object', () => {
+  expect(utils.toString()).toEqual('[object Object]')
 })
