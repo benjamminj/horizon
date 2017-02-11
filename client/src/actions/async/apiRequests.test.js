@@ -48,7 +48,6 @@ describe('reqSunriseSunsetAPI', () => {
 
     test('should return json if successful', async () => {
       const res = await reqSunriseSunsetAPI(location, date)
-      console.log(res)
       expect(res.test).toBe('test')
     })
   })
