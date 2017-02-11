@@ -50,7 +50,7 @@ export default () => {
       dispatch(runTimer({ breakpoints, currentIndex, target, location }))
       dispatch(appLoaded())
     } catch (err) {
-      console.log(err)
+      console.log('here', err)
       dispatch(appLoadFail())
     }
   }
