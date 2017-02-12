@@ -1,6 +1,6 @@
 import { getCurrentIndex } from '../currentIndex'
 import getTarget from '../getTarget'
-import runTimer from './runTimer'
+import runTimer from '../runTimer'
 
 import fetchRemoteData from './fetchRemoteData'
 import refreshSunriseTimes from './refreshSunriseTimes'

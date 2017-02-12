@@ -8,7 +8,7 @@ jest.mock('./refreshSunriseTimes')
 
 jest.mock('../currentIndex')
 
-jest.mock('./runTimer', () => {
+jest.mock('../runTimer', () => {
   const mockRunTimer = (state) => {
     const mockAction = (state) => {
       return {
