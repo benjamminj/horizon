@@ -1,4 +1,4 @@
-import refreshBreakpoints from '../breakpoints'
+import { refreshBreakpoints } from '../breakpoints'
 import { incCurrentIndex } from '../currentIndex'
 import getTarget from '../getTarget'
 
