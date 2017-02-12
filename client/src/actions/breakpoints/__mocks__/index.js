@@ -68,7 +68,7 @@ const mockGetBreakpointsAction = () => {
 }
 
 let ok = true // default
-export const __setuprefreshBreakpointsError = () => {
+export const __setupRefreshBreakpointsError = () => {
   ok = false
 }
 
