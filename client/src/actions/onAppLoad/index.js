@@ -1,23 +1,11 @@
-import { updateSunriseTimes } from '../breakpoints'
 import { getCurrentIndex } from '../currentIndex'
 import getTarget from '../getTarget'
 import runTimer from './runTimer'
 
 import fetchRemoteData from './fetchRemoteData'
+import refreshSunriseTimes from './refreshSunriseTimes'
 
 import * as actions from './appLoadActions'
-
-const refreshSunriseTimes = (oldBreakpoints, location) => {
-  return async (dispatch) => {
-    try {
-      const { breakpoints } = await dispatch(updateSunriseTimes(oldBreakpoints, location))
-
-      return breakpoints
-    } catch (err) {
-      throw new Error(err)
-    }
-  }
-}
 
 export default () => {
   return async (dispatch) => {
@@ -35,7 +23,6 @@ export default () => {
       dispatch(runTimer({ breakpoints, currentIndex, target, location }))
       dispatch(actions.appLoaded())
     } catch (err) {
-      console.log('here', err)
       dispatch(actions.appLoadFail())
     }
   }
