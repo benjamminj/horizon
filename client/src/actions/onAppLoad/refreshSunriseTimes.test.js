@@ -12,7 +12,7 @@ jest.mock('../breakpoints', () => {
   }
 
   return {
-    updateSunriseTimes (breakpoints, location) {
+    updateSunriseBreakpoints (breakpoints, location) {
       return async (dispatch) => {
         if (breakpoints) {
           return dispatch(mockAction(breakpoints))

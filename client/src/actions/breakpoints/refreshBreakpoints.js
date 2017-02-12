@@ -1,4 +1,4 @@
-import { getBreakpoints, updateSunriseTimes } from '../breakpoints'
+import { getBreakpoints, updateSunriseTimes } from './index'
 
 // TODO -- Need to move into updateBreakpoints.js
 export default (isSunset, breakpoints, location) => {

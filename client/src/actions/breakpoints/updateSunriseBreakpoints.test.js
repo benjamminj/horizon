@@ -2,11 +2,11 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
 import { UPDATE_AM_BREAKPOINTS } from '../actionTypes'
-import updateBreakpoints from './updateBreakpoints'
+import updateBreakpoints from './updateSunriseBreakpoints'
 
 jest.mock('../apiRequests')
 
-const middlewares = [ thunk]
+const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
 
 const initialState = []

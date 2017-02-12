@@ -1,4 +1,4 @@
-import refreshBreakpointsData from './refreshBreakpointsData'
+import refreshBreakpoints from '../breakpoints'
 import { incCurrentIndex } from '../currentIndex'
 import getTarget from '../getTarget'
 
@@ -6,7 +6,7 @@ export default ({ breakpoints, currentIndex, target, location }) => {
   return async (dispatch) => {
     try {
       const isSunset = target === 6
-      breakpoints = await dispatch(refreshBreakpointsData(isSunset, breakpoints, location))
+      breakpoints = await dispatch(refreshBreakpoints(isSunset, breakpoints, location))
 
       const updatedCurrentIndexData = dispatch(incCurrentIndex(currentIndex, false))
       currentIndex = updatedCurrentIndexData.currentIndex
