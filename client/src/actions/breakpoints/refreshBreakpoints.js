@@ -1,12 +1,12 @@
-import { getBreakpoints, updateSunriseTimes } from './index'
+import { getBreakpoints, updateSunriseBreakpoints } from './index'
 
-// TODO -- Need to move into updateBreakpoints.js
+// TODO -- add try/catch for error handling?
 export default (isSunset, breakpoints, location) => {
   return async (dispatch) => {
     let updatedBreakpointsData
 
     if (isSunset) {
-      updatedBreakpointsData = await dispatch(updateSunriseTimes(breakpoints, location))
+      updatedBreakpointsData = await dispatch(updateSunriseBreakpoints(breakpoints, location))
     } else {
       updatedBreakpointsData = await dispatch(getBreakpoints(location))
     }

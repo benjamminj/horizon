@@ -58,8 +58,8 @@ describe('ok', () => {
 
 describe('error', () => {
   beforeEach(() => {
-    const { __setupRefreshBreakpointsError } = require('../breakpoints')
-    __setupRefreshBreakpointsError()
+    const { __setupBreakpointsError } = require('../breakpoints')
+    __setupBreakpointsError()
 
     store = mockStore(initialState)
   })

@@ -68,7 +68,7 @@ const mockGetBreakpointsAction = () => {
 }
 
 let ok = true // default
-export const __setupRefreshBreakpointsError = () => {
+export const __setupBreakpointsError = () => {
   ok = false
 }
 
@@ -85,5 +85,19 @@ export const refreshBreakpoints = (isSunset) => {
     }
   } else {
     throw new Error('there was an error while refreshing the breakpoints')
+  }
+}
+
+export const updateSunriseBreakpoints = () => {
+  return dispatch => {
+    dispatch(mockUpdateSunriseAction())
+    return { breakpoints: generateBreakpoints(100) }
+  }
+}
+
+export const getBreakpoints = () => {
+  return dispatch => {
+    dispatch(mockGetBreakpointsAction())
+    return { breakpoints: generateBreakpoints(1000) }
   }
 }
