@@ -4,7 +4,7 @@ import Sun from '../components/Sun'
 
 import isFinalIndex from '../actions/utils/isFinalIndex'
 
-const mapStateToProps = ({ breakpoints, currentIndex }, ownProps) => {
+export const mapStateToProps = ({ breakpoints, currentIndex }, ownProps) => {
   const current = breakpoints[currentIndex]
   const next = !isFinalIndex(currentIndex, breakpoints) ? breakpoints[currentIndex + 1] : breakpoints[0]
 
