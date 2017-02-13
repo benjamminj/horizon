@@ -1,4 +1,4 @@
-import getTarget from './getTarget'
+import getTarget from './index'
 
 test('should return null if `status` does not contain `waiting`', () => {
   expect(getTarget('fancy_pants_testing').target).toBeNull()

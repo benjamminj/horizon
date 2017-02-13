@@ -1,4 +1,4 @@
-import { GET_TARGET } from './actionTypes'
+import { GET_TARGET } from '../actionTypes'
 
 // assumes the breakpoints will always be created with length === 11
 const targetIndexes = {

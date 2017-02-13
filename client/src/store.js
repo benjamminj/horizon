@@ -7,7 +7,7 @@ import rootReducer from './reducers'
 
 const loggerMiddleware = createLogger()
 
-let store = createStore(
+const store = createStore(
   rootReducer,
   applyMiddleware(
     thunkMiddleware,

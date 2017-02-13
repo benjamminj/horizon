@@ -1,7 +1,3 @@
-export const setBackground = (state) => {
-
-}
-
 export const toUTC = (date) => {
   const args = [
     date.getUTCFullYear(),
@@ -21,4 +17,4 @@ export const toUTC = (date) => {
 //   return (civilTwilightBegin - now) < 0 && (civilTwilightEnd - now) > 0
 // }
 
-export default { setBackground, toUTC }
+export default { toUTC }
