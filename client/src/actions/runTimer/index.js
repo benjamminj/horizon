@@ -9,6 +9,7 @@ const runTimer = (state) => {
   let { currentIndex } = state
   const { isFinalBreakpoint, nextTime, targetTime } = setupTimer(state)
 
+  // TODO -- add catch block for error handling
   return async (dispatch) => {
     dispatch(getRemaining(targetTime, Date.now()))
 
