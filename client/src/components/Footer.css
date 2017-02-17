@@ -1,5 +1,5 @@
 footer {
-  height: 50px;
+  height: 30px;
 
   display: flex;
   align-items: center;
@@ -13,7 +13,8 @@ footer {
 
 footer h6 {
   font-size: 8px;
-  font-weight: 100
+  font-weight: bolder;
+  text-shadow: 1px 1px 15px rgba(0, 0, 0, 0.1);
 }
 
 footer h6 a {

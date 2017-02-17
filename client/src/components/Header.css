@@ -4,4 +4,13 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
+}
+
+header h6 {
+  color: #fff;
+}
+
+#gh-icon {
+  fill: rgba(255, 255, 255, 0.4)
 }
