@@ -9,8 +9,8 @@ const Sun = ({ percent }) => {
   const dayLevel = percent > 50 ? (percent - 50) / (65 - 50) : 0
 
   // Sky darkens to night bw 30 and 0
-  const nightLevel = percent < 30 ? ((30 - percent) / 30) : 0
-  const duskLevel = percent < 50 ? (50 - percent) / (50 - 30) : 0
+  const nightLevel = percent < 40 ? ((40 - percent) / 30) : 0
+  const duskLevel = percent < 50 ? (50 - percent) / (50 - 40) : 0
 
   const day = `radial-gradient(${sunHeight / 2}px at 50% center,
     rgba(255, 255, 255, ${dayLevel}),
@@ -21,14 +21,6 @@ const Sun = ({ percent }) => {
     rgba(135, 206, 235, ${dayLevel}) 65%
   )`
 
-  const night = `linear-gradient(rgba(0, 0, 0, ${nightLevel}), rgba(0, 0, 0, ${nightLevel}))`
-
-  const dusk = `radial-gradient(${sunHeight / 2}px at 50% center,
-    rgba(102, 79, 119, ${duskLevel / 2}),
-    rgba(45, 67, 101, ${duskLevel}) 30%,
-    rgba(48, 69, 86, ${duskLevel}) 50%
-  )`
-
   const sun = `radial-gradient(${sunHeight / 2}px at 50% center,
     #fff823,
     #ff9800 15%,
@@ -36,14 +28,42 @@ const Sun = ({ percent }) => {
     #fd5a1c 40%
   )`
 
-  const stylesObj = {
-    background: `${day}, ${night}, ${dusk}, ${sun}`,
+  const sunStyles = {
+    background: `${sun}`,
     height: sunHeight,
     top: `-${percent * 2}%`
   }
 
+  const dayStyles = {
+    background: `${day}`,
+    height: sunHeight,
+    top: `-${percent * 2}%`
+  }
+
+  const duskStyles = {
+    opacity: duskLevel
+  }
+
+  const nightStyles = {
+    opacity: nightLevel
+  }
+
   return (
-    <div className='sun' style={stylesObj} />
+    <div className='sky'>
+      {dayLevel < 1 &&
+        <div className="sun" style={sunStyles} />
+      }
+      {dayLevel > 0 &&
+        <div className="day" style={dayStyles} />
+      }
+      {duskLevel > 0 &&
+        <div className="dusk" style={duskStyles} />
+      }
+      {nightLevel > 0 &&
+        <div className='night' style={nightStyles} />
+      }
+
+    </div>
   )
 }
 
