@@ -1,16 +1,19 @@
 header {
   height: 50px;
-
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   z-index: 2;
-}
-
-header h6 {
-  color: #fff;
+  position: relative;
+  padding: 10px;
 }
 
 #gh-icon {
-  fill: rgba(255, 255, 255, 0.4)
+  width: 32px;
+  height: 32px;
+
+}
+
+#gh-icon path {
+  fill: #fff;
 }

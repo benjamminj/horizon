@@ -9,7 +9,10 @@ const Clock = ({ remaining, name, waiting }) => {
 
   return (
     <div className='time-display'>
-      <h6>{waiting ? `Time until ${name}:` : `${name} is happening right now!`}</h6>
+      {waiting
+        ? <h6>{`Time until ${name}:`}</h6>
+        : <h2>{`${name} is happening right now!`}</h2>
+      }
       {waiting &&
         <h1>{pad(hours)}:{pad(minutes)}:{pad(seconds)}</h1>
       }

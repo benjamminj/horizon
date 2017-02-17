@@ -16,6 +16,14 @@
   font-family: 'Raleway', sans-serif
 }
 
+.time-display h2 {
+  font-family: 'Raleway', sans-serif;
+}
+
+.time-display h2:first-letter {
+  text-transform: capitalize;
+}
+
 .time-display h1 {
   line-height: 2;
   font-family: 'PT Sans Caption', sans-serif;
@@ -38,6 +46,10 @@
   .time-display h1 {
     font-size: 110px;
     line-height: 1.5;
+  }
+
+  .time-display h2 {
+    font-size: 36px;
   }
 
   .time-display h6 {
