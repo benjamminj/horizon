@@ -16,18 +16,6 @@ test('should render Clock and Sun container if `loaded === true`', () => {
   expect(wrapper.contains(<SunContainer />)).toBe(true)
 })
 
-test('should have `skyblue` background if `loaded === true`', () => {
-  const wrapper = shallow(<App loaded />)
-  const { background } = wrapper.props().style
-  expect(background).toMatch(/skyblue/)
-})
-
-test('should have overlay background if `loaded === false`', () => {
-  const wrapper = shallow(<App />)
-  const { background } = wrapper.props().style
-  expect(background).toMatch(/rgba/)
-})
-
 test('should not render Clock/Sun containers if `loaded === false`', () => {
   const wrapper = shallow(<App />)
   expect(wrapper.contains(<ClockContainer />)).toBe(false)
@@ -36,8 +24,9 @@ test('should not render Clock/Sun containers if `loaded === false`', () => {
 
 test('should call onAppLoad when the component is mounted', () => {
   const onAppLoad = jest.fn(() => {
-    return () => {console.log('foo')}
+    return () => { console.log('foo') }
   })
-  const wrapper = mount(<App onAppLoad={onAppLoad} />)
+
+  mount(<App onAppLoad={onAppLoad} />)
   expect(onAppLoad.mock.calls).toHaveLength(1)
 })

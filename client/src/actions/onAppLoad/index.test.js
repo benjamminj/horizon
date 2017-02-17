@@ -1,5 +1,6 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
+import mockDate from 'mockdate'
 
 import onAppLoad from './index'
 
@@ -57,6 +58,7 @@ describe('refresh data for evening', () => {
     const { __setPastSunrise } = require('../currentIndex')
     __setPastSunrise()
 
+    mockDate.set(new Date(2017, 1, 17, 20))
     store = mockStore(initialState)
     store.dispatch(onAppLoad()).then(done)
   })
