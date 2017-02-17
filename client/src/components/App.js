@@ -15,24 +15,20 @@ class App extends Component {
   render () {
     const { loaded } = this.props
 
-    const styles = {
-      background: loaded ? 'skyblue' : 'rgba(255, 255, 255, 0.3)'
-    }
-
-    return (
-      <div id='app' style={styles}>
-        <Header />
-        <main>
-          {loaded &&
+    if (loaded) {
+      return (
+        <div id='app'>
+          <Header />
+          <main>
             <ClockContainer />
-          }
-        </main>
-        <Footer />
-        {loaded &&
+          </main>
+          <Footer />
           <SunContainer />
-        }
-      </div>
-    )
+        </div>
+      )
+    } else {
+      return (<div className="app" />)
+    }
   }
 }
 

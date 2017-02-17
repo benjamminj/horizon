@@ -6,15 +6,6 @@
   box-sizing: inherit;
 }
 
-#root {
-  width: 100%;
-  min-height: 100vh;
-  background-color: black;
-  position: relative;
-
-  overflow: hidden;
-}
-
 main {
   min-height: calc(100vh - 100px);
 
@@ -23,4 +14,8 @@ main {
   align-items: center;
   justify-content: center;
   transition: background 1s ease-in;
+}
+
+.loading-screen {
+  background: red;
 }
