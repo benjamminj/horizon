@@ -13,8 +13,7 @@ export default () => {
       let { breakpoints, location } = await dispatch(fetchRemoteData())
       const { currentIndex } = dispatch(getCurrentIndex(breakpoints, Date.now()))
 
-      // TODO -- need to handle times after midnight so that doesn't refresh @ 1am
-      if (currentIndex >= 6) {
+      if (currentIndex >= 6 && new Date().getHours() > 11) {
         breakpoints = await dispatch(refreshSunriseTimes(breakpoints, location))
       }
 
