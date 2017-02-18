@@ -5,7 +5,7 @@ import './Sun.css'
 const Sun = ({ percent }) => {
   const sunHeight = Math.max(window.innerHeight * 4, window.innerWidth)
 
-  // Sky brightens to blue bw 50 and 70
+  // Sky brightens to blue bw 50 and 65
   const dayLevel = percent > 50 ? (percent - 50) / (65 - 50) : 0
 
   // Sky darkens to night bw 30 and 0
@@ -62,7 +62,6 @@ const Sun = ({ percent }) => {
       {nightLevel > 0 &&
         <div className='night' style={nightStyles} />
       }
-
     </div>
   )
 }

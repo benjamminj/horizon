@@ -1,8 +1,10 @@
 .time-display {
   color: #fff;
-  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.7);
   z-index: 5;
   text-align: center;
+  // background: rgba(0, 0, 0, 0.07);
+  // box-shadow: 0 0 50px 70px rgba(0, 0, 0, 0.07);
 }
 
 .time-display h6, .time-display h1 {
@@ -13,11 +15,14 @@
   line-height: 1.5;
   font-size: 16px;
   font-weight: 600;
-  font-family: 'Raleway', sans-serif
+  // text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  font-family: 'Raleway', sans-serif;
+  // color: rgba(255, 255, 255, 0.7);
 }
 
 .time-display h2 {
   font-family: 'Raleway', sans-serif;
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
 }
 
 .time-display h2:first-letter {
