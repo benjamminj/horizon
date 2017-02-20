@@ -1,0 +1,12 @@
+{
+  "name": "when-is-sunset",
+  "version": "1.0.0",
+  "description": "App to track how much time is left until sunrise/sunset",
+  "main": "index.js",
+  "repository": "https://github.com/benjaminj6/sunrise-sunset.git",
+  "author": "Benjamin Johnson <benjamin.d.johnson@icloud.com>",
+  "license": "MIT",
+  "scripts": {
+    "deploy-server": "git subtree push --prefix server heroku master"
+  }
+}
