@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Slider from './Slider.js'
+import SliderContainer from '../containers/SliderContainer'
 import './Clock.css'
 
 const Clock = ({ remaining, name, waiting }) => {
@@ -17,7 +17,7 @@ const Clock = ({ remaining, name, waiting }) => {
       {waiting &&
         <h1>{pad(hours)}:{pad(minutes)}:{pad(seconds)}</h1>
       }
-      <Slider />
+      <SliderContainer />
     </div>
   )
 }

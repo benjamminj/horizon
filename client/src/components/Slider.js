@@ -1,28 +1,34 @@
 import React from 'react'
 import './Slider.css'
 
-function onInput (e) {
-  console.log(e.target.value)
+function setCustomHeight (props) {
+  return (e) => {
+    props.setCustomSunHeight(parseInt(e.target.value, 10))
+  }
 }
 
-function onMouseDown (e) {
-  console.log(`mouse down -- pause the percent & set to ${e.target.value}`)
-}
+function resumeAutoHeight (props) {
+  return (e) => {
+    const heights = {
+      autoHeight: props.sunHeight,
+      customHeight: parseInt(e.target.value, 10)
+    }
 
-function onMouseUp (e) {
-  console.log('mouse up -- resume the regular position')
+    props.resumeAutoSunHeight(heights)
+    e.target.value = props.sunHeight
+  }
 }
 
 function Blur () {
   return (
     <filter id='blur'>
-      <feGaussianBlur in='SourceAlpha' stdDeviation='3'/>
-      <feOffset dx='2' dy='2'/>
+      <feGaussianBlur in='SourceAlpha' stdDeviation='3' />
+      <feOffset dx='2' dy='2' />
       <feComponentTransfer>
-        <feFuncA type='linear' slope='0.2'/>
+        <feFuncA type='linear' slope='0.2' />
       </feComponentTransfer>
       <feMerge>
-        <feMergeNode/>
+        <feMergeNode />
         <feMergeNode in='SourceGraphic' />
       </feMerge>
     </filter>
@@ -56,16 +62,21 @@ function DaySVG () {
 }
 
 function Slider (props) {
+  const setCustomSunHeight = setCustomHeight(props)
+  const resumeAutoSunHeight = resumeAutoHeight(props)
+
   return (
     <div id='slider'>
       <NightSVG />
       <input
-        min='0'
+        id="slider-range-input"
+        min='1'
         max='100'
         type='range'
-        onInput={onInput}
-        onMouseDown={onMouseDown}
-        onMouseUp={onMouseUp}
+        defaultValue={props.slider}
+        onInput={setCustomSunHeight}
+        onMouseDown={setCustomSunHeight}
+        onMouseUp={resumeAutoSunHeight}
       />
       <DaySVG />
     </div>

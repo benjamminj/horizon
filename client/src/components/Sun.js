@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { PropTypes } from 'react'
 import './Sun.css'
 
@@ -8,8 +7,10 @@ const Sun = ({ percent }) => {
   // Sky brightens to blue bw 50 and 65
   const dayLevel = percent > 50 ? (percent - 50) / (65 - 50) : 0
 
-  // Sky darkens to night bw 30 and 0
+  // Sky darkens to night bw 40 and 0
   const nightLevel = percent < 40 ? ((40 - percent) / 30) : 0
+
+  // Dusk fades in between 50 and 40
   const duskLevel = percent < 50 ? (50 - percent) / (50 - 40) : 0
 
   const day = `radial-gradient(${sunHeight / 2}px at 50% center,
@@ -51,13 +52,13 @@ const Sun = ({ percent }) => {
   return (
     <div className='sky'>
       {dayLevel < 1 &&
-        <div className="sun" style={sunStyles} />
+        <div className='sun' style={sunStyles} />
       }
       {dayLevel > 0 &&
-        <div className="day" style={dayStyles} />
+        <div className='day' style={dayStyles} />
       }
       {duskLevel > 0 &&
-        <div className="dusk" style={duskStyles} />
+        <div className='dusk' style={duskStyles} />
       }
       {nightLevel > 0 &&
         <div className='night' style={nightStyles} />

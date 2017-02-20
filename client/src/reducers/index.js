@@ -6,6 +6,8 @@ import currentIndex from './currentIndex'
 import remaining from './remaining'
 import target from './target'
 import loaded from './loaded'
+import customSunHeight from './customSunHeight'
+import sunHeight from './sunHeight'
 
 export default combineReducers({
   location,
@@ -13,5 +15,7 @@ export default combineReducers({
   currentIndex,
   remaining,
   target,
-  loaded
+  loaded,
+  customSunHeight,
+  sunHeight
 })
