@@ -7,6 +7,10 @@
   "author": "Benjamin Johnson <benjamin.d.johnson@icloud.com>",
   "license": "MIT",
   "scripts": {
-    "deploy-server": "git subtree push --prefix server heroku master"
+    "deploy-server": "git subtree push --prefix server heroku master",
+    "start": "concurrently --prefix \"[{name}]\" --names \"CLIENT,SERVER\" -c \"bgBlue.bold,bgMagenta.bold\" \"cd client && npm start\" \"cd server && npm run dev\""
+  },
+  "dependencies": {
+    "concurrently": "^3.3.0"
   }
 }
