@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "REACT_APP_SERVER=//bjohnson-sunrise-sunset.herokuapp.com/ react-scripts build",
+    "build": "REACT_APP_SERVER=//bjohnson-sunrise-sunset.herokuapp.com react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "coverage": "npm run test -- --coverage --no-cache"
