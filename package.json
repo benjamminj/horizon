@@ -8,6 +8,5 @@
   "license": "MIT",
   "scripts": {
     "deploy-server": "git subtree push --prefix server heroku master"
-  },
-  "homepage": "http://benjaminj6.github.io/sunrise-sunset"
+  }
 }

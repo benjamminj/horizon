@@ -1,4 +1,9 @@
 import { toUTC } from '../../Utils'
+import values from 'object.values'
+
+if (!Object.values) {
+  values.shim()
+}
 
 const levels = [
   { name: 'waiting_sunrise', cond: /_twilight_|sunset_end/ },

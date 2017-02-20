@@ -22,6 +22,7 @@ export default () => {
       dispatch(runTimer({ breakpoints, currentIndex, target, location }))
       dispatch(actions.appLoaded())
     } catch (err) {
+      console.log(err)
       dispatch(actions.appLoadFail())
     }
   }
