@@ -73,7 +73,7 @@ function Slider (props) {
         min='1'
         max='100'
         type='range'
-        defaultValue={props.slider}
+        defaultValue={props.sunHeight}
         onInput={setCustomSunHeight}
         onMouseDown={setCustomSunHeight}
         onMouseUp={resumeAutoSunHeight}

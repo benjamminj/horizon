@@ -12,30 +12,38 @@ export function mapStateToProps ({ sunHeight }) {
 export function mapDispatchToProps (dispatch) {
   return {
     resumeAutoSunHeight: ({ customHeight, autoHeight }) => {
+      const isHigher = customHeight > autoHeight
+      const heightInterval = 4
+
       const diff = Math.abs(customHeight - autoHeight)
-      const middle = diff / 4
-      let result
+      const middle = diff / heightInterval
 
-      console.log(customHeight, autoHeight)
+      let intHeights = []
+
       for (let i = 0; i <= Math.ceil(middle); i++) {
-        const isHigher = customHeight > autoHeight
-
         if (i < middle) {
-          const amt = i * 4
-          result = isHigher ? customHeight - amt : customHeight + amt
-          console.log(result, autoHeight)
+          const amt = i * heightInterval
+          const result = isHigher ? customHeight - amt : customHeight + amt
 
-          setTimeout(() => {
-            dispatch(actions.setCustomSunHeight(result))
-          }, (i * 50))
+          intHeights.push(result)
         } else {
-          setTimeout(() => {
-            dispatch(actions.setCustomSunHeight(autoHeight))
-            dispatch(actions.resumeAutoSunHeight())
-            console.log('now this runs')
-          }, (i * 50))
+          intHeights.push(autoHeight)
         }
       }
+
+      intHeights.forEach((el, i, arr) => {
+        const interval = 50
+
+        setTimeout(() => {
+          dispatch(actions.setCustomSunHeight(el))
+        }, (i * interval))
+
+        if (i === arr.length - 1) {
+          setTimeout(() => {
+            dispatch(actions.resumeAutoSunHeight())
+          }, (i * interval))
+        }
+      })
     },
 
     setCustomSunHeight: (autoHeight) => { dispatch(actions.setCustomSunHeight(autoHeight)) }

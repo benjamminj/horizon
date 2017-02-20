@@ -11,7 +11,7 @@ const lightLevels = [
   { cond: /astronomical_twilight_end/, day: 0 }, // night
   { cond: /astronomical_twilight_begin|nautical_twilight_end/, day: 10 }, // astronomical twilight
   { cond: /nautical_twilight_begin|civil_twilight_end/, day: 20 }, // nautical twilight
-  { cond: /civil_twilight_begin|sunset_end/, day: 30 }, // civil twilight
+  { cond: /civil_twilight_begin|sunset_end/, day: 45 }, // civil twilight
   { cond: /^sun+(rise|set)$/, day: 50 }, // sunrise / sunset
   { cond: /^sunrise_end$/, day: 55 }, // sunrise end
   { cond: /solar_noon/, day: 100 } // noon
