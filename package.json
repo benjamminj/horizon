@@ -8,7 +8,9 @@
   "license": "MIT",
   "scripts": {
     "deploy-server": "git subtree push --prefix server heroku master",
-    "start": "concurrently --prefix \"[{name}]\" --names \"CLIENT,SERVER\" -c \"bgBlue.bold,bgMagenta.bold\" \"cd client && npm start\" \"cd server && npm run dev\""
+    "start": "concurrently --prefix \"[{name}]\" --names \"CLIENT,SERVER\" -c \"bgBlue.bold,bgMagenta.bold\" \"cd client && npm start\" \"cd server && npm run dev\"",
+    "test": "cd client && npm test"
+
   },
   "dependencies": {
     "concurrently": "^3.3.0"
