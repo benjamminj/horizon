@@ -1,15 +1,30 @@
 # Horizon
-###### _Count the time left until sunrise / sunset using ReactJS_
+###### _Count remaining time till sunrise and sunset using ReactJS_
 
 ### About
 
-...To be written
+Ever wish you knew _exactly_ how long you had until you needed to go outside and catch that beautiful sunset? Or when you need to go to bed in order to see the sunrise _and_ not end up sleep-deprived? _Horizon_ provides a simple, fun interface to see how long you have before that sunset/sunrise.
+
+### Screenshots
+
+![](http://i.imgur.com/p7DguL1.png) ![](http://i.imgur.com/YxI5QEo.png)
+![](http://i.imgur.com/uJSkeB1.png)
+![](http://i.imgur.com/vE69ZLw.png)
+![](http://i.imgur.com/ALD6IMI.png)
+![](http://i.imgur.com/O8F32tl.png)
 
 ### Technologies Used
 
+##### Client
+* [Create React App](https://github.com/facebookincubator/create-react-app)
 * [ReactJS](https://facebook.github.io/react/)
 * [Redux](http://redux.js.org/)
+
+##### Server
 * [ExpressJS](http://expressjs.com/)
+
+##### Style Guide
+* [Javascript Standard Style Guide](http://standardjs.com/)
 
 ### Installation
 
@@ -62,6 +77,6 @@ To get _Horizon_ running locally, simply follow the instructions provided below.
 * Add a page displaying sunrise and sunset times
 * Performance improvements
 
-### Contributing
+### Issues
 
-...to be written
+If the app isn't working the way it's supposed, I'd love to know! You can submit issues or suggestions on the [Github issue tracker](https://github.com/benjaminj6/horizon/issues)
