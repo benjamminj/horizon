@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Horizon — Main Screen</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #ddd;
+      height: 100vh;
+      position: relative;
+      font-family: monospace;
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 0.5rem;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .icon {
+      display: flex;
+      height: 100%;
+      align-items: center;
+    }
+
+    .icon i {
+      --size: 2rem;
+
+      text-align: center;
+      height: var(--size);
+      width: var(--size);
+      border-radius: 50%;
+      background: #bbb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sun {
+      --size: 7rem;
+
+      background: #bbb;
+      height: var(--size);
+      width: var(--size);
+      border-radius: 50%;
+      position: absolute;
+      top: 30%;
+      left: calc(50% - (var(--size) * 0.5));
+    }
+
+    footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-areas: "subheading icon" "time icon";
+    }
+
+    footer h4 {
+      grid-area: subheading;
+    }
+
+    footer h1 {
+      grid-area: time
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="icon">
+      <i>i</i>
+    </div>
+
+    <div class="tip">
+      <h4>this is a short tip...</h4>
+    </div>
+  </header>
+
+  <div class="sun"></div>
+  <footer>
+    <h3>time until sunset</h3>
+    <h1>11:00:04</h1>
+  </footer>
+</body>
+</html>
