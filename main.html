@@ -7,6 +7,15 @@
   <title>Horizon — Main Screen</title>
 
   <style>
+    :root {
+      --gutter-medium: 2rem;
+      --gutter-default: 0.5rem;
+    }
+
+    html {
+      font-size: 18px;
+    }
+
     body {
       margin: 0;
       background: #ddd;
@@ -15,7 +24,11 @@
       font-family: monospace;
     }
 
-    h1, h2, h3, h4 {
+    a {
+      text-decoration: none;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
       margin: 0;
       line-height: 1.5;
     }
@@ -24,16 +37,71 @@
       font-size: 2rem;
     }
 
+    h2 {
+      font-size: 1.75rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    h4 {
+      font-size: 1.25rem;
+    }
+
+    i {
+      font-style: normal;
+    }
+
+    .screen-lg {
+      display: none;
+    }
+
+    @media screen and (min-width: 40rem) {
+      html {
+        font-size: 18px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media screen and (min-width: 50rem) {
+      .screen-lg {
+        display: initial;
+      }
+    }
+
+    @media screen and (min-width: 140rem) {
+      body {
+        max-width: 140rem;
+        margin: 0 auto;
+      }
+    }
+
     header {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      padding: 0.5rem;
+      padding: var(--gutter-default);
 
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+
+    @media screen and (min-width: 40rem) {
+      header {
+        padding: var(--gutter-medium);
+      }
+    }
+
+    @media screen and (min-width: 50rem) {
+      header {
+        justify-content: flex-end;
+      }
     }
 
     .icon {
@@ -55,6 +123,12 @@
       justify-content: center;
     }
 
+    @media screen and (min-width: 50rem) {
+      .icon {
+        display: none;
+      }
+    }
+
     .sun {
       --size: 7rem;
 
@@ -67,12 +141,22 @@
       left: calc(50% - (var(--size) * 0.5));
     }
 
+    @media screen and (min-width: 50rem) {
+      .sun {
+        --size: 9rem;
+
+        height: var(--size);
+        width: var(--size);
+        left: calc(50% - (var(--size) * 0.5));
+      }
+    }
+
     footer {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 0.5rem;
+      padding: var(--gutter-default);
       display: grid;
       grid-template-columns: 1fr auto;
       grid-template-areas: "subheading icon" "time icon";
@@ -85,12 +169,26 @@
     footer h1 {
       grid-area: time
     }
+
+    @media screen and (min-width: 40rem) {
+      footer {
+        padding: var(--gutter-medium);
+        align-items: flex-end;
+      }
+
+      .title {
+        text-align: right;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
+    <!-- <div class="screen-lg">
+      <h3>horizon</h3>
+    </div> -->
     <div class="icon">
-      <i>i</i>
+      <i><a href="/menu.html">◼️</a></i>
     </div>
 
     <div class="tip">
@@ -100,8 +198,16 @@
 
   <div class="sun"></div>
   <footer>
-    <h3>time until sunset</h3>
-    <h1>11:00:04</h1>
+    <div>
+      <h3>time until sunset</h3>
+      <h1>11:00:04</h1>
+    </div>
+
+    <div class="title screen-lg">
+      <h5><a href="">view the source code</a></h5>
+      <h5>made with ❤️ by <a href="">benjamin johnson</a></h5>
+      <h6>attributions to the api, icons, stuff like that</h6>
+    </div>
   </footer>
 </body>
 </html>
