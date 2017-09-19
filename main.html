@@ -22,6 +22,7 @@
       height: 100vh;
       position: relative;
       font-family: monospace;
+      line-height: 1.5;
     }
 
     a {
@@ -30,11 +31,10 @@
 
     h1, h2, h3, h4, h5, h6 {
       margin: 0;
-      line-height: 1.5;
     }
 
     h1 {
-      font-size: 2rem;
+      font-size: 1.75rem;
     }
 
     h2 {
@@ -46,7 +46,11 @@
     }
 
     h4 {
-      font-size: 1.25rem;
+      font-size: 1rem;
+    }
+
+    h5 {
+      font-size: 1rem;
     }
 
     i {
@@ -64,6 +68,10 @@
 
       h1 {
         font-size: 2.5rem;
+      }
+
+      h4 {
+        font-size: 1.25rem;
       }
     }
 
@@ -88,7 +96,7 @@
       padding: var(--gutter-default);
 
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
     }
 
@@ -123,6 +131,10 @@
       justify-content: center;
     }
 
+    .tip * {
+      overflow-x: hidden;
+    }
+
     @media screen and (min-width: 50rem) {
       .icon {
         display: none;
@@ -130,7 +142,7 @@
     }
 
     .sun {
-      --size: 7rem;
+      --size: 5rem;
 
       background: #bbb;
       height: var(--size);
@@ -157,12 +169,12 @@
       left: 0;
       right: 0;
       padding: var(--gutter-default);
-      display: grid;
-      grid-template-columns: 1fr auto;
-      grid-template-areas: "subheading icon" "time icon";
+      text-align: center;
+      line-height: 1.25;
     }
 
     footer h4 {
+
       grid-area: subheading;
     }
 
@@ -184,23 +196,16 @@
 </head>
 <body>
   <header>
-    <!-- <div class="screen-lg">
-      <h3>horizon</h3>
-    </div> -->
     <div class="icon">
       <i><a href="/menu.html">◼️</a></i>
-    </div>
-
-    <div class="tip">
-      <h4>this is a short tip...</h4>
     </div>
   </header>
 
   <div class="sun"></div>
   <footer>
     <div>
-      <h3>time until sunset</h3>
-      <h1>11:00:04</h1>
+      <h6>time until sunset</h6>
+      <h1>9:00:08</h1>
     </div>
 
     <div class="title screen-lg">
