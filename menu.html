@@ -36,25 +36,11 @@
 
     h2 {
       font-size: 1.5rem;
-    }
-    h2 {
       margin-bottom: 1rem;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      text-align: center;
-    }
-
-    li + li {
-      margin-top: 2rem;
-    }
-
     header {
-      text-align: center;
       display: flex;
-      justify-content: space-between;
       position: absolute;
       left: 0;
       top: 0;
@@ -62,17 +48,17 @@
       padding: 1rem;
     }
 
-    .time {
-      font-size: 2.5rem;
+    .tip {
+      text-align: center;
     }
 
     footer {
       position: absolute;
+      text-align: center;
       padding: 1rem;
       left: 0;
       right: 0;
       bottom: 0;
-      text-align: center;
     }
 
     .icon {
@@ -101,19 +87,18 @@
     <i><a href="/main.html">◼️</a></i>
   </header>
 
-  <section>
-      <ul>
-        <li>
-          <h2>view on <a href="">github</a></h2>
-        </li>
-        <li>
-          <h2>made with ❤️ by <a href="portfolio">benjamin johnson</a></h2>
-        </li>
-      </ul>
-    </section>
+  <section class="tip">
+    <h2>touch anywhere to move the sun!</h2>
+  </section>
 
-    <footer>
-      <h4>attribution to the <a href="">api</a>, <a href="">icons</a>, stuff like that.</h4>
+  <footer>
+    <h3>
+      <a href="">
+        view the source code
+      </a>
+    </h3>
+    <h3>made with ❤︎ by <a href="">benjamin johnson</a></h3>
+    <h6>attribution to the <a href="">api</a>, <a href="">icons</a>, stuff like that.</h6>
   </footer>
 </body>
 </html>
