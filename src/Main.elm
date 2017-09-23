@@ -1,86 +1,67 @@
 module Main exposing (..)
 
-import Html exposing (Html, text, div, img)
-import Html.Attributes exposing (src)
+import Html exposing (Html, text, div, button)
+import Html.Events exposing (onClick)
+import Geolocation exposing (Location)
+import Date exposing (..)
+import Task
 import Http
-import Json.Decode exposing (..)
-import Debug
-import Json.Decode.Pipeline exposing (decode, required, optional, requiredAt, custom)
+import Json.Decode as Decode exposing (Decoder, keyValuePairs, string)
 
 
 ---- MODEL ----
 
 
+type alias GeoModel =
+    { location : Maybe Location
+    , loading : Bool
+    , loaded : Bool
+    , error : Maybe Geolocation.Error
+    }
+
+
+initialGeoModel : GeoModel
+initialGeoModel =
+    { location = Nothing
+    , loading = False
+    , loaded = False
+    , error = Nothing
+    }
+
+
+type alias TimesModel =
+    { loaded : Bool
+    , loading : Bool
+    , times : List DataResult
+    }
+
+
+initialTimesModel : TimesModel
+initialTimesModel =
+    { loaded = False
+    , loading = False
+    , times = []
+    }
+
+
 type alias Model =
-    { status : Maybe String
-    , results : Maybe Results
+    { geo : GeoModel
+    , date : Maybe Date
+    , times : TimesModel
     }
 
 
 initialModel : Model
 initialModel =
-    { status = Nothing
-    , results = Nothing
+    { geo = initialGeoModel
+    , date = Nothing
+    , times = initialTimesModel
     }
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( initialModel, fetchData )
-
-
-fetchData : Cmd Msg
-fetchData =
-    let
-        url =
-            "https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400"
-
-        request =
-            Http.get url decodeSunriseStatus
-    in
-        Http.send NewData request
-
-
-type alias Data =
-    { status : Maybe String
-    , results : Results
-    }
-
-
-decodeSunriseStatus : Decoder Data
-decodeSunriseStatus =
-    decode Data
-        |> required "status" (maybe string)
-        |> required "results" decodeResults
-
-
-type alias Results =
-    { sunrise : String
-    , sunset : String
-    , day_length : String
-    , astronomical_twilight_begin : String
-    , astronomical_twilight_end : String
-    , nautical_twilight_begin : String
-    , nautical_twilight_end : String
-    , civil_twilight_begin : String
-    , civil_twilight_end : String
-    , solar_noon : String
-    }
-
-
-decodeResults : Decoder Results
-decodeResults =
-    decode Results
-        |> required "sunrise" string
-        |> required "sunset" string
-        |> required "day_length" string
-        |> required "astronomical_twilight_begin" string
-        |> required "nautical_twilight_begin" string
-        |> required "civil_twilight_begin" string
-        |> required "solar_noon" string
-        |> required "astronomical_twilight_end" string
-        |> required "nautical_twilight_end" string
-        |> required "civil_twilight_end" string
+    ( initialModel, Cmd.none )
 
 
 
@@ -88,17 +69,141 @@ decodeResults =
 
 
 type Msg
-    = NewData (Result Http.Error Data)
+    = NoOp
+    | AuthorizeGeo
+    | Geo (Result Geolocation.Error Location)
+    | SunriseData (Result Http.Error Data)
+    | GetDate (Result String Date)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        NewData (Ok data) ->
-            ( { data | results = Just data.results }, Cmd.none )
-
-        NewData (Err _) ->
+        NoOp ->
             ( model, Cmd.none )
+
+        AuthorizeGeo ->
+            let
+                geo =
+                    model.geo
+
+                newGeo =
+                    { geo | loading = True }
+            in
+                ( { model | geo = newGeo }, getGeoLocation )
+
+        Geo (Err error) ->
+            let
+                geo =
+                    model.geo
+
+                newGeo =
+                    { geo
+                        | loading = False
+                        , error = Just error
+                    }
+            in
+                ( { model | geo = newGeo }, Cmd.none )
+
+        Geo (Ok location) ->
+            let
+                geo =
+                    model.geo
+
+                newGeo =
+                    { geo
+                        | location = Just location
+                        , loaded = True
+                        , loading = False
+                    }
+
+                nextModel =
+                    { model | geo = newGeo }
+
+                commandMsg =
+                    getSunriseData location.latitude location.longitude
+            in
+                ( nextModel, commandMsg )
+
+        SunriseData (Ok result) ->
+            let
+                times =
+                    model.times
+
+                loaded =
+                    result.status == "OK"
+
+                newTimes =
+                    { times
+                        | loaded = loaded
+                        , times = result.results
+                    }
+
+                nextModel =
+                    { model | times = newTimes }
+            in
+                ( nextModel, getToday )
+
+        SunriseData (Err error) ->
+            ( model, Cmd.none )
+
+        GetDate (Err error) ->
+            ( model, Cmd.none )
+
+        GetDate (Ok date) ->
+            ( { model | date = Just date }, Cmd.none )
+
+
+
+--- TASKS ---
+-- GeoLocation
+
+
+getGeoLocation : Cmd Msg
+getGeoLocation =
+    Task.attempt Geo Geolocation.now
+
+
+
+-- Sunrise & Sunset Times
+
+
+type alias Data =
+    { status : String
+    , results : List DataResult
+    }
+
+
+type alias DataResult =
+    ( String, String )
+
+
+getSunriseData : Float -> Float -> Cmd Msg
+getSunriseData lat lng =
+    let
+        url =
+            "https://api.sunrise-sunset.org/json?lat=" ++ toString lat ++ "&lng=" ++ toString lng
+
+        request =
+            Http.get url decodeSunriseData
+    in
+        Http.send SunriseData request
+
+
+decodeSunriseData : Decoder Data
+decodeSunriseData =
+    Decode.map2 Data
+        (Decode.field "status" Decode.string)
+        (Decode.field "results" (keyValuePairs string))
+
+
+
+-- Today's Date
+
+
+getToday : Cmd Msg
+getToday =
+    Task.attempt GetDate Date.now
 
 
 
@@ -107,8 +212,28 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
+    case model.geo.loaded of
+        True ->
+            div []
+                [ div [] [ text (toString model) ]
+                ]
+
+        False ->
+            case model.geo.loading of
+                True ->
+                    div [] [ text "Fetching your location..." ]
+
+                False ->
+                    locationScreen
+
+
+locationScreen : Html Msg
+locationScreen =
     div []
-        [ div [] [ text (toString model) ]
+        [ div []
+            [ text "Using Horizon Requires Your Location. Is that Ok?" ]
+        , button [ onClick AuthorizeGeo ]
+            [ text "Yeah, I guess so" ]
         ]
 
 
