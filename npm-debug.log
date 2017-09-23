@@ -1,0 +1,47 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/benjaminjohnson/.nvm/versions/node/v6.11.1/bin/node',
+1 verbose cli   '/Users/benjaminjohnson/.nvm/versions/node/v6.11.1/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'dev' ]
+2 info using npm@3.10.10
+3 info using node@v6.11.1
+4 verbose run-script [ 'predev', 'dev', 'postdev' ]
+5 info lifecycle horizon@1.0.0~predev: horizon@1.0.0
+6 silly lifecycle horizon@1.0.0~predev: no script for predev, continuing
+7 info lifecycle horizon@1.0.0~dev: horizon@1.0.0
+8 verbose lifecycle horizon@1.0.0~dev: unsafe-perm in lifecycle true
+9 verbose lifecycle horizon@1.0.0~dev: PATH: /Users/benjaminjohnson/.nvm/versions/node/v6.11.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/benjaminjohnson/projects/horizon/node_modules/.bin:/Users/benjaminjohnson/.nvm/versions/node/v6.11.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+10 verbose lifecycle horizon@1.0.0~dev: CWD: /Users/benjaminjohnson/projects/horizon
+11 silly lifecycle horizon@1.0.0~dev: Args: [ '-c', 'elm-app start' ]
+12 info lifecycle horizon@1.0.0~dev: Failed to exec dev script
+13 verbose stack Error: horizon@1.0.0 dev: `elm-app start`
+13 verbose stack spawn ENOENT
+13 verbose stack     at ChildProcess.<anonymous> (/Users/benjaminjohnson/.nvm/versions/node/v6.11.1/lib/node_modules/npm/lib/utils/spawn.js:33:16)
+13 verbose stack     at emitTwo (events.js:106:13)
+13 verbose stack     at ChildProcess.emit (events.js:191:7)
+13 verbose stack     at maybeClose (internal/child_process.js:891:16)
+13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+14 verbose pkgid horizon@1.0.0
+15 verbose cwd /Users/benjaminjohnson/projects/horizon
+16 error Darwin 16.7.0
+17 error argv "/Users/benjaminjohnson/.nvm/versions/node/v6.11.1/bin/node" "/Users/benjaminjohnson/.nvm/versions/node/v6.11.1/bin/npm" "run" "dev"
+18 error node v6.11.1
+19 error npm  v3.10.10
+20 error file sh
+21 error code ELIFECYCLE
+22 error errno ENOENT
+23 error syscall spawn
+24 error horizon@1.0.0 dev: `elm-app start`
+24 error spawn ENOENT
+25 error Failed at the horizon@1.0.0 dev script 'elm-app start'.
+25 error Make sure you have the latest version of node.js and npm installed.
+25 error If you do, this is most likely a problem with the horizon package,
+25 error not with npm itself.
+25 error Tell the author that this fails on your system:
+25 error     elm-app start
+25 error You can get information on how to open an issue for this project with:
+25 error     npm bugs horizon
+25 error Or if that isn't available, you can get their info via:
+25 error     npm owner ls horizon
+25 error There is likely additional logging output above.
+26 verbose exit [ 1, true ]
