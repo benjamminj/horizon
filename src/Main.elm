@@ -6,10 +6,15 @@ import Geolocation exposing (Location)
 import Date exposing (..)
 import Task
 import Http
-import Json.Decode as Decode exposing (Decoder, keyValuePairs, string)
+import Json.Decode as Decode exposing (Decoder, keyValuePairs, string, oneOf, int)
+import Tuple exposing (first, second)
+import Time exposing (Time)
+import String
+import Regex exposing (regex, contains)
 
 
 ---- MODEL ----
+-- model.geo
 
 
 type alias GeoModel =
@@ -29,10 +34,19 @@ initialGeoModel =
     }
 
 
+
+-- model.times
+
+
+type alias FormattedDate =
+    ( String, Time, Int )
+
+
 type alias TimesModel =
     { loaded : Bool
     , loading : Bool
     , times : List DataResult
+    , formattedTimes : List FormattedDate
     }
 
 
@@ -41,12 +55,14 @@ initialTimesModel =
     { loaded = False
     , loading = False
     , times = []
+    , formattedTimes = []
     }
 
 
 type alias Model =
     { geo : GeoModel
-    , date : Maybe Date
+    , date : Maybe Time
+    , now : Maybe Time
     , times : TimesModel
     }
 
@@ -55,6 +71,7 @@ initialModel : Model
 initialModel =
     { geo = initialGeoModel
     , date = Nothing
+    , now = Nothing
     , times = initialTimesModel
     }
 
@@ -74,6 +91,7 @@ type Msg
     | Geo (Result Geolocation.Error Location)
     | SunriseData (Result Http.Error Data)
     | GetDate (Result String Date)
+    | Tick Time
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -117,13 +135,19 @@ update msg model =
                         , loading = False
                     }
 
+                times =
+                    model.times
+
+                newTimes =
+                    { times | loading = True }
+
                 nextModel =
                     { model | geo = newGeo }
 
-                commandMsg =
+                command =
                     getSunriseData location.latitude location.longitude
             in
-                ( nextModel, commandMsg )
+                ( nextModel, command )
 
         SunriseData (Ok result) ->
             let
@@ -136,6 +160,7 @@ update msg model =
                 newTimes =
                     { times
                         | loaded = loaded
+                        , loading = False
                         , times = result.results
                     }
 
@@ -151,7 +176,136 @@ update msg model =
             ( model, Cmd.none )
 
         GetDate (Ok date) ->
-            ( { model | date = Just date }, Cmd.none )
+            let
+                day =
+                    toString date
+
+                times =
+                    model.times
+
+                formattedTimes =
+                    times.times
+                        |> filterDayLength
+                        |> mapStringsToDates date
+                        |> mapDatesToUtc
+                        |> addSortLevelToTimes
+                        |> sortTimes
+
+                nextTimes =
+                    { times | formattedTimes = formattedTimes }
+
+                nextModel =
+                    { model
+                        | date = Just (Date.toTime date)
+                        , times = nextTimes
+                    }
+            in
+                ( nextModel, Cmd.none )
+
+        Tick newTime ->
+            ( { model | now = Just newTime }, Cmd.none )
+
+
+
+--- DATA FORMATTING ---
+
+
+filterDayLength : List ( String, a ) -> List ( String, a )
+filterDayLength entries =
+    List.filter (\entry -> first entry /= "day_length") entries
+
+
+mapStringsToDates : Date -> List ( a, String ) -> List ( a, Date )
+mapStringsToDates date times =
+    let
+        day =
+            toString (Date.day date)
+
+        month =
+            toString (Date.month date)
+
+        year =
+            toString (Date.year date)
+
+        dateString time =
+            String.join " " [ year, month, day, time ]
+    in
+        List.filterMap (transformToTime dateString) times
+
+
+transformToTime : (a -> String) -> ( a1, a ) -> Maybe ( a1, Date )
+transformToTime dateString time =
+    let
+        timeValue =
+            Tuple.second time
+
+        transformed =
+            Date.fromString (dateString timeValue)
+    in
+        case transformed of
+            Ok date ->
+                Just (Tuple.mapSecond (\value -> date) time)
+
+            Err _ ->
+                Nothing
+
+
+mapDatesToUtc : List ( a, Date ) -> List ( a, Time )
+mapDatesToUtc dates =
+    List.map (Tuple.mapSecond (\date -> Date.toTime date)) dates
+
+
+addSortLevelToTimes : List ( String, Time ) -> List ( String, Time, Int )
+addSortLevelToTimes times =
+    List.map (addSortLevel) times
+
+
+addSortLevel : ( String, Time ) -> ( String, Time, Int )
+addSortLevel ( string, time ) =
+    let
+        sortLevel =
+            matchSortLevel string
+    in
+        ( string, time, sortLevel )
+
+
+matchSortLevel : String -> Int
+matchSortLevel string =
+    if contains (regex "_twilight_end") string then
+        1
+    else if contains (regex "sunrise|solar_noon") string then
+        2
+    else
+        3
+
+
+sortTimes : List FormattedDate -> List FormattedDate
+sortTimes times =
+    List.sortWith compareTimes times
+
+
+compareTimes :
+    ( a, comparable, comparable1 )
+    -> ( b, comparable, comparable1 )
+    -> Order
+compareTimes ( key1, time1, order1 ) ( key2, time2, order2 ) =
+    case compare order1 order2 of
+        LT ->
+            LT
+
+        GT ->
+            GT
+
+        EQ ->
+            case compare time1 time2 of
+                LT ->
+                    LT
+
+                GT ->
+                    GT
+
+                EQ ->
+                    EQ
 
 
 
@@ -212,19 +366,33 @@ getToday =
 
 view : Model -> Html Msg
 view model =
-    case model.geo.loaded of
+    let
+        ready =
+            ( model.geo.loaded, model.times.loaded )
+    in
+        case ready of
+            ( True, True ) ->
+                div [] [ text (toString model) ]
+
+            ( False, False ) ->
+                geoScreens model.geo
+
+            ( True, False ) ->
+                -- this meanes that the geolocation has finished and times are loading
+                div [] [ text "Fetching sunrise times for your area..." ]
+
+            _ ->
+                div [] [ text "Error..." ]
+
+
+geoScreens : GeoModel -> Html Msg
+geoScreens geo =
+    case geo.loading of
         True ->
-            div []
-                [ div [] [ text (toString model) ]
-                ]
+            div [] [ text "Fetching your location..." ]
 
         False ->
-            case model.geo.loading of
-                True ->
-                    div [] [ text "Fetching your location..." ]
-
-                False ->
-                    locationScreen
+            locationScreen
 
 
 locationScreen : Html Msg
@@ -238,6 +406,15 @@ locationScreen =
 
 
 
+--- SUBSCRIPTIONS ---
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Time.every Time.second Tick
+
+
+
 ---- PROGRAM ----
 
 
@@ -247,5 +424,5 @@ main =
         { view = view
         , init = init
         , update = update
-        , subscriptions = always Sub.none
+        , subscriptions = subscriptions
         }
