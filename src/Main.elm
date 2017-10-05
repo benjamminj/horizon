@@ -5,6 +5,11 @@ import Html.Events exposing (onClick)
 import Date exposing (Date)
 import Time exposing (Time)
 import Task
+import Model.Types exposing (Model)
+import Model.Model exposing (initialModel)
+import Update.Types as UpdateTypes exposing (Msg)
+import Update.Update exposing (update)
+import Cmd.Cmd exposing (getToday)
 
 
 -- 1a. get today's date
@@ -43,81 +48,15 @@ main =
         }
 
 
-type alias Model =
-    { date :
-        { loading : Bool
-        , loaded : Bool
-        , value : Maybe Time
-        }
-    }
-
-
-initialModel : Model
-initialModel =
-    { date =
-        { loading = False
-        , loaded = False
-        , value = Nothing
-        }
-    }
-
-
-type Msg
-    = GetDateComplete (Result String Date)
-    | GetDateAttempt
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        GetDateAttempt ->
-            let
-                prevDate =
-                    model.date
-
-                nextDate =
-                    { prevDate
-                        | loading = True
-                        , loaded = False
-                    }
-            in
-                ( model, getToday )
-
-        GetDateComplete (Ok date) ->
-            let
-                nextDate =
-                    { value = Just (Date.toTime date)
-                    , loading = False
-                    , loaded = False
-                    }
-            in
-                ( { model | date = nextDate }, Cmd.none )
-
-        GetDateComplete (Err error) ->
-            let
-                nextDate =
-                    { value = Nothing
-                    , loading = False
-                    , loaded = False
-                    }
-            in
-                ( { model | date = nextDate }, Cmd.none )
-
-
 
 -- MODEL UPDATES --
-
-
-getToday : Cmd Msg
-getToday =
-    Task.attempt GetDateComplete Date.now
 
 
 view : Model -> Html Msg
 view model =
     div []
         [ div [] [ text (toString model) ]
-        , button [ onClick GetDateAttempt ] [ text "get today" ]
+        , button [ onClick UpdateTypes.GetDateAttempt ] [ text "get today" ]
         ]
 
 
