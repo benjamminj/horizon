@@ -87,7 +87,7 @@ update msg model =
             let
                 nextDate =
                     { value = Just (Date.toTime date)
-                    , loading = True
+                    , loading = False
                     , loaded = False
                     }
             in
@@ -98,7 +98,7 @@ update msg model =
                 nextDate =
                     { value = Nothing
                     , loading = False
-                    , loaded = True
+                    , loaded = False
                     }
             in
                 ( { model | date = nextDate }, Cmd.none )
@@ -128,4 +128,4 @@ subscriptions model =
 
 init : ( Model, Cmd Msg )
 init =
-    ( initialModel, Cmd.none )
+    ( initialModel, getToday )
