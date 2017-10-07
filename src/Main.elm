@@ -2,9 +2,6 @@ module Main exposing (..)
 
 import Html exposing (..)
 import Html.Events exposing (onClick)
-import Date exposing (Date)
-import Time exposing (Time)
-import Task
 import Model.Types exposing (Model)
 import Model.Model exposing (initialModel)
 import Update.Types as UpdateTypes exposing (Msg)
@@ -56,7 +53,7 @@ view : Model -> Html Msg
 view model =
     div []
         [ div [] [ text (toString model) ]
-        , button [ onClick UpdateTypes.GetDateAttempt ] [ text "get today" ]
+        , button [ onClick UpdateTypes.GetGeoAttempt ] [ text "get your location" ]
         ]
 
 
