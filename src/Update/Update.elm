@@ -4,7 +4,8 @@ import Date exposing (Date)
 import Update.Types as Types exposing (Msg)
 import Model.Types exposing (Model)
 import Cmd.Cmd exposing (..)
-import Network.Request exposing (getSunriseData)
+import Network.Request exposing (getSunriseData, sanitizeData)
+import Debug
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -70,7 +71,8 @@ update msg model =
                         , location = Just location
                     }
             in
-                ( { model | geo = nextGeo }, Cmd.none )
+                -- recursive call to update to dispatch the next message
+                update Types.HorizonDataReqAttempt { model | geo = nextGeo }
 
         Types.GetGeoComplete (Err error) ->
             let
@@ -86,12 +88,48 @@ update msg model =
             in
                 ( { model | geo = nextGeo }, Cmd.none )
 
-        -- TODO -- wire up get sunrise data command
         Types.HorizonDataReqAttempt ->
-            ( model, Cmd.none )
+            let
+                prevTimes =
+                    model.times
+
+                nextTimes =
+                    { prevTimes | loading = True }
+
+                command =
+                    case model.geo.location of
+                        Nothing ->
+                            Cmd.none
+
+                        Just { latitude, longitude } ->
+                            getSunriseData latitude longitude
+            in
+                ( { model | times = nextTimes }, command )
 
         Types.HorizonDataReqComplete (Ok data) ->
-            ( model, Cmd.none )
+            let
+                prevTimes =
+                    model.times
+
+                nextTimes =
+                    { prevTimes
+                        | loading = False
+                        , loaded = True
+                        , values = sanitizeData data
+                    }
+            in
+                ( { model | times = nextTimes }, Cmd.none )
 
         Types.HorizonDataReqComplete (Err error) ->
-            ( model, Cmd.none )
+            let
+                prevTimes =
+                    model.times
+
+                nextTimes =
+                    { prevTimes
+                        | loading = False
+                        , loaded = True
+                        , error = Just "Invalid JSON"
+                    }
+            in
+                ( { model | times = nextTimes }, Cmd.none )

@@ -1,7 +1,11 @@
 module Network.Types exposing (..)
 
+-- import Time exposing (Time)
+
 
 type alias Data =
-    { status : String
-    , results : List ( String, String )
-    }
+    { results : List ResultItem }
+
+
+type alias ResultItem =
+    ( String, String )

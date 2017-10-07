@@ -20,8 +20,18 @@ initialModelGeo =
     }
 
 
+initialModelTimes : ModelTimes
+initialModelTimes =
+    { loading = False
+    , loaded = False
+    , error = Nothing
+    , values = []
+    }
+
+
 initialModel : Model
 initialModel =
     { date = initialModelDate
     , geo = initialModelGeo
+    , times = initialModelTimes
     }

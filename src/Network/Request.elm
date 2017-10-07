@@ -1,17 +1,29 @@
-module Network.Request exposing (..)
+module Network.Request exposing (getSunriseData, sanitizeData)
 
 import Update.Types as UpdateTypes exposing (Msg)
-import Json.Decode as Decode exposing (Decoder, keyValuePairs, string, oneOf, int)
+import Json.Decode as Decode exposing (Decoder, keyValuePairs, string, oneOf, at, field, succeed)
 import Http
 import Network.Types exposing (..)
+import List
+import Tuple
+import Date exposing (Date)
+import Time exposing (Time)
+
+
+-- import Debug
 
 
 getSunriseData : Float -> Float -> Cmd Msg
 getSunriseData lat lng =
     let
         url =
-            "https://api.sunrise-sunset.org/json?lat=" ++ toString lat ++ "&lng=" ++ toString lng
+            "https://api.sunrise-sunset.org/json?lat="
+                ++ toString lat
+                ++ "&lng="
+                ++ toString lng
+                ++ "&formatted=0"
 
+        -- request dates in UTC format for easier conversion
         request =
             Http.get url decodeSunriseData
     in
@@ -20,6 +32,32 @@ getSunriseData lat lng =
 
 decodeSunriseData : Decoder Data
 decodeSunriseData =
-    Decode.map2 Data
-        (Decode.field "status" Decode.string)
-        (Decode.field "results" (keyValuePairs string))
+    Decode.map Data
+        (field "results" (keyValuePairs badData))
+
+
+badData : Decoder String
+badData =
+    oneOf [ string, succeed "INVALID" ]
+
+
+sanitizeData : Data -> List ( String, Time )
+sanitizeData { results } =
+    results
+        |> removeBadData
+        |> List.filterMap addDate
+
+
+removeBadData : List ResultItem -> List ResultItem
+removeBadData data =
+    List.filter (\value -> Tuple.second value /= "INVALID") data
+
+
+addDate : ResultItem -> Maybe ( String, Time )
+addDate ( key, dateString ) =
+    case (Date.fromString dateString) of
+        Err _ ->
+            Nothing
+
+        Ok date ->
+            Just ( key, Date.toTime date )
