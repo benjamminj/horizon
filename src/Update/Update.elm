@@ -4,6 +4,7 @@ import Date exposing (Date)
 import Update.Types as Types exposing (Msg)
 import Model.Types exposing (Model)
 import Cmd.Cmd exposing (..)
+import Network.Request exposing (getSunriseData)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -84,3 +85,13 @@ update msg model =
                     }
             in
                 ( { model | geo = nextGeo }, Cmd.none )
+
+        -- TODO -- wire up get sunrise data command
+        Types.HorizonDataReqAttempt ->
+            ( model, Cmd.none )
+
+        Types.HorizonDataReqComplete (Ok data) ->
+            ( model, Cmd.none )
+
+        Types.HorizonDataReqComplete (Err error) ->
+            ( model, Cmd.none )

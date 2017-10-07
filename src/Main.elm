@@ -9,8 +9,8 @@ import Update.Update exposing (update)
 import Cmd.Cmd exposing (getToday)
 
 
--- 1a. get today's date
--- 1b. get the user's geolocation
+-- 1a. get today's date ✔
+-- 1b. get the user's geolocation ✔
 -- 2. get horizon related to the date
 --      a. fetch times for today
 --      b. run formatting...
