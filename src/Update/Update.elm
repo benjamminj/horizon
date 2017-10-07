@@ -5,7 +5,6 @@ import Update.Types as Types exposing (Msg)
 import Model.Types exposing (Model)
 import Cmd.Cmd exposing (..)
 import Network.Request exposing (getSunriseData, sanitizeData)
-import Debug
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )

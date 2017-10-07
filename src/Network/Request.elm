@@ -5,7 +5,6 @@ import Json.Decode as Decode exposing (Decoder, keyValuePairs, string, oneOf, at
 import Http
 import Network.Types exposing (..)
 import List
-import Tuple
 import Date exposing (Date)
 import Time exposing (Time)
 
@@ -38,19 +37,13 @@ decodeSunriseData =
 
 badData : Decoder String
 badData =
-    oneOf [ string, succeed "INVALID" ]
+    oneOf [ string, succeed "INVALID DATE" ]
 
 
 sanitizeData : Data -> List ( String, Time )
 sanitizeData { results } =
     results
-        |> removeBadData
         |> List.filterMap addDate
-
-
-removeBadData : List ResultItem -> List ResultItem
-removeBadData data =
-    List.filter (\value -> Tuple.second value /= "INVALID") data
 
 
 addDate : ResultItem -> Maybe ( String, Time )
