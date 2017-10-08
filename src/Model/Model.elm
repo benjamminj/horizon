@@ -8,7 +8,6 @@ initialModelDate =
     { loading = False
     , loaded = False
     , value = Nothing
-    , iso = Nothing
     }
 
 
@@ -34,7 +33,6 @@ initialModelCounter : ModelCounter
 initialModelCounter =
     { waitingFor = Nothing
     , current = Nothing
-    , now = Nothing
     }
 
 

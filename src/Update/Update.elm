@@ -29,7 +29,6 @@ update msg model =
             let
                 nextDate =
                     { value = Just (Date.toTime date)
-                    , iso = Just date
                     , loading = False
                     , loaded = False
                     }
@@ -40,7 +39,6 @@ update msg model =
             let
                 nextDate =
                     { value = Nothing
-                    , iso = Nothing
                     , loading = False
                     , loaded = False
                     }
@@ -75,7 +73,7 @@ update msg model =
                     }
             in
                 -- recursive call to update to dispatch the next message
-                update Types.HorizonDataReqAttempt { model | geo = nextGeo }
+                update HorizonDataReqAttempt { model | geo = nextGeo }
 
         GetGeoComplete (Err error) ->
             let
@@ -140,21 +138,21 @@ update msg model =
         -- Counter
         TickCounter time ->
             let
-                prevCounter =
-                    model.counter
+                prevDate =
+                    model.date
 
-                nextCounter =
-                    { prevCounter
-                        | now = Just time
+                nextDate =
+                    { prevDate
+                        | value = Just time
                     }
             in
-                ( { model | counter = nextCounter }, Cmd.none )
+                ( { model | date = nextDate }, Cmd.none )
 
         GetCounterCurrent ->
             let
                 current =
                     getCounterCurrent
-                        model.counter.now
+                        model.date.value
                         model.times.values
 
                 prevCounter =
@@ -176,5 +174,6 @@ update msg model =
                 if foundCurrent then
                     ( { model | counter = nextCounter }, Cmd.none )
                 else
+                    -- here is where I fire the code to look for tomorrow's times
                     Debug.log "hasn't found a current value yet, must be evening"
                         ( { model | counter = nextCounter }, Cmd.none )

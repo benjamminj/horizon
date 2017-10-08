@@ -17,7 +17,6 @@ type alias ModelDate =
     { loading : Bool
     , loaded : Bool
     , value : Maybe Time
-    , iso : Maybe Date
     }
 
 
@@ -55,5 +54,4 @@ type alias HorizonItem =
 type alias ModelCounter =
     { waitingFor : Maybe HorizonStatus
     , current : Maybe HorizonStatus
-    , now : Maybe Time
     }
