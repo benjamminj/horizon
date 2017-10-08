@@ -7,9 +7,9 @@ import Network.Types exposing (..)
 import List
 import Date exposing (Date)
 import Time exposing (Time)
-
-
--- import Debug
+import Model.Types as ModelTypes exposing (..)
+import Regex exposing (regex, contains)
+import Tuple
 
 
 getSunriseData : Float -> Float -> Cmd Msg
@@ -40,10 +40,13 @@ badData =
     oneOf [ string, succeed "INVALID DATE" ]
 
 
-sanitizeData : Data -> List ( String, Time )
+sanitizeData : Data -> List ( HorizonStatus, Time )
 sanitizeData { results } =
     results
         |> List.filterMap addDate
+        |> List.map addHorizonStatus
+        |> addEndTimes
+        |> List.sortBy Tuple.second
 
 
 addDate : ResultItem -> Maybe ( String, Time )
@@ -54,3 +57,46 @@ addDate ( key, dateString ) =
 
         Ok date ->
             Just ( key, Date.toTime date )
+
+
+addHorizonStatus : ( String, Time ) -> HorizonItem
+addHorizonStatus ( key, time ) =
+    let
+        status =
+            if contains (regex "sunrise$") key then
+                Sunrise
+            else if contains (regex "sunset$") key then
+                Sunset
+            else if contains (regex "civil") key then
+                CivilTwilight
+            else if contains (regex "nautical") key then
+                NauticalTwilight
+            else if contains (regex "astronomical") key then
+                AstronomicalTwilight
+            else
+                SolarNoon
+    in
+        ( status, time )
+
+
+addEndTimes : List HorizonItem -> List HorizonItem
+addEndTimes times =
+    (List.filterMap getEndTimes times) ++ times
+
+
+getEndTimes : HorizonItem -> Maybe HorizonItem
+getEndTimes ( status, time ) =
+    let
+        -- 5 minutes after
+        newTime =
+            time + 300000
+    in
+        case status of
+            Sunrise ->
+                Just ( SunriseEnd, newTime )
+
+            Sunset ->
+                Just ( SunsetEnd, newTime )
+
+            _ ->
+                Nothing

@@ -8,6 +8,7 @@ type alias Model =
     { date : ModelDate
     , geo : ModelGeo
     , times : ModelTimes
+    , counter : ModelCounter
     }
 
 
@@ -30,5 +31,27 @@ type alias ModelTimes =
     { loading : Bool
     , loaded : Bool
     , error : Maybe String
-    , values : List ( String, Time )
+    , values : List HorizonItem
+    }
+
+
+type HorizonStatus
+    = Sunrise
+    | SunriseEnd
+    | Sunset
+    | SunsetEnd
+    | SolarNoon
+    | CivilTwilight
+    | NauticalTwilight
+    | AstronomicalTwilight
+
+
+type alias HorizonItem =
+    ( HorizonStatus, Time )
+
+
+type alias ModelCounter =
+    { waitingFor : Maybe HorizonStatus
+    , current : Maybe HorizonStatus
+    , now : Maybe Time
     }

@@ -29,9 +29,18 @@ initialModelTimes =
     }
 
 
+initialModelCounter : ModelCounter
+initialModelCounter =
+    { waitingFor = Nothing
+    , current = Nothing
+    , now = Nothing
+    }
+
+
 initialModel : Model
 initialModel =
     { date = initialModelDate
     , geo = initialModelGeo
     , times = initialModelTimes
+    , counter = initialModelCounter
     }

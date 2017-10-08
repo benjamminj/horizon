@@ -11,9 +11,11 @@ import Cmd.Cmd exposing (getToday)
 
 -- 1a. get today's date ✔
 -- 1b. get the user's geolocation ✔
--- 2. get horizon related to the date
---      a. fetch times for today
---      b. run formatting...
+-- 2. get horizon related to the date ✔
+--      a. fetch times for today ✔
+--      b. run formatting... ✔
+--      b2. format should be for each item (SunriseStatus, Time - UTC
+--      b3. SunriseStatus = Union Type -> Name of status
 --      c. if now is after sunset then fetch tomorrow's times too
 --      d. once data is correct then display the UI
 {--sample model
