@@ -1,16 +1,18 @@
 module Update.Update exposing (..)
 
 import Date exposing (Date)
-import Update.Types as Types exposing (Msg)
+import Update.Types as Types exposing (..)
 import Model.Types exposing (Model)
 import Cmd.Cmd exposing (..)
 import Network.Request exposing (getSunriseData, sanitizeData)
+import Counter exposing (..)
+import Debug
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Types.GetDateAttempt ->
+        GetDateAttempt ->
             let
                 prevDate =
                     model.date
@@ -23,27 +25,29 @@ update msg model =
             in
                 ( model, getToday )
 
-        Types.GetDateComplete (Ok date) ->
+        GetDateComplete (Ok date) ->
             let
                 nextDate =
                     { value = Just (Date.toTime date)
+                    , iso = Just date
                     , loading = False
                     , loaded = False
                     }
             in
                 ( { model | date = nextDate }, Cmd.none )
 
-        Types.GetDateComplete (Err error) ->
+        GetDateComplete (Err error) ->
             let
                 nextDate =
                     { value = Nothing
+                    , iso = Nothing
                     , loading = False
                     , loaded = False
                     }
             in
                 ( { model | date = nextDate }, Cmd.none )
 
-        Types.GetGeoAttempt ->
+        GetGeoAttempt ->
             let
                 prevGeo =
                     model.geo
@@ -58,7 +62,7 @@ update msg model =
             in
                 ( { model | geo = nextGeo }, getGeo )
 
-        Types.GetGeoComplete (Ok location) ->
+        GetGeoComplete (Ok location) ->
             let
                 prevGeo =
                     model.geo
@@ -73,7 +77,7 @@ update msg model =
                 -- recursive call to update to dispatch the next message
                 update Types.HorizonDataReqAttempt { model | geo = nextGeo }
 
-        Types.GetGeoComplete (Err error) ->
+        GetGeoComplete (Err error) ->
             let
                 prevGeo =
                     model.geo
@@ -87,7 +91,7 @@ update msg model =
             in
                 ( { model | geo = nextGeo }, Cmd.none )
 
-        Types.HorizonDataReqAttempt ->
+        HorizonDataReqAttempt ->
             let
                 prevTimes =
                     model.times
@@ -105,7 +109,7 @@ update msg model =
             in
                 ( { model | times = nextTimes }, command )
 
-        Types.HorizonDataReqComplete (Ok data) ->
+        HorizonDataReqComplete (Ok data) ->
             let
                 prevTimes =
                     model.times
@@ -117,9 +121,9 @@ update msg model =
                         , values = sanitizeData data
                     }
             in
-                ( { model | times = nextTimes }, Cmd.none )
+                update GetCounterCurrent { model | times = nextTimes }
 
-        Types.HorizonDataReqComplete (Err error) ->
+        HorizonDataReqComplete (Err error) ->
             let
                 prevTimes =
                     model.times
@@ -132,3 +136,45 @@ update msg model =
                     }
             in
                 ( { model | times = nextTimes }, Cmd.none )
+
+        -- Counter
+        TickCounter time ->
+            let
+                prevCounter =
+                    model.counter
+
+                nextCounter =
+                    { prevCounter
+                        | now = Just time
+                    }
+            in
+                ( { model | counter = nextCounter }, Cmd.none )
+
+        GetCounterCurrent ->
+            let
+                current =
+                    getCounterCurrent
+                        model.counter.now
+                        model.times.values
+
+                prevCounter =
+                    model.counter
+
+                nextCounter =
+                    { prevCounter
+                        | current = current
+                    }
+
+                foundCurrent =
+                    case current of
+                        Just _ ->
+                            True
+
+                        Nothing ->
+                            False
+            in
+                if foundCurrent then
+                    ( { model | counter = nextCounter }, Cmd.none )
+                else
+                    Debug.log "hasn't found a current value yet, must be evening"
+                        ( { model | counter = nextCounter }, Cmd.none )

@@ -7,6 +7,7 @@ import Model.Model exposing (initialModel)
 import Update.Types as UpdateTypes exposing (Msg)
 import Update.Update exposing (update)
 import Cmd.Cmd exposing (getToday)
+import Sub exposing (subscriptions)
 
 
 -- 1a. get today's date ✔
@@ -14,8 +15,8 @@ import Cmd.Cmd exposing (getToday)
 -- 2. get horizon related to the date ✔
 --      a. fetch times for today ✔
 --      b. run formatting... ✔
---      b2. format should be for each item (SunriseStatus, Time - UTC
---      b3. SunriseStatus = Union Type -> Name of status
+--      b2. format should be for each item (SunriseStatus, Time - UTC ✔
+--      b3. SunriseStatus = Union Type -> Name of status ✔
 --      c. if now is after sunset then fetch tomorrow's times too
 --      d. once data is correct then display the UI
 {--sample model
@@ -47,21 +48,12 @@ main =
         }
 
 
-
--- MODEL UPDATES --
-
-
 view : Model -> Html Msg
 view model =
     div []
         [ div [] [ text (toString model) ]
         , button [ onClick UpdateTypes.GetGeoAttempt ] [ text "get your location" ]
         ]
-
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
 
 
 init : ( Model, Cmd Msg )

@@ -2,6 +2,7 @@ module Model.Types exposing (..)
 
 import Time exposing (Time)
 import Geolocation exposing (Location)
+import Date exposing (Date)
 
 
 type alias Model =
@@ -16,6 +17,7 @@ type alias ModelDate =
     { loading : Bool
     , loaded : Bool
     , value : Maybe Time
+    , iso : Maybe Date
     }
 
 

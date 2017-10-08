@@ -8,6 +8,7 @@ initialModelDate =
     { loading = False
     , loaded = False
     , value = Nothing
+    , iso = Nothing
     }
 
 
