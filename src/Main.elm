@@ -1,13 +1,13 @@
 module Main exposing (..)
 
-import Html exposing (..)
-import Html.Events exposing (onClick)
+import Html
 import Model.Types exposing (Model)
 import Model.Model exposing (initialModel)
 import Update.Types as UpdateTypes exposing (Msg)
 import Update.Update exposing (update)
 import Cmd.Cmd exposing (getToday)
 import Sub exposing (subscriptions)
+import View exposing (..)
 
 
 -- 1a. get today's date ✔
@@ -46,14 +46,6 @@ main =
         , update = update
         , subscriptions = subscriptions
         }
-
-
-view : Model -> Html Msg
-view model =
-    div []
-        [ div [] [ text (toString model) ]
-        , button [ onClick UpdateTypes.GetGeoAttempt ] [ text "get your location" ]
-        ]
 
 
 init : ( Model, Cmd Msg )
