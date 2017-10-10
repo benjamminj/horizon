@@ -155,11 +155,8 @@ update msg model =
                         model.date.value
                         model.times.values
 
-                prevCounter =
-                    model.counter
-
-                nextCounter =
-                    { prevCounter
+                nextModel =
+                    { model
                         | current = current
                     }
 
@@ -172,8 +169,8 @@ update msg model =
                             False
             in
                 if foundCurrent then
-                    ( { model | counter = nextCounter }, Cmd.none )
+                    ( nextModel, Cmd.none )
                 else
                     -- here is where I fire the code to look for tomorrow's times
                     Debug.log "hasn't found a current value yet, must be evening"
-                        ( { model | counter = nextCounter }, Cmd.none )
+                        ( nextModel, Cmd.none )

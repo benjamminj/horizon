@@ -13,7 +13,7 @@ getCounterCurrent now items =
                 [] ->
                     Nothing
 
-                x :: [] ->
+                _ :: [] ->
                     Nothing
 
                 ( status, x ) :: y :: xs ->

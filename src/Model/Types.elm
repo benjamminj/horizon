@@ -2,14 +2,14 @@ module Model.Types exposing (..)
 
 import Time exposing (Time)
 import Geolocation exposing (Location)
-import Date exposing (Date)
 
 
 type alias Model =
     { date : ModelDate
     , geo : ModelGeo
     , times : ModelTimes
-    , counter : ModelCounter
+    , waitingFor : Maybe HorizonStatus
+    , current : Maybe HorizonStatus
     }
 
 
@@ -49,9 +49,3 @@ type HorizonStatus
 
 type alias HorizonItem =
     ( HorizonStatus, Time )
-
-
-type alias ModelCounter =
-    { waitingFor : Maybe HorizonStatus
-    , current : Maybe HorizonStatus
-    }
