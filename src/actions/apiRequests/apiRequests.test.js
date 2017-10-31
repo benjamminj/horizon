@@ -41,8 +41,8 @@ describe('reqSunriseSunsetAPI', () => {
     beforeEach(() => {
       const dateParam = '2017-2-10'
 
-      nock(`${process.env.REACT_APP_SERVER}/api/sunrise-sunset`)
-        .get(`/lat=${location.lat}&lng=${location.lng}&date=${dateParam}`)
+      nock(`${process.env.rAPI}/json`)
+        .get(`?lat=${location.lat}&lng=${location.lng}&date=${dateParam}`)
         .reply(200, { test: 'test' })
     })
 
@@ -56,8 +56,8 @@ describe('reqSunriseSunsetAPI', () => {
     beforeEach(() => {
       const dateParam = '2017-2-10'
 
-      nock(`${process.env.REACT_APP_SERVER}/api/sunrise-sunset`)
-        .get(`/lat=${location.lat}&lng=${location.lng}&date=${dateParam}`)
+      nock(`${process.env.REACT_APP_API}/json`)
+        .get(`?lat=${location.lat}&lng=${location.lng}&date=${dateParam}`)
         .replyWithError('testing sunrise sunset')
     })
 

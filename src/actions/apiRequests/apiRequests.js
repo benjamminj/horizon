@@ -15,7 +15,7 @@ export async function reqSunriseSunsetAPI ({ lat, lng }, date) {
   const formattedDate = [date.getFullYear(), date.getMonth() + 1, date.getDate()]
 
   try {
-    const json = await apiRequest(`${process.env.REACT_APP_SERVER}/api/sunrise-sunset/lat=${lat}&lng=${lng}&date=${formattedDate.join('-')}`)
+    const json = await apiRequest(`${process.env.REACT_APP_API}?lat=${lat}&lng=${lng}&date=${formattedDate.join('-')}&formatted=0`)
 
     return json
   } catch (err) {
