@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 
+import PropTypes from 'prop-types'
 import ClockContainer from '../containers/ClockContainer'
 import Footer from './Footer'
 import Header from './Header'
