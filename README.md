@@ -1,82 +1,68 @@
-# Horizon
-###### _Count remaining time till sunrise and sunset using ReactJS_
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### About
+## Available Scripts
 
-Ever wish you knew _exactly_ how long you had until you needed to go outside and catch that beautiful sunset? Or when you need to go to bed in order to see the sunrise _and_ not end up sleep-deprived? _Horizon_ provides a simple, fun interface to see how long you have before that sunset/sunrise.
+In the project directory, you can run:
 
-### Screenshots
+### `npm start`
 
-![](http://i.imgur.com/p7DguL1.png) ![](http://i.imgur.com/YxI5QEo.png)
-![](http://i.imgur.com/uJSkeB1.png)
-![](http://i.imgur.com/vE69ZLw.png)
-![](http://i.imgur.com/ALD6IMI.png)
-![](http://i.imgur.com/O8F32tl.png)
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### Technologies Used
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
 
-##### Client
-* [Create React App](https://github.com/facebookincubator/create-react-app)
-* [ReactJS](https://facebook.github.io/react/)
-* [Redux](http://redux.js.org/)
+### `npm test`
 
-##### Server
-* [ExpressJS](http://expressjs.com/)
+Launches the test runner in the interactive watch mode.<br>
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-##### Style Guide
-* [Javascript Standard Style Guide](http://standardjs.com/)
+### `npm run build`
 
-### Installation
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-To get _Horizon_ running locally, simply follow the instructions provided below.
+The build is minified and the filenames include the hashes.<br>
+Your app is ready to be deployed!
 
-##### 1. Clone the repo
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-  ```bash
-  $ git clone https://github.com/benjaminj6/horizon.git
-  $ cd horizon
-  ```
+### `npm run eject`
 
-##### 2. Install dependecies
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-  ```bash
-  # Using npm
-  $ npm install
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-  # Using Yarn
-  $ yarn
-  ```
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-##### 3. Set up environment
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-1. Create a `.env` file in the `client` directory
-2. Add the following line to `client/.env`
+## Learn More
 
-  ```bash
-  # You may use any port you like. This is the port of the dev server that serves client html. The backend server will run on port 3001 by default
-  REACT_APP_SERVER="http://localhost:3000"
-  ```
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-##### 4. Start it up!
-1. Make sure that you are in the root directory of your project
-2. Start your local instance:
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-  ```bash
-  # Using npm
-  $ npm start
+### Code Splitting
 
-  # Using yarn
-  $ yarn start
-  ```
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-3. Open your browser to `http://localhost:3000`
+### Analyzing the Bundle Size
 
-### Roadmap to v.2
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-* Continue to stablize and polish the UI experience
-* Add a page displaying sunrise and sunset times
-* Performance improvements
+### Making a Progressive Web App
 
-### Issues
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-If the app isn't working the way it's supposed, I'd love to know! You can submit issues or suggestions on the [Github issue tracker](https://github.com/benjaminj6/horizon/issues)
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `npm run build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

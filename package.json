@@ -1,18 +1,25 @@
 {
-  "name": "when-is-sunset",
-  "version": "1.0.0",
-  "description": "App to track how much time is left until sunrise/sunset",
-  "main": "index.js",
-  "repository": "https://github.com/benjaminj6/sunrise-sunset.git",
-  "author": "Benjamin Johnson <benjamin.d.johnson@icloud.com>",
-  "license": "MIT",
-  "scripts": {
-    "deploy-server": "git subtree push --prefix server heroku master",
-    "start": "concurrently --prefix \"[{name}]\" --names \"CLIENT,SERVER\" -c \"bgBlue.bold,bgMagenta.bold\" \"cd client && npm start\" \"cd server && npm run dev\"",
-    "test": "cd client && npm test"
-
-  },
+  "name": "horizon",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "concurrently": "^3.3.0"
-  }
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "react-scripts": "2.1.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
